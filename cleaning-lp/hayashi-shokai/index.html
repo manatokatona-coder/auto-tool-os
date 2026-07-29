@@ -16,30 +16,32 @@ button { font: inherit; }
 
 /* ---------- tokens ---------- */
 :root {
-  --paper:      #F2F5F6;
-  --paper-2:    #E7EDEE;
+  --paper:      #FDF7F0;
+  --paper-2:    #FAEEE1;
   --card:       #FFFFFF;
-  --ink:        #1D2B33;
-  --ink-2:      #55686F;
-  --line:       #DCE3E2;
-  --soap:       #7E9459;
-  --soap-deep:  #5A6E3C;
-  --soap-tint:  #E9EFE0;
-  --sun:        #DCC79A;
-  --sun-tint:   #F4EDDD;
-  --btn-bg:     #2E4A5C;
+  --ink:        #3A2A20;
+  --ink-2:      #7A6255;
+  --line:       #F0E1D2;
+  --soap:       #F0871F;
+  --soap-deep:  #A04E05;
+  --soap-tint:  #FDE9D2;
+  --sun:        #F7C64B;
+  --sun-tint:   #FDF0CE;
+  --sign:       #17538F;
+  --tile:       #D2690C;
+  --btn-bg:     #B85B08;
   --btn-fg:     #FFFFFF;
-  --footer-bg:  #2E4A5C;
-  --footer-fg:  #EAF0F1;
-  --shadow:     0 18px 40px -28px rgba(29, 43, 51, .5);
-  --shadow-sm:  0 10px 22px -18px rgba(29, 43, 51, .55);
-  --marker:     linear-gradient(transparent 62%, color-mix(in srgb, var(--sun) 78%, transparent) 62%);
+  --footer-bg:  #3B2A1F;
+  --footer-fg:  #F8EFE5;
+  --shadow:     0 18px 40px -28px rgba(90, 52, 20, .55);
+  --shadow-sm:  0 10px 22px -18px rgba(90, 52, 20, .6);
+  --marker:     linear-gradient(transparent 62%, color-mix(in srgb, var(--sun) 80%, transparent) 62%);
 
   --r-panel: 22px;
   --r-card:  14px;
   --r-pill:  999px;
 
-  --font-serif: "Hiragino Mincho ProN", "Hiragino Mincho Pro", "Yu Mincho", "YuMincho", "Noto Serif JP", "Source Han Serif JP", "BIZ UDMincho", serif;
+  --font-display: "Hiragino Maru Gothic ProN", "Hiragino Maru Gothic Pro", "Zen Maru Gothic", "BIZ UDPGothic", "Yu Gothic Medium", "游ゴシック Medium", "Noto Sans JP", sans-serif;
   --font-round: "Hiragino Sans", "Hiragino Kaku Gothic ProN", "BIZ UDPGothic", "Yu Gothic Medium", "游ゴシック Medium", "Noto Sans JP", sans-serif;
   --font-body:  "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Noto Sans JP", "Yu Gothic", "游ゴシック", Meiryo, sans-serif;
   --font-num:   "Avenir Next", "Segoe UI", "Helvetica Neue", var(--font-body);
@@ -49,67 +51,74 @@ button { font: inherit; }
 }
 @media (prefers-color-scheme: dark) {
   :root {
-    --paper:     #111C21;
-    --paper-2:   #16242A;
-    --card:      #1A2A31;
-    --ink:       #E4ECEB;
-    --ink-2:     #9FB3B8;
-    --line:      #2A3D44;
-    --soap:      #A6BF7C;
-    --soap-deep: #BCD494;
-    --soap-tint: #253026;
-    --sun:       #D8BE8C;
-    --sun-tint:  #322B1E;
-    --btn-bg:    #A9CBDD;
-    --btn-fg:    #10202A;
-    --footer-bg: #16262F;
-    --footer-fg: #DCE7EA;
-    --shadow:    0 20px 44px -30px rgba(0, 0, 0, .85);
+    --paper:     #1E1611;
+    --paper-2:   #251B14;
+    --card:      #2A1F17;
+    --ink:       #F5E9DE;
+    --ink-2:     #C0A997;
+    --line:      #3E2E23;
+    --soap:      #F6A44B;
+    --soap-deep: #FBC07A;
+    --soap-tint: #3A2716;
+    --sun:       #F7CE72;
+    --sun-tint:  #3A2E17;
+    --sign:      #8FBEEC;
+    --tile:      #D2690C;
+  --tile:      #D2690C;
+    --btn-bg:    #F6A44B;
+    --btn-fg:    #2A1608;
+    --footer-bg: #150F0A;
+    --footer-fg: #EFE2D5;
+    --shadow:    0 20px 44px -30px rgba(0, 0, 0, .9);
     --shadow-sm: 0 12px 24px -20px rgba(0, 0, 0, .9);
-    --marker:    linear-gradient(transparent 76%, color-mix(in srgb, var(--sun) 34%, transparent) 76%);
+    --marker:    linear-gradient(transparent 76%, color-mix(in srgb, var(--sun) 30%, transparent) 76%);
     color-scheme: dark;
   }
 }
 :root[data-theme="dark"] {
-  --paper:     #111C21;
-  --paper-2:   #16242A;
-  --card:      #1A2A31;
-  --ink:       #E4ECEB;
-  --ink-2:     #9FB3B8;
-  --line:      #2A3D44;
-  --soap:      #A6BF7C;
-  --soap-deep: #BCD494;
-  --soap-tint: #253026;
-  --sun:       #D8BE8C;
-  --sun-tint:  #322B1E;
-  --btn-bg:    #A9CBDD;
-  --btn-fg:    #10202A;
-  --footer-bg: #16262F;
-  --footer-fg: #DCE7EA;
-  --shadow:    0 20px 44px -30px rgba(0, 0, 0, .85);
+  --paper:     #1E1611;
+  --paper-2:   #251B14;
+  --card:      #2A1F17;
+  --ink:       #F5E9DE;
+  --ink-2:     #C0A997;
+  --line:      #3E2E23;
+  --soap:      #F6A44B;
+  --soap-deep: #FBC07A;
+  --soap-tint: #3A2716;
+  --sun:       #F7CE72;
+  --sun-tint:  #3A2E17;
+  --sign:      #8FBEEC;
+  --tile:      #D2690C;
+  --btn-bg:    #F6A44B;
+  --btn-fg:    #2A1608;
+  --footer-bg: #150F0A;
+  --footer-fg: #EFE2D5;
+  --shadow:    0 20px 44px -30px rgba(0, 0, 0, .9);
   --shadow-sm: 0 12px 24px -20px rgba(0, 0, 0, .9);
-  --marker:    linear-gradient(transparent 76%, color-mix(in srgb, var(--sun) 34%, transparent) 76%);
+  --marker:    linear-gradient(transparent 76%, color-mix(in srgb, var(--sun) 30%, transparent) 76%);
   color-scheme: dark;
 }
 :root[data-theme="light"] {
-  --paper:      #F2F5F6;
-  --paper-2:    #E7EDEE;
+  --paper:      #FDF7F0;
+  --paper-2:    #FAEEE1;
   --card:       #FFFFFF;
-  --ink:        #1D2B33;
-  --ink-2:      #55686F;
-  --line:       #DCE3E2;
-  --soap:       #7E9459;
-  --soap-deep:  #5A6E3C;
-  --soap-tint:  #E9EFE0;
-  --sun:        #DCC79A;
-  --sun-tint:   #F4EDDD;
-  --btn-bg:     #2E4A5C;
+  --ink:        #3A2A20;
+  --ink-2:      #7A6255;
+  --line:       #F0E1D2;
+  --soap:       #F0871F;
+  --soap-deep:  #A04E05;
+  --soap-tint:  #FDE9D2;
+  --sun:        #F7C64B;
+  --sun-tint:   #FDF0CE;
+  --sign:       #17538F;
+  --tile:       #D2690C;
+  --btn-bg:     #B85B08;
   --btn-fg:     #FFFFFF;
-  --footer-bg:  #2E4A5C;
-  --footer-fg:  #EAF0F1;
-  --shadow:     0 18px 40px -28px rgba(29, 43, 51, .5);
-  --shadow-sm:  0 10px 22px -18px rgba(29, 43, 51, .55);
-  --marker:     linear-gradient(transparent 62%, color-mix(in srgb, var(--sun) 78%, transparent) 62%);
+  --footer-bg:  #3B2A1F;
+  --footer-fg:  #F8EFE5;
+  --shadow:     0 18px 40px -28px rgba(90, 52, 20, .55);
+  --shadow-sm:  0 10px 22px -18px rgba(90, 52, 20, .6);
+  --marker:     linear-gradient(transparent 62%, color-mix(in srgb, var(--sun) 80%, transparent) 62%);
   color-scheme: light;
 }
 
@@ -148,17 +157,17 @@ body {
   font-family: var(--font-num);
   font-size: .72rem; font-weight: 600;
   letter-spacing: .22em; text-transform: uppercase;
-  color: var(--btn-bg);
+  color: var(--sign);
   display: flex; align-items: center; gap: .7rem;
 }
-.eyebrow::after { content: ""; flex: 0 0 30px; height: 1px; background: var(--soap); }
+.eyebrow::after { content: ""; flex: 0 0 30px; height: 2px; border-radius: 2px; background: var(--soap); }
 .h2 {
-  font-family: var(--font-serif);
+  font-family: var(--font-display);
   font-size: clamp(1.5rem, 3.1vw, 2.05rem);
-  font-weight: 600; line-height: 1.75; letter-spacing: .05em;
+  font-weight: 700; line-height: 1.6; letter-spacing: .02em;
   text-wrap: balance; word-break: auto-phrase;
 }
-.head p { color: var(--ink-2); max-width: 34em; }
+.head p:not(.eyebrow) { color: var(--ink-2); max-width: 34em; }
 
 /* ---------- header ---------- */
 .site-header {
@@ -172,7 +181,13 @@ body {
 .header-in { display: flex; align-items: center; gap: 1.4rem; padding-block: .85rem; }
 .brand { display: flex; align-items: center; gap: .6rem; text-decoration: none; flex: 0 0 auto; }
 .brand-mark { width: 34px; height: 34px; flex: 0 0 auto; }
-.brand-name { font-family: var(--font-serif); font-weight: 700; font-size: 1.02rem; letter-spacing: .04em; line-height: 1.3; }
+.brand-name { font-family: var(--font-display); font-weight: 700; font-size: 1.06rem; letter-spacing: .04em; line-height: 1.3; }
+.brand-tag {
+  display: inline-block; margin-right: .45rem;
+  background: var(--sign); color: #FFFFFF;
+  font-family: var(--font-display); font-weight: 700; font-size: .74rem; letter-spacing: .08em;
+  padding: .12rem .5rem; border-radius: 4px; vertical-align: .12em;
+}
 .brand-sub { display: block; font-family: var(--font-num); font-size: .6rem; letter-spacing: .18em; color: var(--ink-2); font-weight: 600; }
 .nav { display: flex; gap: .3rem; margin-left: auto; overflow-x: auto; scrollbar-width: none; }
 .nav::-webkit-scrollbar { display: none; }
@@ -209,9 +224,17 @@ body {
     radial-gradient(40% 38% at 82% 30%, color-mix(in srgb, var(--sun) 26%, transparent), transparent 68%);
   pointer-events: none;
 }
-#bubbles { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
+.hero::after {
+  content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 46%; z-index: 0;
+  background: linear-gradient(to top,
+    color-mix(in srgb, var(--soap) 62%, transparent),
+    color-mix(in srgb, var(--soap) 28%, transparent) 45%,
+    transparent);
+  pointer-events: none;
+}
+#bubbles { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 1; }
 .hero-in {
-  position: relative;
+  position: relative; z-index: 2;
   display: grid; grid-template-columns: 1.15fr .85fr; gap: clamp(2rem, 4vw, 3.5rem); align-items: center;
 }
 .hero-copy { display: flex; flex-direction: column; align-items: flex-start; gap: 1.3rem; }
@@ -223,15 +246,15 @@ body {
 }
 .pill .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--soap); }
 .hero h1 {
-  font-family: var(--font-serif);
+  font-family: var(--font-display);
   font-size: clamp(1.95rem, 5vw, 3.05rem);
-  font-weight: 600; line-height: 1.62; letter-spacing: .06em;
+  font-weight: 700; line-height: 1.5; letter-spacing: .01em;
   text-wrap: balance; word-break: auto-phrase;
 }
 .hero h1 .accent { background: var(--marker); }
 .hero-lead { color: var(--ink-2); max-width: 30em; }
 .hero-actions { display: flex; flex-wrap: wrap; gap: .8rem; align-items: center; }
-.hero-note { font-size: .82rem; color: var(--ink-2); }
+.hero-note { font-size: .82rem; color: color-mix(in srgb, var(--ink) 85%, transparent); }
 .hero-points { display: flex; flex-wrap: wrap; gap: .5rem .6rem; }
 .point {
   display: inline-flex; align-items: center; gap: .4rem;
@@ -251,8 +274,12 @@ body {
   padding: 2rem 1.6rem 1.8rem; box-shadow: var(--shadow-sm);
   display: flex; flex-direction: column; gap: .7rem;
 }
-.reason .ico { width: 52px; height: 52px; margin-bottom: .5rem; }
-.reason h3 { font-family: var(--font-serif); font-size: 1.1rem; font-weight: 600; letter-spacing: .03em; line-height: 1.6; }
+.reason .ico {
+  width: 54px; height: 54px; padding: 11px; border-radius: 15px;
+  background: var(--tile); box-shadow: var(--shadow-sm);
+  margin-bottom: .6rem;
+}
+.reason h3 { font-family: var(--font-display); font-size: 1.1rem; font-weight: 700; line-height: 1.6; }
 .reason p { font-size: .93rem; color: var(--ink-2); }
 
 /* ---------- price ---------- */
@@ -278,7 +305,7 @@ body {
   padding: 1.5rem 1.4rem; box-shadow: var(--shadow-sm); overflow-x: auto;
 }
 .table-box h3 {
-  font-family: var(--font-serif); font-size: 1rem; font-weight: 700;
+  font-family: var(--font-display); font-size: 1rem; font-weight: 700;
   padding-bottom: .8rem; margin-bottom: .4rem; border-bottom: 2px solid var(--soap-tint);
 }
 .table-box table { width: 100%; border-collapse: collapse; font-size: .93rem; }
@@ -316,7 +343,7 @@ body {
   font-family: var(--font-num); font-weight: 700; font-size: 1.02rem;
   box-shadow: var(--shadow-sm);
 }
-.step h3 { font-family: var(--font-serif); font-size: 1.02rem; font-weight: 600; letter-spacing: .03em; }
+.step h3 { font-family: var(--font-display); font-size: 1.03rem; font-weight: 700; }
 .step p { font-size: .9rem; color: var(--ink-2); }
 
 /* ---------- shop info ---------- */
@@ -326,7 +353,7 @@ body {
   border-radius: var(--r-panel); padding: clamp(1.6rem, 3vw, 2.4rem); box-shadow: var(--shadow-sm);
 }
 .panel-h {
-  font-family: var(--font-serif); font-size: 1rem; font-weight: 600; letter-spacing: .03em;
+  font-family: var(--font-display); font-size: 1rem; font-weight: 700;
   padding-bottom: .8rem; margin-bottom: 1rem; border-bottom: 1px solid var(--line);
 }
 .access-list { display: flex; flex-direction: column; gap: .1rem; }
@@ -376,7 +403,7 @@ body {
   list-style: none; cursor: pointer;
   display: flex; align-items: flex-start; gap: .8rem;
   padding-block: 1.05rem;
-  font-family: var(--font-serif); font-weight: 600; font-size: .97rem; line-height: 1.85; letter-spacing: .02em;
+  font-family: var(--font-display); font-weight: 700; font-size: .98rem; line-height: 1.75;
 }
 .faq summary::-webkit-details-marker { display: none; }
 .faq summary::after {
@@ -399,7 +426,7 @@ body {
   padding: clamp(2.2rem, 5vw, 3.4rem);
   display: flex; flex-direction: column; align-items: center; gap: 1.1rem; text-align: center;
 }
-.cta-panel h2 { font-family: var(--font-serif); font-size: clamp(1.35rem, 3.2vw, 1.9rem); font-weight: 600; letter-spacing: .05em; line-height: 1.55; text-wrap: balance; }
+.cta-panel h2 { font-family: var(--font-display); font-size: clamp(1.4rem, 3.4vw, 2rem); font-weight: 700; line-height: 1.55; text-wrap: balance; }
 .cta-panel p { color: var(--ink-2); max-width: 40em; }
 .cta-actions { display: flex; flex-wrap: wrap; gap: .8rem; justify-content: center; }
 
@@ -413,6 +440,7 @@ body {
 .site-footer .footer-links a:hover { color: var(--footer-fg); }
 .site-footer .brand-mark circle:first-child { fill: color-mix(in srgb, var(--footer-fg) 16%, transparent); }
 .site-footer .brand-mark path { stroke: var(--footer-fg); }
+.site-footer .brand-tag { background: color-mix(in srgb, var(--footer-fg) 22%, transparent); color: var(--footer-fg); }
 .footer-in { display: flex; flex-wrap: wrap; gap: 1.4rem; justify-content: space-between; align-items: flex-start; }
 .footer-links { display: flex; flex-wrap: wrap; gap: .3rem 1.2rem; font-size: .88rem; }
 .footer-links a { text-decoration: none; color: var(--ink-2); }
@@ -480,7 +508,7 @@ body {
         <path d="M20 9c-4.4 0-8 3.4-8 7.6 0 1.9.8 3.6 2.1 5l5.2 5.7c.4.4 1 .4 1.4 0l5.2-5.7c1.3-1.4 2.1-3.1 2.1-5C28 12.4 24.4 9 20 9z" fill="none" stroke="var(--soap-deep)" stroke-width="2" stroke-linejoin="round"/>
         <circle cx="17.4" cy="16.6" r="2.6" fill="var(--sun)"/>
       </svg>
-      <span class="brand-name">クリーニング林商会
+      <span class="brand-name"><span class="brand-tag">クリーニング</span>林商会
         <span class="brand-sub">HAYASHI SHOKAI</span>
       </span>
     </a>
@@ -571,31 +599,31 @@ body {
       </div>
       <ul class="reasons">
         <li class="reason r">
-          <svg class="ico" viewBox="0 0 48 48" fill="none" stroke="var(--soap-deep)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <svg class="ico" viewBox="0 0 48 48" fill="none" stroke="#FFFFFF" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
             <rect x="5" y="25" width="27" height="16" rx="6"/>
             <path d="M11 33h11"/>
             <circle cx="35" cy="16" r="6.5"/>
-            <circle cx="23" cy="12" r="4" stroke="var(--soap)"/>
-            <circle cx="42" cy="28" r="3" stroke="var(--soap)"/>
+            <circle cx="23" cy="12" r="4" stroke="rgba(255,255,255,.72)"/>
+            <circle cx="42" cy="28" r="3" stroke="rgba(255,255,255,.72)"/>
           </svg>
           <h3>肌にやさしい、石けん洗い。</h3>
           <p>石けんを使ったやさしい洗いにこだわっています。肌に直接ふれる衣類だからこそ、洗い上がりの気持ちよさを大切にしています。</p>
         </li>
         <li class="reason r">
-          <svg class="ico" viewBox="0 0 48 48" fill="none" stroke="var(--soap-deep)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <svg class="ico" viewBox="0 0 48 48" fill="none" stroke="#FFFFFF" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
             <path d="M6 33h30a4 4 0 0 0 4-4c0-6.6-5.4-12-12-12H15z"/>
             <path d="M15 17v-3a5 5 0 0 1 5-5h8a5 5 0 0 1 5 5v3"/>
-            <path d="M12 39h24" stroke="var(--soap)"/>
+            <path d="M12 39h24" stroke="rgba(255,255,255,.72)"/>
           </svg>
           <h3>仕上げは、手作業で。</h3>
           <p>一点ずつ手をかけて仕上げます。襟や袖、折り目のかたちを見ながら整えるので、袖を通したときの印象が違います。</p>
         </li>
         <li class="reason r">
-          <svg class="ico" viewBox="0 0 48 48" fill="none" stroke="var(--soap-deep)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <svg class="ico" viewBox="0 0 48 48" fill="none" stroke="#FFFFFF" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
             <path d="M6 31V21l9-6 9 6v10"/>
             <path d="M24 24h6l5 6v5h-11z"/>
-            <circle cx="14" cy="35" r="3.4" stroke="var(--soap)"/>
-            <circle cx="31" cy="35" r="3.4" stroke="var(--soap)"/>
+            <circle cx="14" cy="35" r="3.4" stroke="rgba(255,255,255,.72)"/>
+            <circle cx="31" cy="35" r="3.4" stroke="rgba(255,255,255,.72)"/>
           </svg>
           <h3>集荷・お届けも承ります。</h3>
           <p>お電話一本で、ご自宅まで集荷にうかがいます。お仕事や子育てで店舗に立ち寄る時間がとりにくい方も、玄関先で受け渡しが完結します。</p>
@@ -655,29 +683,29 @@ body {
       </div>
       <ul class="reasons">
         <li class="reason r">
-          <svg class="ico" viewBox="0 0 48 48" fill="none" stroke="var(--soap-deep)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <svg class="ico" viewBox="0 0 48 48" fill="none" stroke="#FFFFFF" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
             <path d="M6 31V21l9-6 9 6v10"/>
             <path d="M24 24h6l5 6v5h-11z"/>
-            <circle cx="14" cy="35" r="3.4" stroke="var(--soap)"/>
-            <circle cx="31" cy="35" r="3.4" stroke="var(--soap)"/>
+            <circle cx="14" cy="35" r="3.4" stroke="rgba(255,255,255,.72)"/>
+            <circle cx="31" cy="35" r="3.4" stroke="rgba(255,255,255,.72)"/>
           </svg>
           <h3>店舗に寄る時間がなくても。</h3>
           <p>お仕事や子育てで日中に立ち寄りにくい方、まとまった量で持ち運びが大変な方に、ご利用いただいています。</p>
         </li>
         <li class="reason r">
-          <svg class="ico" viewBox="0 0 48 48" fill="none" stroke="var(--soap-deep)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <svg class="ico" viewBox="0 0 48 48" fill="none" stroke="#FFFFFF" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
             <circle cx="24" cy="26" r="13"/>
             <path d="M24 19v7l5 3"/>
-            <path d="M14 10l-5 4M34 10l5 4" stroke="var(--soap)"/>
+            <path d="M14 10l-5 4M34 10l5 4" stroke="rgba(255,255,255,.72)"/>
           </svg>
           <h3>朝8時から開いています。</h3>
           <p>月曜から土曜は朝8時から夜19時まで。ご出勤前やお帰りの時間にあわせて、店頭でのお預かりも承ります。</p>
         </li>
         <li class="reason r">
-          <svg class="ico" viewBox="0 0 48 48" fill="none" stroke="var(--soap-deep)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <svg class="ico" viewBox="0 0 48 48" fill="none" stroke="#FFFFFF" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
             <path d="M6 33h30a4 4 0 0 0 4-4c0-6.6-5.4-12-12-12H15z"/>
             <path d="M15 17v-3a5 5 0 0 1 5-5h8a5 5 0 0 1 5 5v3"/>
-            <path d="M12 39h24" stroke="var(--soap)"/>
+            <path d="M12 39h24" stroke="rgba(255,255,255,.72)"/>
           </svg>
           <h3>洗いも仕上げも、自分たちの手で。</h3>
           <p>石けんでやさしく洗い、一点ずつ手をかけて仕上げます。気になるところがあれば、お預かりのときにお申し付けください。</p>
@@ -829,7 +857,7 @@ body {
           <path d="M20 9c-4.4 0-8 3.4-8 7.6 0 1.9.8 3.6 2.1 5l5.2 5.7c.4.4 1 .4 1.4 0l5.2-5.7c1.3-1.4 2.1-3.1 2.1-5C28 12.4 24.4 9 20 9z" fill="none" stroke="var(--soap-deep)" stroke-width="2" stroke-linejoin="round"/>
           <circle cx="17.4" cy="16.6" r="2.6" fill="var(--sun)"/>
         </svg>
-        <span class="brand-name">クリーニング林商会
+        <span class="brand-name"><span class="brand-tag">クリーニング</span>林商会
           <span class="brand-sub">HAYASHI SHOKAI</span>
         </span>
       </a>
@@ -912,7 +940,8 @@ body {
         v: 0.08 + Math.random() * 0.2,
         drift: (Math.random() - 0.5) * 0.3,
         phase: Math.random() * Math.PI * 2,
-        alpha: 0.22 + (1 - t) * 0.4
+        alpha: 0.3 + (1 - t) * 0.45,
+        warm: Math.random() < 0.4
       });
     }
   }
@@ -931,13 +960,14 @@ body {
   function draw() {
     ctx.clearRect(0, 0, w, h);
     var foam = token('--card', '#FFFFFF');
-    var rim = token('--soap', '#7E9459');
+    var warmFoam = token('--sun-tint', '#FDF0CE');
+    var rim = token('--soap', '#F0871F');
     for (var i = 0; i < bubbles.length; i++) {
       var b = bubbles[i];
       ctx.beginPath();
       ctx.arc(b.x, b.y, b.r, 0, Math.PI * 2);
       ctx.globalAlpha = b.alpha;
-      ctx.fillStyle = foam;
+      ctx.fillStyle = b.warm ? warmFoam : foam;
       ctx.fill();
       ctx.globalAlpha = b.alpha * 0.5;
       ctx.lineWidth = 1;
