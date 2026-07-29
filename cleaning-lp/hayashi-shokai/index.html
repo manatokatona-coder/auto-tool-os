@@ -16,28 +16,31 @@ button { font: inherit; }
 
 /* ---------- tokens ---------- */
 :root {
-  --paper:      #F5F7F4;
-  --paper-2:    #ECF2EF;
+  --paper:      #F2F5F6;
+  --paper-2:    #E7EDEE;
   --card:       #FFFFFF;
-  --ink:        #1E3437;
-  --ink-2:      #4A6669;
-  --line:       #DFE7E3;
-  --soap:       #4E9AA1;
-  --soap-deep:  #2F757C;
-  --soap-tint:  #E2F0EF;
-  --sun:        #F0BE63;
-  --sun-tint:   #FBEDD3;
-  --btn-bg:     #2F757C;
+  --ink:        #1D2B33;
+  --ink-2:      #55686F;
+  --line:       #DCE3E2;
+  --soap:       #7E9459;
+  --soap-deep:  #5A6E3C;
+  --soap-tint:  #E9EFE0;
+  --sun:        #DCC79A;
+  --sun-tint:   #F4EDDD;
+  --btn-bg:     #2E4A5C;
   --btn-fg:     #FFFFFF;
-  --shadow:     0 20px 44px -28px rgba(30, 52, 55, .45);
-  --shadow-sm:  0 10px 24px -18px rgba(30, 52, 55, .5);
-  --marker:     linear-gradient(transparent 62%, color-mix(in srgb, var(--sun) 62%, transparent) 62%);
+  --footer-bg:  #2E4A5C;
+  --footer-fg:  #EAF0F1;
+  --shadow:     0 18px 40px -28px rgba(29, 43, 51, .5);
+  --shadow-sm:  0 10px 22px -18px rgba(29, 43, 51, .55);
+  --marker:     linear-gradient(transparent 62%, color-mix(in srgb, var(--sun) 78%, transparent) 62%);
 
-  --r-panel: 36px;
-  --r-card:  18px;
+  --r-panel: 22px;
+  --r-card:  14px;
   --r-pill:  999px;
 
-  --font-round: "Hiragino Maru Gothic ProN", "Hiragino Maru Gothic Pro", "BIZ UDPGothic", "Zen Maru Gothic", "Yu Gothic Medium", "游ゴシック Medium", "Noto Sans JP", sans-serif;
+  --font-serif: "Hiragino Mincho ProN", "Hiragino Mincho Pro", "Yu Mincho", "YuMincho", "Noto Serif JP", "Source Han Serif JP", "BIZ UDMincho", serif;
+  --font-round: "Hiragino Sans", "Hiragino Kaku Gothic ProN", "BIZ UDPGothic", "Yu Gothic Medium", "游ゴシック Medium", "Noto Sans JP", sans-serif;
   --font-body:  "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Noto Sans JP", "Yu Gothic", "游ゴシック", Meiryo, sans-serif;
   --font-num:   "Avenir Next", "Segoe UI", "Helvetica Neue", var(--font-body);
 
@@ -46,61 +49,67 @@ button { font: inherit; }
 }
 @media (prefers-color-scheme: dark) {
   :root {
-    --paper:     #131E1F;
-    --paper-2:   #182728;
-    --card:      #1B2A2B;
-    --ink:       #E9EFEC;
-    --ink-2:     #A6BBB9;
-    --line:      #2C4143;
-    --soap:      #6FBDC3;
-    --soap-deep: #8FD2D7;
-    --soap-tint: #22383A;
-    --sun:       #E7BE74;
-    --sun-tint:  #33301F;
-    --btn-bg:    #7ECBD1;
-    --btn-fg:    #0F1D1E;
-    --shadow:    0 22px 48px -30px rgba(0, 0, 0, .8);
-    --shadow-sm: 0 12px 26px -20px rgba(0, 0, 0, .85);
-    --marker:    linear-gradient(transparent 76%, color-mix(in srgb, var(--sun) 55%, transparent) 76%);
+    --paper:     #111C21;
+    --paper-2:   #16242A;
+    --card:      #1A2A31;
+    --ink:       #E4ECEB;
+    --ink-2:     #9FB3B8;
+    --line:      #2A3D44;
+    --soap:      #A6BF7C;
+    --soap-deep: #BCD494;
+    --soap-tint: #253026;
+    --sun:       #D8BE8C;
+    --sun-tint:  #322B1E;
+    --btn-bg:    #A9CBDD;
+    --btn-fg:    #10202A;
+    --footer-bg: #16262F;
+    --footer-fg: #DCE7EA;
+    --shadow:    0 20px 44px -30px rgba(0, 0, 0, .85);
+    --shadow-sm: 0 12px 24px -20px rgba(0, 0, 0, .9);
+    --marker:    linear-gradient(transparent 76%, color-mix(in srgb, var(--sun) 34%, transparent) 76%);
     color-scheme: dark;
   }
 }
 :root[data-theme="dark"] {
-  --paper:     #131E1F;
-  --paper-2:   #182728;
-  --card:      #1B2A2B;
-  --ink:       #E9EFEC;
-  --ink-2:     #A6BBB9;
-  --line:      #2C4143;
-  --soap:      #6FBDC3;
-  --soap-deep: #8FD2D7;
-  --soap-tint: #22383A;
-  --sun:       #E7BE74;
-  --sun-tint:  #33301F;
-  --btn-bg:    #7ECBD1;
-  --btn-fg:    #0F1D1E;
-  --shadow:    0 22px 48px -30px rgba(0, 0, 0, .8);
-  --shadow-sm: 0 12px 26px -20px rgba(0, 0, 0, .85);
-  --marker:    linear-gradient(transparent 76%, color-mix(in srgb, var(--sun) 55%, transparent) 76%);
+  --paper:     #111C21;
+  --paper-2:   #16242A;
+  --card:      #1A2A31;
+  --ink:       #E4ECEB;
+  --ink-2:     #9FB3B8;
+  --line:      #2A3D44;
+  --soap:      #A6BF7C;
+  --soap-deep: #BCD494;
+  --soap-tint: #253026;
+  --sun:       #D8BE8C;
+  --sun-tint:  #322B1E;
+  --btn-bg:    #A9CBDD;
+  --btn-fg:    #10202A;
+  --footer-bg: #16262F;
+  --footer-fg: #DCE7EA;
+  --shadow:    0 20px 44px -30px rgba(0, 0, 0, .85);
+  --shadow-sm: 0 12px 24px -20px rgba(0, 0, 0, .9);
+  --marker:    linear-gradient(transparent 76%, color-mix(in srgb, var(--sun) 34%, transparent) 76%);
   color-scheme: dark;
 }
 :root[data-theme="light"] {
-  --paper:     #F5F7F4;
-  --paper-2:   #ECF2EF;
-  --card:      #FFFFFF;
-  --ink:       #1E3437;
-  --ink-2:     #4A6669;
-  --line:      #DFE7E3;
-  --soap:      #4E9AA1;
-  --soap-deep: #2F757C;
-  --soap-tint: #E2F0EF;
-  --sun:       #F0BE63;
-  --sun-tint:  #FBEDD3;
-  --btn-bg:    #2F757C;
-  --btn-fg:    #FFFFFF;
-  --shadow:    0 20px 44px -28px rgba(30, 52, 55, .45);
-  --shadow-sm: 0 10px 24px -18px rgba(30, 52, 55, .5);
-  --marker:    linear-gradient(transparent 62%, color-mix(in srgb, var(--sun) 62%, transparent) 62%);
+  --paper:      #F2F5F6;
+  --paper-2:    #E7EDEE;
+  --card:       #FFFFFF;
+  --ink:        #1D2B33;
+  --ink-2:      #55686F;
+  --line:       #DCE3E2;
+  --soap:       #7E9459;
+  --soap-deep:  #5A6E3C;
+  --soap-tint:  #E9EFE0;
+  --sun:        #DCC79A;
+  --sun-tint:   #F4EDDD;
+  --btn-bg:     #2E4A5C;
+  --btn-fg:     #FFFFFF;
+  --footer-bg:  #2E4A5C;
+  --footer-fg:  #EAF0F1;
+  --shadow:     0 18px 40px -28px rgba(29, 43, 51, .5);
+  --shadow-sm:  0 10px 22px -18px rgba(29, 43, 51, .55);
+  --marker:     linear-gradient(transparent 62%, color-mix(in srgb, var(--sun) 78%, transparent) 62%);
   color-scheme: light;
 }
 
@@ -138,15 +147,15 @@ body {
 .eyebrow {
   font-family: var(--font-num);
   font-size: .72rem; font-weight: 600;
-  letter-spacing: .2em; text-transform: uppercase;
-  color: var(--soap-deep);
-  display: flex; align-items: center; gap: .6rem;
+  letter-spacing: .22em; text-transform: uppercase;
+  color: var(--btn-bg);
+  display: flex; align-items: center; gap: .7rem;
 }
-.eyebrow::after { content: ""; flex: 0 0 34px; height: 2px; border-radius: 2px; background: var(--sun); }
+.eyebrow::after { content: ""; flex: 0 0 30px; height: 1px; background: var(--soap); }
 .h2 {
-  font-family: var(--font-round);
-  font-size: clamp(1.55rem, 3.2vw, 2.15rem);
-  font-weight: 700; line-height: 1.5; letter-spacing: .01em;
+  font-family: var(--font-serif);
+  font-size: clamp(1.5rem, 3.1vw, 2.05rem);
+  font-weight: 600; line-height: 1.75; letter-spacing: .05em;
   text-wrap: balance; word-break: auto-phrase;
 }
 .head p { color: var(--ink-2); max-width: 34em; }
@@ -163,7 +172,7 @@ body {
 .header-in { display: flex; align-items: center; gap: 1.4rem; padding-block: .85rem; }
 .brand { display: flex; align-items: center; gap: .6rem; text-decoration: none; flex: 0 0 auto; }
 .brand-mark { width: 34px; height: 34px; flex: 0 0 auto; }
-.brand-name { font-family: var(--font-round); font-weight: 700; font-size: 1.02rem; letter-spacing: .04em; line-height: 1.3; }
+.brand-name { font-family: var(--font-serif); font-weight: 700; font-size: 1.02rem; letter-spacing: .04em; line-height: 1.3; }
 .brand-sub { display: block; font-family: var(--font-num); font-size: .6rem; letter-spacing: .18em; color: var(--ink-2); font-weight: 600; }
 .nav { display: flex; gap: .3rem; margin-left: auto; overflow-x: auto; scrollbar-width: none; }
 .nav::-webkit-scrollbar { display: none; }
@@ -214,9 +223,9 @@ body {
 }
 .pill .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--soap); }
 .hero h1 {
-  font-family: var(--font-round);
-  font-size: clamp(2.05rem, 5.4vw, 3.35rem);
-  font-weight: 700; line-height: 1.42; letter-spacing: .005em;
+  font-family: var(--font-serif);
+  font-size: clamp(1.95rem, 5vw, 3.05rem);
+  font-weight: 600; line-height: 1.62; letter-spacing: .06em;
   text-wrap: balance; word-break: auto-phrase;
 }
 .hero h1 .accent { background: var(--marker); }
@@ -242,8 +251,8 @@ body {
   padding: 2rem 1.6rem 1.8rem; box-shadow: var(--shadow-sm);
   display: flex; flex-direction: column; gap: .7rem;
 }
-.reason .ico { width: 46px; height: 46px; margin-bottom: .3rem; }
-.reason h3 { font-family: var(--font-round); font-size: 1.12rem; font-weight: 700; line-height: 1.6; }
+.reason .ico { width: 52px; height: 52px; margin-bottom: .5rem; }
+.reason h3 { font-family: var(--font-serif); font-size: 1.1rem; font-weight: 600; letter-spacing: .03em; line-height: 1.6; }
 .reason p { font-size: .93rem; color: var(--ink-2); }
 
 /* ---------- price ---------- */
@@ -269,7 +278,7 @@ body {
   padding: 1.5rem 1.4rem; box-shadow: var(--shadow-sm); overflow-x: auto;
 }
 .table-box h3 {
-  font-family: var(--font-round); font-size: 1rem; font-weight: 700;
+  font-family: var(--font-serif); font-size: 1rem; font-weight: 700;
   padding-bottom: .8rem; margin-bottom: .4rem; border-bottom: 2px solid var(--soap-tint);
 }
 .table-box table { width: 100%; border-collapse: collapse; font-size: .93rem; }
@@ -302,12 +311,12 @@ body {
 .step { display: flex; flex-direction: column; gap: .6rem; position: relative; }
 .step-no {
   width: 42px; height: 42px; border-radius: 50%;
-  background: var(--soap-deep); color: var(--btn-fg);
+  background: var(--btn-bg); color: var(--btn-fg);
   display: grid; place-items: center;
   font-family: var(--font-num); font-weight: 700; font-size: 1.02rem;
   box-shadow: var(--shadow-sm);
 }
-.step h3 { font-family: var(--font-round); font-size: 1.03rem; font-weight: 700; }
+.step h3 { font-family: var(--font-serif); font-size: 1.02rem; font-weight: 600; letter-spacing: .03em; }
 .step p { font-size: .9rem; color: var(--ink-2); }
 
 /* ---------- shop info ---------- */
@@ -317,8 +326,8 @@ body {
   border-radius: var(--r-panel); padding: clamp(1.6rem, 3vw, 2.4rem); box-shadow: var(--shadow-sm);
 }
 .panel-h {
-  font-family: var(--font-round); font-size: 1rem; font-weight: 700;
-  padding-bottom: .8rem; margin-bottom: 1rem; border-bottom: 2px solid var(--soap-tint);
+  font-family: var(--font-serif); font-size: 1rem; font-weight: 600; letter-spacing: .03em;
+  padding-bottom: .8rem; margin-bottom: 1rem; border-bottom: 1px solid var(--line);
 }
 .access-list { display: flex; flex-direction: column; gap: .1rem; }
 .access-list li {
@@ -367,7 +376,7 @@ body {
   list-style: none; cursor: pointer;
   display: flex; align-items: flex-start; gap: .8rem;
   padding-block: 1.05rem;
-  font-family: var(--font-round); font-weight: 700; font-size: .98rem; line-height: 1.7;
+  font-family: var(--font-serif); font-weight: 600; font-size: .97rem; line-height: 1.85; letter-spacing: .02em;
 }
 .faq summary::-webkit-details-marker { display: none; }
 .faq summary::after {
@@ -390,12 +399,20 @@ body {
   padding: clamp(2.2rem, 5vw, 3.4rem);
   display: flex; flex-direction: column; align-items: center; gap: 1.1rem; text-align: center;
 }
-.cta-panel h2 { font-family: var(--font-round); font-size: clamp(1.4rem, 3.4vw, 2rem); font-weight: 700; line-height: 1.55; text-wrap: balance; }
+.cta-panel h2 { font-family: var(--font-serif); font-size: clamp(1.35rem, 3.2vw, 1.9rem); font-weight: 600; letter-spacing: .05em; line-height: 1.55; text-wrap: balance; }
 .cta-panel p { color: var(--ink-2); max-width: 40em; }
 .cta-actions { display: flex; flex-wrap: wrap; gap: .8rem; justify-content: center; }
 
 /* ---------- footer ---------- */
-.site-footer { border-top: 1px solid var(--line); padding-block: 2.6rem 3rem; }
+.site-footer {
+  background: var(--footer-bg); color: var(--footer-fg);
+  padding-block: 3rem 3.4rem; margin-top: clamp(3rem, 6vw, 5rem);
+}
+.site-footer .brand-sub, .site-footer .footer-links a,
+.site-footer .disclaimer, .site-footer .copy { color: color-mix(in srgb, var(--footer-fg) 72%, transparent); }
+.site-footer .footer-links a:hover { color: var(--footer-fg); }
+.site-footer .brand-mark circle:first-child { fill: color-mix(in srgb, var(--footer-fg) 16%, transparent); }
+.site-footer .brand-mark path { stroke: var(--footer-fg); }
 .footer-in { display: flex; flex-wrap: wrap; gap: 1.4rem; justify-content: space-between; align-items: flex-start; }
 .footer-links { display: flex; flex-wrap: wrap; gap: .3rem 1.2rem; font-size: .88rem; }
 .footer-links a { text-decoration: none; color: var(--ink-2); }
@@ -510,6 +527,12 @@ body {
       <div class="hero-art r" aria-hidden="true">
         <svg viewBox="0 0 300 330" role="img">
           <ellipse cx="150" cy="300" rx="112" ry="16" fill="var(--soap-tint)"/>
+          <g>
+            <rect x="38" y="268" width="70" height="36" rx="15" fill="var(--sun-tint)" stroke="var(--soap)" stroke-width="4"/>
+            <path d="M54 281h26" stroke="var(--soap)" stroke-width="4" stroke-linecap="round" opacity=".65"/>
+            <circle cx="118" cy="262" r="8" fill="none" stroke="var(--soap)" stroke-width="3"/>
+            <circle cx="132" cy="277" r="5" fill="none" stroke="var(--soap)" stroke-width="3"/>
+          </g>
           <g class="sway">
             <!-- hanger -->
             <path d="M150 46v-14c0-6 9-6 9-12a7.5 7.5 0 0 0-14-3.4" fill="none" stroke="var(--ink-2)" stroke-width="5" stroke-linecap="round"/>
@@ -548,31 +571,31 @@ body {
       </div>
       <ul class="reasons">
         <li class="reason r">
-          <svg class="ico" viewBox="0 0 48 48" fill="none" aria-hidden="true">
-            <rect x="4" y="8" width="40" height="32" rx="10" fill="var(--soap-tint)"/>
-            <path d="M14 30c4-10 10-14 20-14" stroke="var(--soap-deep)" stroke-width="3" stroke-linecap="round"/>
-            <path d="M31 30l7-7 4 4-7 7z" fill="var(--sun)"/>
-            <circle cx="17" cy="20" r="3" fill="var(--soap-deep)"/>
+          <svg class="ico" viewBox="0 0 48 48" fill="none" stroke="var(--soap-deep)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <rect x="5" y="25" width="27" height="16" rx="6"/>
+            <path d="M11 33h11"/>
+            <circle cx="35" cy="16" r="6.5"/>
+            <circle cx="23" cy="12" r="4" stroke="var(--soap)"/>
+            <circle cx="42" cy="28" r="3" stroke="var(--soap)"/>
           </svg>
           <h3>肌にやさしい、石けん洗い。</h3>
           <p>石けんを使ったやさしい洗いにこだわっています。肌に直接ふれる衣類だからこそ、洗い上がりの気持ちよさを大切にしています。</p>
         </li>
         <li class="reason r">
-          <svg class="ico" viewBox="0 0 48 48" fill="none" aria-hidden="true">
-            <rect x="4" y="8" width="40" height="32" rx="10" fill="var(--sun-tint)"/>
-            <path d="M24 13c-5 6-9 10-9 15a9 9 0 0 0 18 0c0-5-4-9-9-15z" fill="none" stroke="var(--soap-deep)" stroke-width="3" stroke-linejoin="round"/>
-            <circle cx="21" cy="29" r="2.6" fill="var(--sun)"/>
+          <svg class="ico" viewBox="0 0 48 48" fill="none" stroke="var(--soap-deep)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M6 33h30a4 4 0 0 0 4-4c0-6.6-5.4-12-12-12H15z"/>
+            <path d="M15 17v-3a5 5 0 0 1 5-5h8a5 5 0 0 1 5 5v3"/>
+            <path d="M12 39h24" stroke="var(--soap)"/>
           </svg>
           <h3>仕上げは、手作業で。</h3>
           <p>一点ずつ手をかけて仕上げます。襟や袖、折り目のかたちを見ながら整えるので、袖を通したときの印象が違います。</p>
         </li>
         <li class="reason r">
-          <svg class="ico" viewBox="0 0 48 48" fill="none" aria-hidden="true">
-            <rect x="4" y="8" width="40" height="32" rx="10" fill="var(--soap-tint)"/>
-            <path d="M11 30V22l9-6 9 6v8" fill="none" stroke="var(--soap-deep)" stroke-width="3" stroke-linejoin="round"/>
-            <path d="M29 24h5l4 5v5h-9z" fill="none" stroke="var(--soap-deep)" stroke-width="3" stroke-linejoin="round"/>
-            <circle cx="17" cy="34" r="3" fill="var(--sun)"/>
-            <circle cx="32" cy="34" r="3" fill="var(--sun)"/>
+          <svg class="ico" viewBox="0 0 48 48" fill="none" stroke="var(--soap-deep)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M6 31V21l9-6 9 6v10"/>
+            <path d="M24 24h6l5 6v5h-11z"/>
+            <circle cx="14" cy="35" r="3.4" stroke="var(--soap)"/>
+            <circle cx="31" cy="35" r="3.4" stroke="var(--soap)"/>
           </svg>
           <h3>集荷・お届けも承ります。</h3>
           <p>お電話一本で、ご自宅まで集荷にうかがいます。お仕事や子育てで店舗に立ち寄る時間がとりにくい方も、玄関先で受け渡しが完結します。</p>
@@ -632,30 +655,29 @@ body {
       </div>
       <ul class="reasons">
         <li class="reason r">
-          <svg class="ico" viewBox="0 0 48 48" fill="none" aria-hidden="true">
-            <rect x="4" y="8" width="40" height="32" rx="10" fill="var(--soap-tint)"/>
-            <path d="M11 30V22l9-6 9 6v8" fill="none" stroke="var(--soap-deep)" stroke-width="3" stroke-linejoin="round"/>
-            <path d="M29 24h5l4 5v5h-9z" fill="none" stroke="var(--soap-deep)" stroke-width="3" stroke-linejoin="round"/>
-            <circle cx="17" cy="34" r="3" fill="var(--sun)"/>
-            <circle cx="32" cy="34" r="3" fill="var(--sun)"/>
+          <svg class="ico" viewBox="0 0 48 48" fill="none" stroke="var(--soap-deep)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M6 31V21l9-6 9 6v10"/>
+            <path d="M24 24h6l5 6v5h-11z"/>
+            <circle cx="14" cy="35" r="3.4" stroke="var(--soap)"/>
+            <circle cx="31" cy="35" r="3.4" stroke="var(--soap)"/>
           </svg>
           <h3>店舗に寄る時間がなくても。</h3>
           <p>お仕事や子育てで日中に立ち寄りにくい方、まとまった量で持ち運びが大変な方に、ご利用いただいています。</p>
         </li>
         <li class="reason r">
-          <svg class="ico" viewBox="0 0 48 48" fill="none" aria-hidden="true">
-            <rect x="4" y="8" width="40" height="32" rx="10" fill="var(--sun-tint)"/>
-            <circle cx="24" cy="24" r="10" fill="none" stroke="var(--soap-deep)" stroke-width="3"/>
-            <path d="M24 18v6l4 3" fill="none" stroke="var(--soap-deep)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+          <svg class="ico" viewBox="0 0 48 48" fill="none" stroke="var(--soap-deep)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <circle cx="24" cy="26" r="13"/>
+            <path d="M24 19v7l5 3"/>
+            <path d="M14 10l-5 4M34 10l5 4" stroke="var(--soap)"/>
           </svg>
           <h3>朝8時から開いています。</h3>
           <p>月曜から土曜は朝8時から夜19時まで。ご出勤前やお帰りの時間にあわせて、店頭でのお預かりも承ります。</p>
         </li>
         <li class="reason r">
-          <svg class="ico" viewBox="0 0 48 48" fill="none" aria-hidden="true">
-            <rect x="4" y="8" width="40" height="32" rx="10" fill="var(--soap-tint)"/>
-            <path d="M24 13c-5 6-9 10-9 15a9 9 0 0 0 18 0c0-5-4-9-9-15z" fill="none" stroke="var(--soap-deep)" stroke-width="3" stroke-linejoin="round"/>
-            <circle cx="21" cy="29" r="2.6" fill="var(--sun)"/>
+          <svg class="ico" viewBox="0 0 48 48" fill="none" stroke="var(--soap-deep)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M6 33h30a4 4 0 0 0 4-4c0-6.6-5.4-12-12-12H15z"/>
+            <path d="M15 17v-3a5 5 0 0 1 5-5h8a5 5 0 0 1 5 5v3"/>
+            <path d="M12 39h24" stroke="var(--soap)"/>
           </svg>
           <h3>洗いも仕上げも、自分たちの手で。</h3>
           <p>石けんでやさしく洗い、一点ずつ手をかけて仕上げます。気になるところがあれば、お預かりのときにお申し付けください。</p>
@@ -872,23 +894,25 @@ body {
   var bubbles = [];
   var w = 0, h = 0, raf = null;
 
-  function accent() {
-    var v = getComputedStyle(document.documentElement).getPropertyValue('--soap').trim();
-    return v || '#4E9AA1';
+  function token(name, fallback) {
+    var v = getComputedStyle(document.documentElement).getPropertyValue(name).trim();
+    return v || fallback;
   }
 
   function seed() {
     bubbles = [];
     var count = Math.max(8, Math.min(18, Math.round(w / 90)));
     for (var i = 0; i < count; i++) {
+      // 下側ほど密に、大きく（洗い桶に立つ泡のイメージ）
+      var t = Math.pow(Math.random(), 1.7);   // 0 に寄る = 下側
       bubbles.push({
         x: Math.random() * w,
-        y: Math.random() * h,
-        r: 7 + Math.random() * 27,
-        v: 0.12 + Math.random() * 0.28,
+        y: h - t * h * 1.1,
+        r: 9 + (1 - t) * 26 + Math.random() * 5,
+        v: 0.08 + Math.random() * 0.2,
         drift: (Math.random() - 0.5) * 0.3,
         phase: Math.random() * Math.PI * 2,
-        alpha: 0.08 + Math.random() * 0.1
+        alpha: 0.22 + (1 - t) * 0.4
       });
     }
   }
@@ -906,17 +930,18 @@ body {
 
   function draw() {
     ctx.clearRect(0, 0, w, h);
-    var color = accent();
+    var foam = token('--card', '#FFFFFF');
+    var rim = token('--soap', '#7E9459');
     for (var i = 0; i < bubbles.length; i++) {
       var b = bubbles[i];
       ctx.beginPath();
       ctx.arc(b.x, b.y, b.r, 0, Math.PI * 2);
       ctx.globalAlpha = b.alpha;
-      ctx.fillStyle = color;
+      ctx.fillStyle = foam;
       ctx.fill();
-      ctx.globalAlpha = b.alpha * 1.6;
-      ctx.lineWidth = 1.2;
-      ctx.strokeStyle = color;
+      ctx.globalAlpha = b.alpha * 0.5;
+      ctx.lineWidth = 1;
+      ctx.strokeStyle = rim;
       ctx.stroke();
     }
     ctx.globalAlpha = 1;
@@ -929,7 +954,7 @@ body {
       b.y -= b.v;
       b.x += Math.sin(b.phase) * 0.35 + b.drift * 0.2;
       if (b.y + b.r < -10) {
-        b.y = h + b.r + Math.random() * 40;
+        b.y = h + b.r + Math.random() * 60;
         b.x = Math.random() * w;
       }
     }
