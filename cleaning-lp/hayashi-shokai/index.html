@@ -1,0 +1,945 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>クリーニング林商会｜肌にやさしい石けん洗いと、手仕上げ。杉並区松庵</title>
+<meta name="description" content="杉並区松庵のクリーニング店。肌にやさしい石けん洗いと手仕上げ、集荷・お届けも承ります。朝8時から営業、三鷹台・久我山・西荻窪から徒歩圏。TEL 03-3333-6256">
+<style>
+/* ---------- reset ---------- */
+*, *::before, *::after { box-sizing: border-box; }
+html, body, h1, h2, h3, p, ul, ol, li, dl, dt, dd, figure, table { margin: 0; padding: 0; }
+ul, ol { list-style: none; }
+img, svg { display: block; max-width: 100%; }
+a { color: inherit; }
+button { font: inherit; }
+
+/* ---------- tokens ---------- */
+:root {
+  --paper:      #FFFCF8;
+  --paper-2:    #FFF8F0;
+  --card:       #FFFFFF;
+  --ink:        #3A2A20;
+  --ink-2:      #7A6255;
+  --line:       #F8EDE1;
+  --soap:       #F0871F;
+  --soap-deep:  #A04E05;
+  --soap-tint:  #FDE9D2;
+  --sun:        #F7C64B;
+  --sun-tint:   #FDF0CE;
+  --sign:       #17538F;
+  --tile:       #D2690C;
+  --btn-bg:     #B85B08;
+  --btn-fg:     #FFFFFF;
+  --footer-bg:  #FFF8F0;
+  --footer-fg:  #3A2A20;
+  --shadow:     0 18px 40px -30px rgba(120, 78, 40, .38);
+  --shadow-sm:  0 10px 22px -20px rgba(120, 78, 40, .4);
+  --marker:     linear-gradient(transparent 62%, color-mix(in srgb, var(--sun) 80%, transparent) 62%);
+
+  --r-panel: 22px;
+  --r-card:  14px;
+  --r-pill:  999px;
+
+  --font-display: "Hiragino Maru Gothic ProN", "Hiragino Maru Gothic Pro", "Zen Maru Gothic", "BIZ UDPGothic", "Yu Gothic Medium", "游ゴシック Medium", "Noto Sans JP", sans-serif;
+  --font-round: "Hiragino Sans", "Hiragino Kaku Gothic ProN", "BIZ UDPGothic", "Yu Gothic Medium", "游ゴシック Medium", "Noto Sans JP", sans-serif;
+  --font-body:  "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Noto Sans JP", "Yu Gothic", "游ゴシック", Meiryo, sans-serif;
+  --font-num:   "Avenir Next", "Segoe UI", "Helvetica Neue", var(--font-body);
+
+  --wrap: 1080px;
+  color-scheme: light;
+}
+
+/* ---------- base ---------- */
+:root { background: var(--paper); }
+body {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: 1.0625rem;
+  line-height: 1.9;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+:where(a, button, summary):focus-visible {
+  outline: 2px solid var(--soap-deep);
+  outline-offset: 3px;
+  border-radius: 6px;
+}
+
+.wrap { width: min(100% - 2.5rem, var(--wrap)); margin-inline: auto; }
+.band { padding-block: clamp(4rem, 9vw, 7rem); scroll-margin-top: 84px; }
+.band--tint { background: var(--paper-2); }
+
+.skip {
+  position: absolute; left: 1rem; top: -4rem; z-index: 60;
+  background: var(--card); color: var(--ink);
+  padding: .6rem 1.1rem; border-radius: var(--r-pill); box-shadow: var(--shadow-sm);
+  transition: top .2s ease;
+}
+.skip:focus { top: 1rem; }
+
+/* ---------- section heads ---------- */
+.head { display: flex; flex-direction: column; gap: .7rem; margin-bottom: clamp(2rem, 4vw, 3rem); }
+.eyebrow {
+  font-family: var(--font-num);
+  font-size: .8rem; font-weight: 700;
+  letter-spacing: .18em; text-transform: uppercase;
+  color: var(--sign);
+  display: flex; align-items: center; gap: .7rem;
+}
+.eyebrow::after { content: ""; flex: 0 0 30px; height: 2px; border-radius: 2px; background: var(--soap); }
+.h2 {
+  font-family: var(--font-display);
+  font-size: clamp(1.7rem, 3.4vw, 2.3rem);
+  font-weight: 700; line-height: 1.6; letter-spacing: .02em;
+  text-wrap: balance; word-break: auto-phrase;
+}
+.head p:not(.eyebrow) { color: var(--ink-2); max-width: 34em; }
+
+/* ---------- header ---------- */
+.site-header {
+  position: sticky; top: 0; z-index: 50;
+  background: color-mix(in srgb, var(--paper) 82%, transparent);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid transparent;
+  transition: border-color .25s ease, background .25s ease;
+}
+.site-header.is-scrolled { border-bottom-color: var(--line); }
+.header-in { display: flex; align-items: center; gap: 1rem; padding-block: .85rem; }
+.brand { display: flex; align-items: center; gap: .6rem; text-decoration: none; flex: 0 0 auto; }
+.brand-mark { width: 34px; height: 34px; flex: 0 0 auto; }
+.brand-name { font-family: var(--font-display); font-weight: 700; font-size: 1.18rem; letter-spacing: .03em; line-height: 1.3; }
+.brand-tag {
+  display: inline-block; margin-right: .45rem;
+  background: var(--sign); color: #FFFFFF;
+  font-family: var(--font-display); font-weight: 700; font-size: .74rem; letter-spacing: .08em;
+  padding: .12rem .5rem; border-radius: 4px; vertical-align: .12em;
+}
+.brand-sub { display: block; font-family: var(--font-num); font-size: .6rem; letter-spacing: .18em; color: var(--ink-2); font-weight: 600; }
+.nav { display: flex; gap: .1rem; margin-left: auto; overflow-x: auto; scrollbar-width: none; }
+.nav::-webkit-scrollbar { display: none; }
+.nav a {
+  text-decoration: none; white-space: nowrap;
+  font-size: .94rem; color: var(--ink-2);
+  padding: .45rem .7rem; border-radius: var(--r-pill);
+  transition: color .2s ease, background .2s ease;
+}
+@media (max-width: 1180px) {
+  .nav a { font-size: .88rem; padding: .4rem .55rem; }
+}
+.nav a:hover { color: var(--ink); background: var(--soap-tint); }
+.header-cta { flex: 0 0 auto; }
+
+/* ---------- buttons ---------- */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: .5rem;
+  font-family: var(--font-round); font-weight: 700; font-size: 1.04rem;
+  text-decoration: none; white-space: nowrap;
+  padding: .9rem 1.7rem; border-radius: var(--r-pill); border: 1.5px solid transparent;
+  transition: transform .18s ease, box-shadow .22s ease, background .2s ease, border-color .2s ease;
+}
+.btn--primary { background: var(--btn-bg); color: var(--btn-fg); box-shadow: var(--shadow-sm); }
+.btn--primary:hover { transform: translateY(-2px); box-shadow: var(--shadow); }
+.btn--ghost { background: var(--card); color: var(--ink); border-color: var(--line); }
+.btn--ghost:hover { border-color: var(--soap); transform: translateY(-2px); }
+.btn--sm { padding: .62rem 1.25rem; font-size: .94rem; }
+.btn .ic { width: 17px; height: 17px; flex: 0 0 auto; }
+
+/* ---------- hero ---------- */
+.hero { position: relative; padding-block: clamp(2.5rem, 6vw, 4.5rem) clamp(3.5rem, 8vw, 6rem); overflow: hidden; }
+.hero::before {
+  content: ""; position: absolute; inset: -20% -30% auto -30%; height: 130%;
+  background:
+    radial-gradient(48% 42% at 22% 18%, color-mix(in srgb, var(--soap) 26%, transparent), transparent 70%),
+    radial-gradient(40% 38% at 82% 30%, color-mix(in srgb, var(--sun) 32%, transparent), transparent 68%);
+  pointer-events: none;
+}
+.hero::after {
+  content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 68%; z-index: 0;
+  background: linear-gradient(to top,
+    color-mix(in srgb, var(--soap) 72%, transparent),
+    color-mix(in srgb, var(--soap) 46%, transparent) 38%,
+    color-mix(in srgb, var(--soap) 18%, transparent) 68%,
+    transparent);
+  pointer-events: none;
+}
+#bubbles { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 1; }
+.hero-in {
+  position: relative; z-index: 2;
+  display: grid; grid-template-columns: 1.15fr .85fr; gap: clamp(2rem, 4vw, 3.5rem); align-items: center;
+}
+.hero-copy { display: flex; flex-direction: column; align-items: flex-start; gap: 1.3rem; }
+.pill {
+  display: inline-flex; align-items: center; gap: .5rem;
+  background: var(--card); border: 1px solid var(--line);
+  padding: .38rem 1rem; border-radius: var(--r-pill);
+  font-size: .9rem; color: var(--ink-2); box-shadow: var(--shadow-sm);
+}
+.pill .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--soap); }
+.hero h1 {
+  font-family: var(--font-display);
+  font-size: clamp(2.15rem, 5.4vw, 3.4rem);
+  font-weight: 700; line-height: 1.5; letter-spacing: .01em;
+  text-wrap: balance; word-break: auto-phrase;
+}
+.hero h1 .accent { background: var(--marker); }
+.hero-lead { color: var(--ink-2); max-width: 30em; font-size: 1.08rem; }
+.hero-actions { display: flex; flex-wrap: wrap; gap: .8rem; align-items: center; }
+.hero-note { font-size: .95rem; color: color-mix(in srgb, var(--ink) 85%, transparent); }
+.hero-points { display: flex; flex-wrap: wrap; gap: .5rem .6rem; }
+.point {
+  display: inline-flex; align-items: center; gap: .4rem;
+  font-size: .95rem; font-weight: 700;
+  background: var(--soap-tint); color: var(--soap-deep);
+  padding: .35rem .85rem; border-radius: var(--r-pill);
+}
+.hero-art { display: flex; justify-content: center; }
+.hero-art svg { width: min(100%, 340px); height: auto; }
+.sway { transform-origin: 50% 6%; animation: sway 7s ease-in-out infinite alternate; }
+@keyframes sway { from { transform: rotate(-1.4deg); } to { transform: rotate(1.4deg); } }
+
+/* ---------- reasons ---------- */
+.reasons { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.2rem; }
+.reason {
+  background: var(--card); border: 1px solid var(--line); border-radius: var(--r-card);
+  padding: 2rem 1.6rem 1.8rem; box-shadow: var(--shadow-sm);
+  display: flex; flex-direction: column; gap: .7rem;
+}
+.reason .ico {
+  width: 54px; height: 54px; padding: 11px; border-radius: 15px;
+  background: var(--tile); box-shadow: var(--shadow-sm);
+  margin-bottom: .6rem;
+}
+.reason h3 { font-family: var(--font-display); font-size: 1.28rem; font-weight: 700; line-height: 1.5; }
+.reason p { font-size: 1.03rem; color: var(--ink-2); }
+
+/* ---------- price ---------- */
+.price-top { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 1rem; margin-bottom: 2.2rem; }
+.price-card {
+  background: var(--card); border: 1px solid var(--line); border-radius: var(--r-card);
+  padding: 1.4rem 1.3rem; box-shadow: var(--shadow-sm);
+  display: flex; flex-direction: column; gap: .2rem; position: relative; overflow: hidden;
+}
+.price-card::after {
+  content: ""; position: absolute; right: -28px; top: -28px; width: 78px; height: 78px;
+  border-radius: 50%; background: var(--sun-tint);
+}
+.price-card > * { position: relative; }
+.price-card .label { font-size: .98rem; color: var(--ink-2); }
+.price-card .yen { font-family: var(--font-num); font-weight: 700; font-size: 2.1rem; letter-spacing: -.01em; font-variant-numeric: tabular-nums; line-height: 1.4; }
+.price-card .yen small { font-size: .95rem; font-weight: 600; margin-left: .15rem; }
+.price-card .memo { font-size: .88rem; color: var(--ink-2); }
+
+.tables { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 1.2rem; }
+.table-box {
+  background: var(--card); border: 1px solid var(--line); border-radius: var(--r-card);
+  padding: 1.5rem 1.4rem; box-shadow: var(--shadow-sm); overflow-x: auto;
+}
+.table-box h3 {
+  font-family: var(--font-display); font-size: 1.14rem; font-weight: 700;
+  padding-bottom: .8rem; margin-bottom: .4rem; border-bottom: 2px solid var(--soap-tint);
+}
+.table-box table { width: 100%; border-collapse: collapse; font-size: 1.03rem; }
+.table-box th, .table-box td { padding: .62rem .2rem; text-align: left; font-weight: 400; }
+.table-box tr + tr th, .table-box tr + tr td { border-top: 1px dashed var(--line); }
+.table-box td {
+  text-align: right; white-space: nowrap;
+  font-family: var(--font-num); font-variant-numeric: tabular-nums; font-weight: 600;
+}
+.table-box td.free { color: var(--soap-deep); font-family: var(--font-body); }
+.note { font-size: .9rem; color: var(--ink-2); margin-top: 1rem; }
+
+/* ---------- services ---------- */
+.services { display: grid; grid-template-columns: repeat(2, 1fr); gap: .8rem; }
+@media (min-width: 620px) { .services { grid-template-columns: repeat(3, 1fr); } }
+@media (min-width: 900px) { .services { grid-template-columns: repeat(4, 1fr); } }
+.service {
+  background: var(--card); border: 1px solid var(--line); border-radius: var(--r-card);
+  padding: 1.15rem 1rem; text-align: center;
+  font-family: var(--font-round); font-weight: 700; font-size: .95rem;
+  display: flex; flex-direction: column; align-items: center; gap: .55rem;
+  transition: transform .2s ease, border-color .2s ease;
+}
+.service:hover { transform: translateY(-3px); border-color: var(--soap); }
+.service .ico { width: 32px; height: 32px; }
+.service span { display: block; font-family: var(--font-body); font-weight: 400; font-size: .78rem; color: var(--ink-2); line-height: 1.6; }
+
+/* ---------- flow ---------- */
+.flow { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1.6rem 1.2rem; counter-reset: step; }
+.step { display: flex; flex-direction: column; gap: .6rem; position: relative; }
+.step-no {
+  width: 42px; height: 42px; border-radius: 50%;
+  background: var(--btn-bg); color: var(--btn-fg);
+  display: grid; place-items: center;
+  font-family: var(--font-num); font-weight: 700; font-size: 1.02rem;
+  box-shadow: var(--shadow-sm);
+}
+.step h3 { font-family: var(--font-display); font-size: 1.18rem; font-weight: 700; }
+.step p { font-size: 1rem; color: var(--ink-2); }
+
+/* ---------- shop info ---------- */
+.info { display: grid; grid-template-columns: 1.1fr .9fr; gap: 1.4rem; align-items: start; }
+.panel {
+  background: var(--card); border: 1px solid var(--line);
+  border-radius: var(--r-panel); padding: clamp(1.6rem, 3vw, 2.4rem); box-shadow: var(--shadow-sm);
+}
+.panel-h {
+  font-family: var(--font-display); font-size: 1.14rem; font-weight: 700;
+  padding-bottom: .8rem; margin-bottom: 1rem; border-bottom: 1px solid var(--line);
+}
+.access-list { display: flex; flex-direction: column; gap: .1rem; }
+.access-list li {
+  display: flex; align-items: baseline; gap: .8rem;
+  padding-block: .75rem; font-size: 1.04rem;
+}
+.access-list li + li { border-top: 1px dashed var(--line); }
+.access-list .st { font-family: var(--font-round); font-weight: 700; }
+.access-list .walk {
+  margin-left: auto; white-space: nowrap;
+  font-family: var(--font-num); font-variant-numeric: tabular-nums; color: var(--ink-2);
+}
+.info dl { display: grid; grid-template-columns: 7em 1fr; gap: .1rem 1rem; font-size: 1.04rem; }
+.info dt { color: var(--ink-2); font-size: .95rem; padding-block: .6rem; }
+.info dd { padding-block: .55rem; }
+.info dt + dd { border-bottom: 1px dashed var(--line); }
+.info dl > dt { border-bottom: 1px dashed var(--line); }
+.info dl > dt:last-of-type, .info dl > dd:last-of-type { border-bottom: 0; }
+.tel-block { display: flex; flex-direction: column; gap: .2rem; margin-bottom: 1.4rem; }
+.tel-block .cap { font-size: .9rem; color: var(--ink-2); }
+.tel-num {
+  font-family: var(--font-num); font-weight: 700; font-size: clamp(1.9rem, 4.4vw, 2.5rem);
+  letter-spacing: .02em; text-decoration: none; color: var(--ink); font-variant-numeric: tabular-nums;
+  display: inline-flex; align-items: center; gap: .5rem;
+}
+.tel-num .ic { width: 22px; height: 22px; color: var(--soap-deep); }
+.hours { width: 100%; border-collapse: collapse; font-size: 1.03rem; margin-top: .4rem; }
+.hours th, .hours td { padding: .6rem .2rem; text-align: left; font-weight: 400; }
+.hours td { text-align: right; font-family: var(--font-num); font-variant-numeric: tabular-nums; }
+.hours tr + tr th, .hours tr + tr td { border-top: 1px dashed var(--line); }
+.hours .closed { color: var(--ink-2); }
+.map {
+  margin-top: 1.2rem; border-radius: var(--r-card); overflow: hidden;
+  border: 1px solid var(--line); background: var(--paper-2);
+}
+.map svg { width: 100%; height: auto; }
+.map-cap { font-size: .8rem; color: var(--ink-2); padding: .7rem .9rem; border-top: 1px solid var(--line); }
+
+/* ---------- faq ---------- */
+.faq { display: flex; flex-direction: column; gap: .7rem; max-width: 760px; margin-inline: auto; }
+.faq details {
+  background: var(--card); border: 1px solid var(--line); border-radius: var(--r-card);
+  padding: .3rem 1.3rem; box-shadow: var(--shadow-sm);
+}
+.faq summary {
+  list-style: none; cursor: pointer;
+  display: flex; align-items: flex-start; gap: .8rem;
+  padding-block: 1.05rem;
+  font-family: var(--font-display); font-weight: 700; font-size: 1.1rem; line-height: 1.7;
+}
+.faq summary::-webkit-details-marker { display: none; }
+.faq summary::after {
+  content: ""; flex: 0 0 auto; margin-left: auto; margin-top: .55rem;
+  width: 11px; height: 11px;
+  border-right: 2px solid var(--soap-deep); border-bottom: 2px solid var(--soap-deep);
+  transform: rotate(45deg); transition: transform .25s ease;
+}
+.faq details[open] summary::after { transform: rotate(-135deg); }
+.faq .q {
+  flex: 0 0 auto; color: var(--soap-deep);
+  font-family: var(--font-num); font-weight: 700; font-size: 1.1rem; line-height: 1.7;
+}
+.faq .a { padding: 0 0 1.15rem 1.9rem; font-size: 1.03rem; color: var(--ink-2); }
+
+/* ---------- closing cta ---------- */
+.cta-panel {
+  background: linear-gradient(150deg,
+    color-mix(in srgb, var(--soap) 30%, var(--card)),
+    color-mix(in srgb, var(--sun) 34%, var(--card)));
+  border: 1px solid var(--line); border-radius: var(--r-panel);
+  padding: clamp(2.2rem, 5vw, 3.4rem);
+  display: flex; flex-direction: column; align-items: center; gap: 1.1rem; text-align: center;
+}
+.cta-panel h2 { font-family: var(--font-display); font-size: clamp(1.55rem, 3.6vw, 2.2rem); font-weight: 700; line-height: 1.5; text-wrap: balance; }
+.cta-panel p { color: var(--ink-2); max-width: 40em; font-size: 1.05rem; }
+.cta-actions { display: flex; flex-wrap: wrap; gap: .8rem; justify-content: center; }
+
+/* ---------- footer ---------- */
+.site-footer {
+  background: linear-gradient(to bottom,
+    color-mix(in srgb, var(--soap) 26%, var(--footer-bg)), var(--footer-bg) 70%);
+  color: var(--footer-fg);
+  border-top: 4px solid var(--soap);
+  padding-block: 2.8rem 3.2rem; margin-top: clamp(3rem, 6vw, 5rem);
+}
+.site-footer .brand-sub, .site-footer .footer-links a,
+.site-footer .disclaimer, .site-footer .copy { color: var(--ink-2); }
+.site-footer .footer-links a:hover { color: var(--footer-fg); }
+.site-footer .brand-tag { background: var(--sign); color: #FFFFFF; }
+.footer-in { display: flex; flex-wrap: wrap; gap: 1.4rem; justify-content: space-between; align-items: flex-start; }
+.footer-links { display: flex; flex-wrap: wrap; gap: .5rem 1.2rem; font-size: .98rem; }
+.footer-links a { text-decoration: none; color: var(--ink-2); }
+.footer-links a:hover { color: var(--ink); }
+.disclaimer { font-size: .85rem; color: var(--ink-2); margin-top: 1.6rem; line-height: 1.8; }
+.copy { font-family: var(--font-num); font-size: .82rem; color: var(--ink-2); letter-spacing: .04em; margin-top: .4rem; }
+
+/* ---------- mobile call bar ---------- */
+.call-bar {
+  display: none;
+  position: fixed; left: 0; right: 0; bottom: 0; z-index: 45;
+  padding: .65rem .9rem calc(.65rem + env(safe-area-inset-bottom));
+  background: color-mix(in srgb, var(--paper) 88%, transparent);
+  backdrop-filter: blur(12px);
+  border-top: 1px solid var(--line);
+}
+.call-bar .btn { width: 100%; }
+.call-bar .cap { display: block; text-align: center; font-size: .82rem; color: var(--ink-2); margin-top: .35rem; }
+
+/* ---------- reveal ---------- */
+.js .r { opacity: 0; transform: translateY(14px); }
+.js .r.in { opacity: 1; transform: none; transition: opacity .6s ease, transform .6s cubic-bezier(.22,.7,.3,1); }
+
+/* ---------- responsive ---------- */
+@media (max-width: 900px) {
+  .hero-in { grid-template-columns: 1fr; }
+  .hero-art { order: -1; }
+  .hero-art svg { width: min(72%, 250px); }
+  .info { grid-template-columns: 1fr; }
+}
+@media (max-width: 720px) {
+  .header-cta { display: none; }
+  .nav { margin-left: auto; }
+  .info dl { grid-template-columns: 5.5em 1fr; }
+  .call-bar { display: block; }
+  body { padding-bottom: 5.2rem; }
+}
+@media (max-width: 560px) {
+  .hero-art svg { width: min(62%, 210px); }
+  .hero-actions { width: 100%; }
+  .hero-actions .btn { flex: 1 1 100%; }
+  .cta-actions .btn { flex: 1 1 100%; }
+}
+@media (max-width: 460px) {
+  .brand-name { font-size: 1.05rem; }
+  .nav a { padding: .45rem .65rem; font-size: .9rem; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
+  .js .r { opacity: 1; transform: none; }
+}
+</style>
+</head>
+<body>
+<script>document.documentElement.classList.add('js');</script>
+
+<a class="skip" href="#main">本文へスキップ</a>
+
+<header class="site-header" id="top">
+  <div class="wrap header-in">
+    <a class="brand" href="#top">
+      <svg class="brand-mark" viewBox="0 0 40 40" aria-hidden="true">
+        <circle cx="20" cy="20" r="19" fill="var(--soap-tint)"/>
+        <path d="M20 9c-4.4 0-8 3.4-8 7.6 0 1.9.8 3.6 2.1 5l5.2 5.7c.4.4 1 .4 1.4 0l5.2-5.7c1.3-1.4 2.1-3.1 2.1-5C28 12.4 24.4 9 20 9z" fill="none" stroke="var(--soap-deep)" stroke-width="2" stroke-linejoin="round"/>
+        <circle cx="17.4" cy="16.6" r="2.6" fill="var(--sun)"/>
+      </svg>
+      <span class="brand-name"><span class="brand-tag">クリーニング</span>林商会
+        <span class="brand-sub">HAYASHI SHOKAI</span>
+      </span>
+    </a>
+    <nav class="nav" aria-label="メインメニュー">
+      <a href="#reason">選ばれる理由</a>
+      <a href="#price">料金・ご相談</a>
+      <a href="#service">集荷・お届け</a>
+      <a href="#flow">ご利用の流れ</a>
+      <a href="#shop">店舗情報</a>
+      <a href="#faq">よくある質問</a>
+    </nav>
+    <a class="btn btn--primary btn--sm header-cta" href="tel:0333336256">
+      <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8.1 9.8a16 16 0 0 0 6 6l1.2-1.2a2 2 0 0 1 2.1-.5c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.8 2.1z"/></svg>
+      03-3333-6256
+    </a>
+  </div>
+</header>
+
+<main id="main">
+
+  <!-- ============ HERO ============ -->
+  <section class="hero">
+    <canvas id="bubbles" aria-hidden="true"></canvas>
+    <div class="wrap hero-in">
+      <div class="hero-copy">
+        <p class="pill r"><span class="dot"></span>杉並区松庵｜三鷹台・久我山・西荻窪から徒歩圏</p>
+        <h1 class="r">肌にやさしい、<br><span class="accent">石けん洗い</span>。</h1>
+        <p class="hero-lead r">親切・丁寧・安心をモットーに、皆様に愛されるクリーニング店を目指しています。肌にやさしい石けんで洗い、仕上げは一点ずつ手作業で。ご自宅への集荷・お届けも承ります。</p>
+        <ul class="hero-points r">
+          <li class="point">石けん洗い</li>
+          <li class="point">手仕上げ</li>
+          <li class="point">集荷・お届け</li>
+        </ul>
+        <div class="hero-actions r">
+          <a class="btn btn--primary" href="tel:0333336256">
+            <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8.1 9.8a16 16 0 0 0 6 6l1.2-1.2a2 2 0 0 1 2.1-.5c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.8 2.1z"/></svg>
+            電話で集荷を申し込む
+          </a>
+          <a class="btn btn--ghost" href="#service">サービスを見る</a>
+        </div>
+        <p class="hero-note r">月〜土 8:00〜19:00／祝日 9:00〜19:00（日曜定休）　朝8時から開いています</p>
+      </div>
+
+      <div class="hero-art r" aria-hidden="true">
+        <svg viewBox="0 0 300 330" role="img">
+          <ellipse cx="150" cy="300" rx="112" ry="16" fill="var(--soap-tint)"/>
+          <g>
+            <rect x="38" y="268" width="70" height="36" rx="15" fill="var(--sun-tint)" stroke="var(--soap)" stroke-width="4"/>
+            <path d="M54 281h26" stroke="var(--soap)" stroke-width="4" stroke-linecap="round" opacity=".65"/>
+            <circle cx="118" cy="262" r="8" fill="none" stroke="var(--soap)" stroke-width="3"/>
+            <circle cx="132" cy="277" r="5" fill="none" stroke="var(--soap)" stroke-width="3"/>
+          </g>
+          <g class="sway">
+            <!-- hanger -->
+            <path d="M150 46v-14c0-6 9-6 9-12a7.5 7.5 0 0 0-14-3.4" fill="none" stroke="var(--ink-2)" stroke-width="5" stroke-linecap="round"/>
+            <path d="M92 86 150 46l58 40" fill="none" stroke="var(--ink-2)" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+            <!-- shirt -->
+            <path d="M150 62 126 72 74 96q-14 6-18 20l-14 48q-3 10 7 14l35 16q10 4 14-6l12-26v122q0 12 12 12h56q12 0 12-12V162l12 26q4 10 14 6l35-16q10-4 7-14l-14-48q-4-14-18-20l-52-24-24-10z"
+                  fill="var(--card)" stroke="var(--soap)" stroke-width="5" stroke-linejoin="round"/>
+            <!-- collar -->
+            <path d="M126 72l24 24 24-24" fill="none" stroke="var(--soap)" stroke-width="5" stroke-linejoin="round"/>
+            <path d="M150 96v148" stroke="var(--soap-tint)" stroke-width="5" stroke-linecap="round"/>
+            <circle cx="150" cy="138" r="4.5" fill="var(--sun)"/>
+            <circle cx="150" cy="178" r="4.5" fill="var(--sun)"/>
+            <circle cx="150" cy="218" r="4.5" fill="var(--sun)"/>
+            <!-- pocket -->
+            <path d="M104 146h28v24l-14 9-14-9z" fill="var(--soap-tint)" stroke="var(--soap)" stroke-width="4" stroke-linejoin="round"/>
+            <!-- tag -->
+            <path d="M208 66l24 14" stroke="var(--ink-2)" stroke-width="3" stroke-linecap="round"/>
+            <g transform="rotate(9 246 96)">
+              <rect x="222" y="76" width="56" height="40" rx="9" fill="var(--sun-tint)" stroke="var(--sun)" stroke-width="3.5"/>
+              <circle cx="232" cy="86" r="3.6" fill="none" stroke="var(--sun)" stroke-width="3"/>
+              <path d="M240 98h30M240 106h20" stroke="var(--sun)" stroke-width="3.5" stroke-linecap="round"/>
+            </g>
+          </g>
+        </svg>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ REASONS ============ -->
+  <section class="band band--tint" id="reason">
+    <div class="wrap">
+      <div class="head r">
+        <p class="eyebrow">Our promise</p>
+        <h2 class="h2">親切、丁寧、安心を<br>モットーにしています。</h2>
+        <p>皆様に愛されるクリーニング店を目指して。林商会が大切にしている、三つのことをご紹介します。</p>
+      </div>
+      <ul class="reasons">
+        <li class="reason r">
+          <svg class="ico" viewBox="0 0 48 48" fill="none" stroke="#FFFFFF" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <rect x="5" y="25" width="27" height="16" rx="6"/>
+            <path d="M11 33h11"/>
+            <circle cx="35" cy="16" r="6.5"/>
+            <circle cx="23" cy="12" r="4" stroke="rgba(255,255,255,.72)"/>
+            <circle cx="42" cy="28" r="3" stroke="rgba(255,255,255,.72)"/>
+          </svg>
+          <h3>肌にやさしい、石けん洗い。</h3>
+          <p>石けんを使ったやさしい洗いにこだわっています。肌に直接ふれる衣類だからこそ、洗い上がりの気持ちよさを大切にしています。</p>
+        </li>
+        <li class="reason r">
+          <svg class="ico" viewBox="0 0 48 48" fill="none" stroke="#FFFFFF" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M6 33h30a4 4 0 0 0 4-4c0-6.6-5.4-12-12-12H15z"/>
+            <path d="M15 17v-3a5 5 0 0 1 5-5h8a5 5 0 0 1 5 5v3"/>
+            <path d="M12 39h24" stroke="rgba(255,255,255,.72)"/>
+          </svg>
+          <h3>仕上げは、手作業で。</h3>
+          <p>一点ずつ手をかけて仕上げます。襟や袖、折り目のかたちを見ながら整えるので、袖を通したときの印象が違います。</p>
+        </li>
+        <li class="reason r">
+          <svg class="ico" viewBox="0 0 48 48" fill="none" stroke="#FFFFFF" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M6 31V21l9-6 9 6v10"/>
+            <path d="M24 24h6l5 6v5h-11z"/>
+            <circle cx="14" cy="35" r="3.4" stroke="rgba(255,255,255,.72)"/>
+            <circle cx="31" cy="35" r="3.4" stroke="rgba(255,255,255,.72)"/>
+          </svg>
+          <h3>集荷・お届けも承ります。</h3>
+          <p>お電話一本で、ご自宅まで集荷にうかがいます。お仕事や子育てで店舗に立ち寄る時間がとりにくい方も、玄関先で受け渡しが完結します。</p>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ============ PRICE ============ -->
+  <section class="band" id="price">
+    <div class="wrap">
+      <div class="head r">
+        <p class="eyebrow">Price</p>
+        <h2 class="h2">料金は、お気軽に<br>お問い合わせください。</h2>
+        <p>お品物の種類や状態によって変わります。店頭またはお電話で、仕上がり日とあわせてお見積りをお伝えします。</p>
+      </div>
+      <div class="info">
+        <div class="panel r">
+          <div class="tel-block">
+            <span class="cap">お見積り・ご相談</span>
+            <a class="tel-num" href="tel:0333336256">
+              <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8.1 9.8a16 16 0 0 0 6 6l1.2-1.2a2 2 0 0 1 2.1-.5c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.8 2.1z"/></svg>
+              03-3333-6256
+            </a>
+            <span class="cap">月〜土 8:00〜19:00／祝日 9:00〜19:00（日曜定休）</span>
+          </div>
+          <p class="note">「この汚れは落ちますか」「この素材でも大丈夫ですか」といったご相談だけでも承ります。お品物を拝見して、仕上がり日と料金をその場でお伝えします。</p>
+        </div>
+        <div class="panel r">
+          <h3 class="panel-h">主な取扱い</h3>
+          <ul class="hero-points">
+            <li class="point">ワイシャツ</li>
+            <li class="point">スーツ・ジャケット</li>
+            <li class="point">スラックス・スカート</li>
+            <li class="point">コート</li>
+            <li class="point">セーター・ニット</li>
+            <li class="point">ワンピース</li>
+            <li class="point">学生服</li>
+          </ul>
+          <p class="note">※上記以外のお品物も、まずはご相談ください。取扱いの可否と料金をお伝えします。</p>
+        </div>
+      </div>
+      <!--
+        料金表を掲載する場合は、テンプレート（../index.html の #price セクション）の
+        .price-top / .tables ブロックをここに移し、実際の価格を入れて差し替えてください。
+      -->
+    </div>
+  </section>
+
+  <!-- ============ DELIVERY ============ -->
+  <section class="band band--tint" id="service">
+    <div class="wrap">
+      <div class="head r">
+        <p class="eyebrow">Pick-up &amp; Delivery</p>
+        <h2 class="h2">お電話一本で、<br>ご自宅まで伺います。</h2>
+        <p>店舗までお越しいただかなくても大丈夫です。集荷とお届けを承っていますので、玄関先で受け渡しが完結します。</p>
+      </div>
+      <ul class="reasons">
+        <li class="reason r">
+          <svg class="ico" viewBox="0 0 48 48" fill="none" stroke="#FFFFFF" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M6 31V21l9-6 9 6v10"/>
+            <path d="M24 24h6l5 6v5h-11z"/>
+            <circle cx="14" cy="35" r="3.4" stroke="rgba(255,255,255,.72)"/>
+            <circle cx="31" cy="35" r="3.4" stroke="rgba(255,255,255,.72)"/>
+          </svg>
+          <h3>店舗に寄る時間がなくても。</h3>
+          <p>お仕事や子育てで日中に立ち寄りにくい方、まとまった量で持ち運びが大変な方に、ご利用いただいています。</p>
+        </li>
+        <li class="reason r">
+          <svg class="ico" viewBox="0 0 48 48" fill="none" stroke="#FFFFFF" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <circle cx="24" cy="26" r="13"/>
+            <path d="M24 19v7l5 3"/>
+            <path d="M14 10l-5 4M34 10l5 4" stroke="rgba(255,255,255,.72)"/>
+          </svg>
+          <h3>朝8時から開いています。</h3>
+          <p>月曜から土曜は朝8時から夜19時まで。ご出勤前やお帰りの時間にあわせて、店頭でのお預かりも承ります。</p>
+        </li>
+        <li class="reason r">
+          <svg class="ico" viewBox="0 0 48 48" fill="none" stroke="#FFFFFF" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M6 33h30a4 4 0 0 0 4-4c0-6.6-5.4-12-12-12H15z"/>
+            <path d="M15 17v-3a5 5 0 0 1 5-5h8a5 5 0 0 1 5 5v3"/>
+            <path d="M12 39h24" stroke="rgba(255,255,255,.72)"/>
+          </svg>
+          <h3>洗いも仕上げも、自分たちの手で。</h3>
+          <p>石けんでやさしく洗い、一点ずつ手をかけて仕上げます。気になるところがあれば、お預かりのときにお申し付けください。</p>
+        </li>
+      </ul>
+      <p class="note">※集荷エリア・ご依頼可能な点数・お届けの時間帯については、お電話でご確認ください。</p>
+    </div>
+  </section>
+
+  <!-- ============ FLOW ============ -->
+  <section class="band" id="flow">
+    <div class="wrap">
+      <div class="head r">
+        <p class="eyebrow">Flow</p>
+        <h2 class="h2">ご利用は、4つのステップで。</h2>
+        <p>店頭へのお持ち込みでも、ご自宅への集荷でも、流れは同じです。</p>
+      </div>
+      <ol class="flow">
+        <li class="step r">
+          <span class="step-no">1</span>
+          <h3>お持ち込み・集荷のご依頼</h3>
+          <p>店頭にお持ちいただくか、お電話でご連絡ください。集荷をご希望の場合は、ご自宅までうかがいます。</p>
+        </li>
+        <li class="step r">
+          <span class="step-no">2</span>
+          <h3>確認とお見積り</h3>
+          <p>素材や汚れの状態を一点ずつ確認します。仕上がり日と料金をお伝えしてから、作業に入ります。</p>
+        </li>
+        <li class="step r">
+          <span class="step-no">3</span>
+          <h3>石けん洗いと手仕上げ</h3>
+          <p>肌にやさしい石けんで洗い、仕上げは一点ずつ手作業で。気になるところは、お預かりのときにお申し付けください。</p>
+        </li>
+        <li class="step r">
+          <span class="step-no">4</span>
+          <h3>お渡し・お届け</h3>
+          <p>店頭でのお受け取りのほか、ご自宅までお届けします。お渡しの際にも、仕上がりをご確認ください。</p>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- ============ SHOP INFO ============ -->
+  <section class="band band--tint" id="shop">
+    <div class="wrap">
+      <div class="head r">
+        <p class="eyebrow">Shop info</p>
+        <h2 class="h2">店舗のご案内</h2>
+      </div>
+      <div class="info">
+        <div class="panel r">
+          <dl>
+            <dt>店名</dt><dd>クリーニング林商会</dd>
+            <dt>住所</dt><dd>東京都杉並区松庵2-1-21</dd>
+            <dt>電話</dt><dd><a href="tel:0333336256">03-3333-6256</a></dd>
+            <dt>営業時間</dt><dd>月〜土 8:00〜19:00<br>祝日 9:00〜19:00</dd>
+            <dt>定休日</dt><dd>日曜日</dd>
+            <dt>サービス</dt><dd>石けん洗い・手仕上げ／集荷・お届け</dd>
+          </dl>
+        </div>
+
+        <div class="panel r">
+          <div class="tel-block">
+            <span class="cap">ご予約・お問い合わせ</span>
+            <a class="tel-num" href="tel:0333336256">
+              <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8.1 9.8a16 16 0 0 0 6 6l1.2-1.2a2 2 0 0 1 2.1-.5c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.8 2.1z"/></svg>
+              03-3333-6256
+            </a>
+            <span class="cap">受付時間 月〜土 8:00〜19:00／祝日 9:00〜19:00</span>
+          </div>
+          <table class="hours">
+            <caption class="eyebrow" style="margin-bottom:.6rem;">Business hours</caption>
+            <tbody>
+              <tr><th scope="row">月〜土</th><td>8:00〜19:00</td></tr>
+              <tr><th scope="row">日</th><td class="closed">定休日</td></tr>
+              <tr><th scope="row">祝日</th><td>9:00〜19:00</td></tr>
+            </tbody>
+          </table>
+          <h3 class="panel-h" style="margin-top:1.6rem;">最寄り駅からのアクセス</h3>
+          <ul class="access-list">
+            <li><span class="st">三鷹台駅</span><span class="walk">徒歩約11分（860m）</span></li>
+            <li><span class="st">久我山駅</span><span class="walk">徒歩約12分（890m）</span></li>
+            <li><span class="st">西荻窪駅</span><span class="walk">徒歩約12分（890m）</span></li>
+          </ul>
+          <p class="note">※集荷・お届けをご希望の場合は、お電話でご相談ください。エリアや時間帯をご案内します。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ FAQ ============ -->
+  <section class="band" id="faq">
+    <div class="wrap">
+      <div class="head r">
+        <p class="eyebrow">FAQ</p>
+        <h2 class="h2">よくあるご質問</h2>
+      </div>
+      <div class="faq">
+        <details class="r">
+          <summary><span class="q">Q</span>石けん洗いにこだわっているのはなぜですか？</summary>
+          <p class="a">衣類は肌に直接ふれるものだからです。当店では石けんを使ったやさしい洗いにこだわり、洗い上がりの気持ちよさを大切にしています。素材によって適した洗い方が変わりますので、気になる点はお気軽にご相談ください。</p>
+        </details>
+        <details class="r">
+          <summary><span class="q">Q</span>集荷とお届けはお願いできますか？</summary>
+          <p class="a">承っています。お電話（03-3333-6256）でご依頼ください。店舗までお越しいただかなくても、玄関先で受け渡しが完結します。集荷エリアやご依頼可能な点数については、お電話でご確認ください。</p>
+        </details>
+        <details class="r">
+          <summary><span class="q">Q</span>何時から開いていますか？</summary>
+          <p class="a">月曜から土曜は朝8時から夜19時まで、祝日は9時から19時までです。日曜日は定休日をいただいています。ご出勤前のお預かりにもご利用いただけます。</p>
+        </details>
+        <details class="r">
+          <summary><span class="q">Q</span>最寄り駅はどこですか？</summary>
+          <p class="a">三鷹台駅から徒歩約11分、久我山駅と西荻窪駅からはそれぞれ徒歩約12分です。井の頭線沿線・中央線沿線のどちらからもお越しいただけます。</p>
+        </details>
+        <details class="r">
+          <summary><span class="q">Q</span>料金はどのくらいかかりますか？</summary>
+          <p class="a">お品物の種類や状態によって変わります。店頭またはお電話で、仕上がり日とあわせてお見積りをお伝えしますので、お気軽にお問い合わせください。</p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ CTA ============ -->
+  <section class="band">
+    <div class="wrap">
+      <div class="cta-panel r">
+        <h2>まずは一着、お試しください。</h2>
+        <p>「この汚れは落ちるかな」「この素材は洗えるかな」——そんなご相談だけでも大歓迎です。杉並区松庵から、三鷹台・久我山・西荻窪のみなさまのお越しをお待ちしています。</p>
+        <div class="cta-actions">
+          <a class="btn btn--primary" href="tel:0333336256">
+            <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8.1 9.8a16 16 0 0 0 6 6l1.2-1.2a2 2 0 0 1 2.1-.5c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.8 2.1z"/></svg>
+            03-3333-6256
+          </a>
+          <a class="btn btn--ghost" href="#shop">店舗情報を見る</a>
+        </div>
+        <p class="hero-note">月〜土 8:00〜19:00／祝日 9:00〜19:00（日曜定休）</p>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-in">
+      <a class="brand" href="#top">
+        <svg class="brand-mark" viewBox="0 0 40 40" aria-hidden="true">
+          <circle cx="20" cy="20" r="19" fill="var(--soap-tint)"/>
+          <path d="M20 9c-4.4 0-8 3.4-8 7.6 0 1.9.8 3.6 2.1 5l5.2 5.7c.4.4 1 .4 1.4 0l5.2-5.7c1.3-1.4 2.1-3.1 2.1-5C28 12.4 24.4 9 20 9z" fill="none" stroke="var(--soap-deep)" stroke-width="2" stroke-linejoin="round"/>
+          <circle cx="17.4" cy="16.6" r="2.6" fill="var(--sun)"/>
+        </svg>
+        <span class="brand-name"><span class="brand-tag">クリーニング</span>林商会
+          <span class="brand-sub">HAYASHI SHOKAI</span>
+        </span>
+      </a>
+      <nav class="footer-links" aria-label="フッターメニュー">
+        <a href="#reason">選ばれる理由</a>
+        <a href="#price">料金・ご相談</a>
+        <a href="#service">集荷・お届け</a>
+        <a href="#flow">ご利用の流れ</a>
+        <a href="#shop">店舗情報</a>
+        <a href="#faq">よくある質問</a>
+      </nav>
+    </div>
+    <p class="disclaimer">※本ページはご提案用のデザイン案です。掲載している店名・住所・電話番号・営業時間・アクセスは公開情報をもとにしていますが、店舗様の確認を受けたものではありません。料金・写真・サービスの詳細は未確定のため、公開前に必ず内容のご確認と差し替えをお願いします。</p>
+    <p class="copy">© 2026 HAYASHI SHOKAI CLEANING</p>
+  </div>
+</footer>
+
+<div class="call-bar">
+  <a class="btn btn--primary" href="tel:0333336256">
+    <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8.1 9.8a16 16 0 0 0 6 6l1.2-1.2a2 2 0 0 1 2.1-.5c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.8 2.1z"/></svg>
+    電話する（03-3333-6256）
+  </a>
+  <span class="cap">月〜土 8:00〜19:00／日曜定休</span>
+</div>
+
+<script>
+(function () {
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* --- header shadow on scroll --- */
+  var header = document.querySelector('.site-header');
+  var onScroll = function () {
+    header.classList.toggle('is-scrolled', window.scrollY > 8);
+  };
+  onScroll();
+  window.addEventListener('scroll', onScroll, { passive: true });
+
+  /* --- scroll reveal --- */
+  var items = document.querySelectorAll('.r');
+  if (reduce || !('IntersectionObserver' in window)) {
+    items.forEach(function (el) { el.classList.add('in'); });
+  } else {
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (!entry.isIntersecting) return;
+        var el = entry.target;
+        var siblings = Array.prototype.slice.call(el.parentNode.children);
+        var i = Math.min(siblings.indexOf(el), 5);
+        el.style.transitionDelay = (i * 70) + 'ms';
+        el.classList.add('in');
+        io.unobserve(el);
+      });
+    }, { rootMargin: '0px 0px -8% 0px', threshold: 0.08 });
+    items.forEach(function (el) { io.observe(el); });
+  }
+
+  /* --- ambient soap bubbles in the hero --- */
+  var canvas = document.getElementById('bubbles');
+  if (!canvas || !canvas.getContext) return;
+  var ctx = canvas.getContext('2d');
+  var hero = canvas.parentNode;
+  var bubbles = [];
+  var w = 0, h = 0, raf = null;
+
+  function token(name, fallback) {
+    var v = getComputedStyle(document.documentElement).getPropertyValue(name).trim();
+    return v || fallback;
+  }
+
+  function seed() {
+    bubbles = [];
+    var count = Math.max(8, Math.min(18, Math.round(w / 90)));
+    for (var i = 0; i < count; i++) {
+      // 下側ほど密に、大きく（洗い桶に立つ泡のイメージ）
+      var t = Math.pow(Math.random(), 1.7);   // 0 に寄る = 下側
+      bubbles.push({
+        x: Math.random() * w,
+        y: h - t * h * 1.1,
+        r: 9 + (1 - t) * 26 + Math.random() * 5,
+        v: 0.08 + Math.random() * 0.2,
+        drift: (Math.random() - 0.5) * 0.3,
+        phase: Math.random() * Math.PI * 2,
+        alpha: 0.3 + (1 - t) * 0.45,
+        warm: Math.random() < 0.4
+      });
+    }
+  }
+
+  function resize() {
+    var dpr = Math.min(window.devicePixelRatio || 1, 2);
+    w = hero.clientWidth;
+    h = hero.clientHeight;
+    canvas.width = w * dpr;
+    canvas.height = h * dpr;
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    seed();
+    if (reduce) draw();
+  }
+
+  function draw() {
+    ctx.clearRect(0, 0, w, h);
+    var foam = token('--card', '#FFFFFF');
+    var warmFoam = token('--sun-tint', '#FDF0CE');
+    var rim = token('--soap', '#F0871F');
+    for (var i = 0; i < bubbles.length; i++) {
+      var b = bubbles[i];
+      ctx.beginPath();
+      ctx.arc(b.x, b.y, b.r, 0, Math.PI * 2);
+      ctx.globalAlpha = b.alpha;
+      ctx.fillStyle = b.warm ? warmFoam : foam;
+      ctx.fill();
+      ctx.globalAlpha = b.alpha * 0.5;
+      ctx.lineWidth = 1;
+      ctx.strokeStyle = rim;
+      ctx.stroke();
+    }
+    ctx.globalAlpha = 1;
+  }
+
+  function tick() {
+    for (var i = 0; i < bubbles.length; i++) {
+      var b = bubbles[i];
+      b.phase += 0.008;
+      b.y -= b.v;
+      b.x += Math.sin(b.phase) * 0.35 + b.drift * 0.2;
+      if (b.y + b.r < -10) {
+        b.y = h + b.r + Math.random() * 60;
+        b.x = Math.random() * w;
+      }
+    }
+    draw();
+    raf = requestAnimationFrame(tick);
+  }
+
+  resize();
+  window.addEventListener('resize', resize);
+  if (!reduce) {
+    raf = requestAnimationFrame(tick);
+    document.addEventListener('visibilitychange', function () {
+      if (document.hidden) {
+        cancelAnimationFrame(raf);
+      } else {
+        raf = requestAnimationFrame(tick);
+      }
+    });
+  }
+})();
+</script>
+</body>
+</html>

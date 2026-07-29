@@ -1,0 +1,924 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>クリーニング こもれび｜洗いたてを、いつもの毎日に。</title>
+<meta name="description" content="創業32年の街のクリーニング店。一点ずつ手仕上げ、しみ抜き無料。最短当日仕上げ、ご自宅までの集荷・お届けも承ります。">
+<style>
+/* ---------- reset ---------- */
+*, *::before, *::after { box-sizing: border-box; }
+html, body, h1, h2, h3, p, ul, ol, li, dl, dt, dd, figure, table { margin: 0; padding: 0; }
+ul, ol { list-style: none; }
+img, svg { display: block; max-width: 100%; }
+a { color: inherit; }
+button { font: inherit; }
+
+/* ---------- tokens ---------- */
+:root {
+  --paper:      #F5F7F4;
+  --paper-2:    #ECF2EF;
+  --card:       #FFFFFF;
+  --ink:        #1E3437;
+  --ink-2:      #4A6669;
+  --line:       #DFE7E3;
+  --soap:       #4E9AA1;
+  --soap-deep:  #2F757C;
+  --soap-tint:  #E2F0EF;
+  --sun:        #F0BE63;
+  --sun-tint:   #FBEDD3;
+  --btn-bg:     #2F757C;
+  --btn-fg:     #FFFFFF;
+  --shadow:     0 20px 44px -28px rgba(30, 52, 55, .45);
+  --shadow-sm:  0 10px 24px -18px rgba(30, 52, 55, .5);
+  --marker:     linear-gradient(transparent 62%, color-mix(in srgb, var(--sun) 62%, transparent) 62%);
+
+  --r-panel: 36px;
+  --r-card:  18px;
+  --r-pill:  999px;
+
+  --font-round: "Hiragino Maru Gothic ProN", "Hiragino Maru Gothic Pro", "BIZ UDPGothic", "Zen Maru Gothic", "Yu Gothic Medium", "游ゴシック Medium", "Noto Sans JP", sans-serif;
+  --font-body:  "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Noto Sans JP", "Yu Gothic", "游ゴシック", Meiryo, sans-serif;
+  --font-num:   "Avenir Next", "Segoe UI", "Helvetica Neue", var(--font-body);
+
+  --wrap: 1080px;
+  color-scheme: light;
+}
+
+/* ---------- base ---------- */
+:root { background: var(--paper); }
+body {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: 1rem;
+  line-height: 1.95;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+:where(a, button, summary):focus-visible {
+  outline: 2px solid var(--soap-deep);
+  outline-offset: 3px;
+  border-radius: 6px;
+}
+
+.wrap { width: min(100% - 2.5rem, var(--wrap)); margin-inline: auto; }
+.band { padding-block: clamp(4rem, 9vw, 7rem); scroll-margin-top: 84px; }
+.band--tint { background: var(--paper-2); }
+
+.skip {
+  position: absolute; left: 1rem; top: -4rem; z-index: 60;
+  background: var(--card); color: var(--ink);
+  padding: .6rem 1.1rem; border-radius: var(--r-pill); box-shadow: var(--shadow-sm);
+  transition: top .2s ease;
+}
+.skip:focus { top: 1rem; }
+
+/* ---------- section heads ---------- */
+.head { display: flex; flex-direction: column; gap: .7rem; margin-bottom: clamp(2rem, 4vw, 3rem); }
+.eyebrow {
+  font-family: var(--font-num);
+  font-size: .72rem; font-weight: 600;
+  letter-spacing: .2em; text-transform: uppercase;
+  color: var(--soap-deep);
+  display: flex; align-items: center; gap: .6rem;
+}
+.eyebrow::after { content: ""; flex: 0 0 34px; height: 2px; border-radius: 2px; background: var(--sun); }
+.h2 {
+  font-family: var(--font-round);
+  font-size: clamp(1.55rem, 3.2vw, 2.15rem);
+  font-weight: 700; line-height: 1.5; letter-spacing: .01em;
+  text-wrap: balance; word-break: auto-phrase;
+}
+.head p:not(.eyebrow) { color: var(--ink-2); max-width: 34em; }
+
+/* ---------- header ---------- */
+.site-header {
+  position: sticky; top: 0; z-index: 50;
+  background: color-mix(in srgb, var(--paper) 82%, transparent);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid transparent;
+  transition: border-color .25s ease, background .25s ease;
+}
+.site-header.is-scrolled { border-bottom-color: var(--line); }
+.header-in { display: flex; align-items: center; gap: 1.4rem; padding-block: .85rem; }
+.brand { display: flex; align-items: center; gap: .6rem; text-decoration: none; flex: 0 0 auto; }
+.brand-mark { width: 34px; height: 34px; flex: 0 0 auto; }
+.brand-name { font-family: var(--font-round); font-weight: 700; font-size: 1.02rem; letter-spacing: .04em; line-height: 1.3; }
+.brand-sub { display: block; font-family: var(--font-num); font-size: .6rem; letter-spacing: .18em; color: var(--ink-2); font-weight: 600; }
+.nav { display: flex; gap: .3rem; margin-left: auto; overflow-x: auto; scrollbar-width: none; }
+.nav::-webkit-scrollbar { display: none; }
+.nav a {
+  text-decoration: none; white-space: nowrap;
+  font-size: .88rem; color: var(--ink-2);
+  padding: .45rem .8rem; border-radius: var(--r-pill);
+  transition: color .2s ease, background .2s ease;
+}
+.nav a:hover { color: var(--ink); background: var(--soap-tint); }
+.header-cta { flex: 0 0 auto; }
+
+/* ---------- buttons ---------- */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: .5rem;
+  font-family: var(--font-round); font-weight: 700; font-size: .95rem;
+  text-decoration: none; white-space: nowrap;
+  padding: .8rem 1.5rem; border-radius: var(--r-pill); border: 1.5px solid transparent;
+  transition: transform .18s ease, box-shadow .22s ease, background .2s ease, border-color .2s ease;
+}
+.btn--primary { background: var(--btn-bg); color: var(--btn-fg); box-shadow: var(--shadow-sm); }
+.btn--primary:hover { transform: translateY(-2px); box-shadow: var(--shadow); }
+.btn--ghost { background: var(--card); color: var(--ink); border-color: var(--line); }
+.btn--ghost:hover { border-color: var(--soap); transform: translateY(-2px); }
+.btn--sm { padding: .55rem 1.1rem; font-size: .86rem; }
+.btn .ic { width: 17px; height: 17px; flex: 0 0 auto; }
+
+/* ---------- hero ---------- */
+.hero { position: relative; padding-block: clamp(2.5rem, 6vw, 4.5rem) clamp(3.5rem, 8vw, 6rem); overflow: hidden; }
+.hero::before {
+  content: ""; position: absolute; inset: -20% -30% auto -30%; height: 130%;
+  background:
+    radial-gradient(48% 42% at 22% 18%, color-mix(in srgb, var(--soap) 22%, transparent), transparent 70%),
+    radial-gradient(40% 38% at 82% 30%, color-mix(in srgb, var(--sun) 26%, transparent), transparent 68%);
+  pointer-events: none;
+}
+#bubbles { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
+.hero-in {
+  position: relative;
+  display: grid; grid-template-columns: 1.15fr .85fr; gap: clamp(2rem, 4vw, 3.5rem); align-items: center;
+}
+.hero-copy { display: flex; flex-direction: column; align-items: flex-start; gap: 1.3rem; }
+.pill {
+  display: inline-flex; align-items: center; gap: .5rem;
+  background: var(--card); border: 1px solid var(--line);
+  padding: .38rem 1rem; border-radius: var(--r-pill);
+  font-size: .8rem; color: var(--ink-2); box-shadow: var(--shadow-sm);
+}
+.pill .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--soap); }
+.hero h1 {
+  font-family: var(--font-round);
+  font-size: clamp(2.05rem, 5.4vw, 3.35rem);
+  font-weight: 700; line-height: 1.42; letter-spacing: .005em;
+  text-wrap: balance; word-break: auto-phrase;
+}
+.hero h1 .accent { background: var(--marker); }
+.hero-lead { color: var(--ink-2); max-width: 30em; }
+.hero-actions { display: flex; flex-wrap: wrap; gap: .8rem; align-items: center; }
+.hero-note { font-size: .82rem; color: var(--ink-2); }
+.hero-points { display: flex; flex-wrap: wrap; gap: .5rem .6rem; }
+.point {
+  display: inline-flex; align-items: center; gap: .4rem;
+  font-size: .84rem; font-weight: 600;
+  background: var(--soap-tint); color: var(--soap-deep);
+  padding: .35rem .85rem; border-radius: var(--r-pill);
+}
+.hero-art { display: flex; justify-content: center; }
+.hero-art svg { width: min(100%, 340px); height: auto; }
+.sway { transform-origin: 50% 6%; animation: sway 7s ease-in-out infinite alternate; }
+@keyframes sway { from { transform: rotate(-1.4deg); } to { transform: rotate(1.4deg); } }
+
+/* ---------- reasons ---------- */
+.reasons { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.2rem; }
+.reason {
+  background: var(--card); border: 1px solid var(--line); border-radius: var(--r-card);
+  padding: 2rem 1.6rem 1.8rem; box-shadow: var(--shadow-sm);
+  display: flex; flex-direction: column; gap: .7rem;
+}
+.reason .ico { width: 46px; height: 46px; margin-bottom: .3rem; }
+.reason h3 { font-family: var(--font-round); font-size: 1.12rem; font-weight: 700; line-height: 1.6; }
+.reason p { font-size: .93rem; color: var(--ink-2); }
+
+/* ---------- price ---------- */
+.price-top { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 1rem; margin-bottom: 2.2rem; }
+.price-card {
+  background: var(--card); border: 1px solid var(--line); border-radius: var(--r-card);
+  padding: 1.4rem 1.3rem; box-shadow: var(--shadow-sm);
+  display: flex; flex-direction: column; gap: .2rem; position: relative; overflow: hidden;
+}
+.price-card::after {
+  content: ""; position: absolute; right: -28px; top: -28px; width: 78px; height: 78px;
+  border-radius: 50%; background: var(--sun-tint);
+}
+.price-card > * { position: relative; }
+.price-card .label { font-size: .88rem; color: var(--ink-2); }
+.price-card .yen { font-family: var(--font-num); font-weight: 700; font-size: 2.1rem; letter-spacing: -.01em; font-variant-numeric: tabular-nums; line-height: 1.4; }
+.price-card .yen small { font-size: .95rem; font-weight: 600; margin-left: .15rem; }
+.price-card .memo { font-size: .78rem; color: var(--ink-2); }
+
+.tables { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 1.2rem; }
+.table-box {
+  background: var(--card); border: 1px solid var(--line); border-radius: var(--r-card);
+  padding: 1.5rem 1.4rem; box-shadow: var(--shadow-sm); overflow-x: auto;
+}
+.table-box h3 {
+  font-family: var(--font-round); font-size: 1rem; font-weight: 700;
+  padding-bottom: .8rem; margin-bottom: .4rem; border-bottom: 2px solid var(--soap-tint);
+}
+.table-box table { width: 100%; border-collapse: collapse; font-size: .93rem; }
+.table-box th, .table-box td { padding: .62rem .2rem; text-align: left; font-weight: 400; }
+.table-box tr + tr th, .table-box tr + tr td { border-top: 1px dashed var(--line); }
+.table-box td {
+  text-align: right; white-space: nowrap;
+  font-family: var(--font-num); font-variant-numeric: tabular-nums; font-weight: 600;
+}
+.table-box td.free { color: var(--soap-deep); font-family: var(--font-body); }
+.note { font-size: .8rem; color: var(--ink-2); margin-top: 1rem; }
+
+/* ---------- services ---------- */
+.services { display: grid; grid-template-columns: repeat(2, 1fr); gap: .8rem; }
+@media (min-width: 620px) { .services { grid-template-columns: repeat(3, 1fr); } }
+@media (min-width: 900px) { .services { grid-template-columns: repeat(4, 1fr); } }
+.service {
+  background: var(--card); border: 1px solid var(--line); border-radius: var(--r-card);
+  padding: 1.15rem 1rem; text-align: center;
+  font-family: var(--font-round); font-weight: 700; font-size: .95rem;
+  display: flex; flex-direction: column; align-items: center; gap: .55rem;
+  transition: transform .2s ease, border-color .2s ease;
+}
+.service:hover { transform: translateY(-3px); border-color: var(--soap); }
+.service .ico { width: 32px; height: 32px; }
+.service span { display: block; font-family: var(--font-body); font-weight: 400; font-size: .78rem; color: var(--ink-2); line-height: 1.6; }
+
+/* ---------- flow ---------- */
+.flow { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1.6rem 1.2rem; counter-reset: step; }
+.step { display: flex; flex-direction: column; gap: .6rem; position: relative; }
+.step-no {
+  width: 42px; height: 42px; border-radius: 50%;
+  background: var(--soap-deep); color: var(--btn-fg);
+  display: grid; place-items: center;
+  font-family: var(--font-num); font-weight: 700; font-size: 1.02rem;
+  box-shadow: var(--shadow-sm);
+}
+.step h3 { font-family: var(--font-round); font-size: 1.03rem; font-weight: 700; }
+.step p { font-size: .9rem; color: var(--ink-2); }
+
+/* ---------- shop info ---------- */
+.info { display: grid; grid-template-columns: 1.1fr .9fr; gap: 1.4rem; align-items: start; }
+.panel {
+  background: var(--card); border: 1px solid var(--line);
+  border-radius: var(--r-panel); padding: clamp(1.6rem, 3vw, 2.4rem); box-shadow: var(--shadow-sm);
+}
+.info dl { display: grid; grid-template-columns: 6.5em 1fr; gap: .1rem 1rem; font-size: .93rem; }
+.info dt { color: var(--ink-2); font-size: .86rem; padding-block: .55rem; }
+.info dd { padding-block: .55rem; }
+.info dt + dd { border-bottom: 1px dashed var(--line); }
+.info dl > dt { border-bottom: 1px dashed var(--line); }
+.info dl > dt:last-of-type, .info dl > dd:last-of-type { border-bottom: 0; }
+.tel-block { display: flex; flex-direction: column; gap: .2rem; margin-bottom: 1.4rem; }
+.tel-block .cap { font-size: .8rem; color: var(--ink-2); }
+.tel-num {
+  font-family: var(--font-num); font-weight: 700; font-size: clamp(1.7rem, 4vw, 2.2rem);
+  letter-spacing: .02em; text-decoration: none; color: var(--ink); font-variant-numeric: tabular-nums;
+  display: inline-flex; align-items: center; gap: .5rem;
+}
+.tel-num .ic { width: 22px; height: 22px; color: var(--soap-deep); }
+.hours { width: 100%; border-collapse: collapse; font-size: .92rem; margin-top: .4rem; }
+.hours th, .hours td { padding: .6rem .2rem; text-align: left; font-weight: 400; }
+.hours td { text-align: right; font-family: var(--font-num); font-variant-numeric: tabular-nums; }
+.hours tr + tr th, .hours tr + tr td { border-top: 1px dashed var(--line); }
+.hours .closed { color: var(--ink-2); }
+.map {
+  margin-top: 1.2rem; border-radius: var(--r-card); overflow: hidden;
+  border: 1px solid var(--line); background: var(--paper-2);
+}
+.map svg { width: 100%; height: auto; }
+.map-cap { font-size: .8rem; color: var(--ink-2); padding: .7rem .9rem; border-top: 1px solid var(--line); }
+
+/* ---------- faq ---------- */
+.faq { display: flex; flex-direction: column; gap: .7rem; max-width: 760px; margin-inline: auto; }
+.faq details {
+  background: var(--card); border: 1px solid var(--line); border-radius: var(--r-card);
+  padding: .3rem 1.3rem; box-shadow: var(--shadow-sm);
+}
+.faq summary {
+  list-style: none; cursor: pointer;
+  display: flex; align-items: flex-start; gap: .8rem;
+  padding-block: 1.05rem;
+  font-family: var(--font-round); font-weight: 700; font-size: .98rem; line-height: 1.7;
+}
+.faq summary::-webkit-details-marker { display: none; }
+.faq summary::after {
+  content: ""; flex: 0 0 auto; margin-left: auto; margin-top: .55rem;
+  width: 11px; height: 11px;
+  border-right: 2px solid var(--soap-deep); border-bottom: 2px solid var(--soap-deep);
+  transform: rotate(45deg); transition: transform .25s ease;
+}
+.faq details[open] summary::after { transform: rotate(-135deg); }
+.faq .q {
+  flex: 0 0 auto; color: var(--soap-deep);
+  font-family: var(--font-num); font-weight: 700; font-size: 1rem; line-height: 1.7;
+}
+.faq .a { padding: 0 0 1.15rem 1.9rem; font-size: .92rem; color: var(--ink-2); }
+
+/* ---------- closing cta ---------- */
+.cta-panel {
+  background: linear-gradient(150deg, var(--soap-tint), color-mix(in srgb, var(--sun-tint) 70%, var(--soap-tint)));
+  border: 1px solid var(--line); border-radius: var(--r-panel);
+  padding: clamp(2.2rem, 5vw, 3.4rem);
+  display: flex; flex-direction: column; align-items: center; gap: 1.1rem; text-align: center;
+}
+.cta-panel h2 { font-family: var(--font-round); font-size: clamp(1.4rem, 3.4vw, 2rem); font-weight: 700; line-height: 1.55; text-wrap: balance; }
+.cta-panel p { color: var(--ink-2); max-width: 40em; }
+.cta-actions { display: flex; flex-wrap: wrap; gap: .8rem; justify-content: center; }
+
+/* ---------- footer ---------- */
+.site-footer { border-top: 1px solid var(--line); padding-block: 2.6rem 3rem; }
+.footer-in { display: flex; flex-wrap: wrap; gap: 1.4rem; justify-content: space-between; align-items: flex-start; }
+.footer-links { display: flex; flex-wrap: wrap; gap: .3rem 1.2rem; font-size: .88rem; }
+.footer-links a { text-decoration: none; color: var(--ink-2); }
+.footer-links a:hover { color: var(--ink); }
+.disclaimer { font-size: .78rem; color: var(--ink-2); margin-top: 1.6rem; line-height: 1.8; }
+.copy { font-family: var(--font-num); font-size: .76rem; color: var(--ink-2); letter-spacing: .04em; margin-top: .4rem; }
+
+/* ---------- mobile call bar ---------- */
+.call-bar {
+  display: none;
+  position: fixed; left: 0; right: 0; bottom: 0; z-index: 45;
+  padding: .65rem .9rem calc(.65rem + env(safe-area-inset-bottom));
+  background: color-mix(in srgb, var(--paper) 88%, transparent);
+  backdrop-filter: blur(12px);
+  border-top: 1px solid var(--line);
+}
+.call-bar .btn { width: 100%; }
+.call-bar .cap { display: block; text-align: center; font-size: .72rem; color: var(--ink-2); margin-top: .35rem; }
+
+/* ---------- reveal ---------- */
+.js .r { opacity: 0; transform: translateY(14px); }
+.js .r.in { opacity: 1; transform: none; transition: opacity .6s ease, transform .6s cubic-bezier(.22,.7,.3,1); }
+
+/* ---------- responsive ---------- */
+@media (max-width: 900px) {
+  .hero-in { grid-template-columns: 1fr; }
+  .hero-art { order: -1; }
+  .hero-art svg { width: min(72%, 250px); }
+  .info { grid-template-columns: 1fr; }
+}
+@media (max-width: 720px) {
+  .header-cta { display: none; }
+  .nav { margin-left: auto; }
+  .info dl { grid-template-columns: 5.5em 1fr; }
+  .call-bar { display: block; }
+  body { padding-bottom: 5.2rem; }
+}
+@media (max-width: 560px) {
+  .hero-art svg { width: min(62%, 210px); }
+  .hero-actions { width: 100%; }
+  .hero-actions .btn { flex: 1 1 100%; }
+  .cta-actions .btn { flex: 1 1 100%; }
+}
+@media (max-width: 460px) {
+  .brand-name { font-size: .95rem; }
+  .nav a { padding: .4rem .55rem; font-size: .82rem; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
+  .js .r { opacity: 1; transform: none; }
+}
+</style>
+</head>
+<body>
+<script>document.documentElement.classList.add('js');</script>
+
+<a class="skip" href="#main">本文へスキップ</a>
+
+<header class="site-header" id="top">
+  <div class="wrap header-in">
+    <a class="brand" href="#top">
+      <svg class="brand-mark" viewBox="0 0 40 40" aria-hidden="true">
+        <circle cx="20" cy="20" r="19" fill="var(--soap-tint)"/>
+        <path d="M20 9c-4.4 0-8 3.4-8 7.6 0 1.9.8 3.6 2.1 5l5.2 5.7c.4.4 1 .4 1.4 0l5.2-5.7c1.3-1.4 2.1-3.1 2.1-5C28 12.4 24.4 9 20 9z" fill="none" stroke="var(--soap-deep)" stroke-width="2" stroke-linejoin="round"/>
+        <circle cx="17.4" cy="16.6" r="2.6" fill="var(--sun)"/>
+      </svg>
+      <span class="brand-name">クリーニング こもれび
+        <span class="brand-sub">KOMOREBI CLEANING</span>
+      </span>
+    </a>
+    <nav class="nav" aria-label="メインメニュー">
+      <a href="#reason">選ばれる理由</a>
+      <a href="#price">料金</a>
+      <a href="#service">取扱い品目</a>
+      <a href="#flow">ご利用の流れ</a>
+      <a href="#shop">店舗情報</a>
+      <a href="#faq">よくある質問</a>
+    </nav>
+    <a class="btn btn--primary btn--sm header-cta" href="tel:0120000000">
+      <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8.1 9.8a16 16 0 0 0 6 6l1.2-1.2a2 2 0 0 1 2.1-.5c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.8 2.1z"/></svg>
+      0120-000-000
+    </a>
+  </div>
+</header>
+
+<main id="main">
+
+  <!-- ============ HERO ============ -->
+  <section class="hero">
+    <canvas id="bubbles" aria-hidden="true"></canvas>
+    <div class="wrap hero-in">
+      <div class="hero-copy">
+        <p class="pill r"><span class="dot"></span>創業32年・地域のみなさまのクリーニング店</p>
+        <h1 class="r">洗いたてを、<br><span class="accent">いつもの毎日</span>に。</h1>
+        <p class="hero-lead r">素材と汚れを一点ずつ見極めて洗い分け、仕上げはすべて手作業。しみ抜きは無料、最短当日のお渡しにも対応しています。ご自宅・オフィスへの集荷とお届けも承ります。</p>
+        <ul class="hero-points r">
+          <li class="point">最短当日仕上げ</li>
+          <li class="point">しみ抜き無料</li>
+          <li class="point">集荷・お届け無料</li>
+        </ul>
+        <div class="hero-actions r">
+          <a class="btn btn--primary" href="tel:0120000000">
+            <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8.1 9.8a16 16 0 0 0 6 6l1.2-1.2a2 2 0 0 1 2.1-.5c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.8 2.1z"/></svg>
+            電話で集荷を申し込む
+          </a>
+          <a class="btn btn--ghost" href="#price">料金を見る</a>
+        </div>
+        <p class="hero-note r">受付 9:00〜19:00（水曜定休）／前日18時までのご依頼で翌日集荷</p>
+      </div>
+
+      <div class="hero-art r" aria-hidden="true">
+        <svg viewBox="0 0 300 330" role="img">
+          <ellipse cx="150" cy="300" rx="112" ry="16" fill="var(--soap-tint)"/>
+          <g class="sway">
+            <!-- hanger -->
+            <path d="M150 46v-14c0-6 9-6 9-12a7.5 7.5 0 0 0-14-3.4" fill="none" stroke="var(--ink-2)" stroke-width="5" stroke-linecap="round"/>
+            <path d="M92 86 150 46l58 40" fill="none" stroke="var(--ink-2)" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+            <!-- shirt -->
+            <path d="M150 62 126 72 74 96q-14 6-18 20l-14 48q-3 10 7 14l35 16q10 4 14-6l12-26v122q0 12 12 12h56q12 0 12-12V162l12 26q4 10 14 6l35-16q10-4 7-14l-14-48q-4-14-18-20l-52-24-24-10z"
+                  fill="var(--card)" stroke="var(--soap)" stroke-width="5" stroke-linejoin="round"/>
+            <!-- collar -->
+            <path d="M126 72l24 24 24-24" fill="none" stroke="var(--soap)" stroke-width="5" stroke-linejoin="round"/>
+            <path d="M150 96v148" stroke="var(--soap-tint)" stroke-width="5" stroke-linecap="round"/>
+            <circle cx="150" cy="138" r="4.5" fill="var(--sun)"/>
+            <circle cx="150" cy="178" r="4.5" fill="var(--sun)"/>
+            <circle cx="150" cy="218" r="4.5" fill="var(--sun)"/>
+            <!-- pocket -->
+            <path d="M104 146h28v24l-14 9-14-9z" fill="var(--soap-tint)" stroke="var(--soap)" stroke-width="4" stroke-linejoin="round"/>
+            <!-- tag -->
+            <path d="M208 66l24 14" stroke="var(--ink-2)" stroke-width="3" stroke-linecap="round"/>
+            <g transform="rotate(9 246 96)">
+              <rect x="222" y="76" width="56" height="40" rx="9" fill="var(--sun-tint)" stroke="var(--sun)" stroke-width="3.5"/>
+              <circle cx="232" cy="86" r="3.6" fill="none" stroke="var(--sun)" stroke-width="3"/>
+              <path d="M240 98h30M240 106h20" stroke="var(--sun)" stroke-width="3.5" stroke-linecap="round"/>
+            </g>
+          </g>
+        </svg>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ REASONS ============ -->
+  <section class="band band--tint" id="reason">
+    <div class="wrap">
+      <div class="head r">
+        <p class="eyebrow">Our promise</p>
+        <h2 class="h2">お預かりするのは、<br>あなたの「お気に入り」です。</h2>
+        <p>長く着たい一着ほど、洗い方で仕上がりが変わります。こもれびが大切にしている、三つのことをご紹介します。</p>
+      </div>
+      <ul class="reasons">
+        <li class="reason r">
+          <svg class="ico" viewBox="0 0 48 48" fill="none" aria-hidden="true">
+            <rect x="4" y="8" width="40" height="32" rx="10" fill="var(--soap-tint)"/>
+            <path d="M14 30c4-10 10-14 20-14" stroke="var(--soap-deep)" stroke-width="3" stroke-linecap="round"/>
+            <path d="M31 30l7-7 4 4-7 7z" fill="var(--sun)"/>
+            <circle cx="17" cy="20" r="3" fill="var(--soap-deep)"/>
+          </svg>
+          <h3>一点ずつ、手仕上げ。</h3>
+          <p>素材と汚れの状態を見極めて洗い分け、仕上げはすべて手作業です。型崩れやテカリを防ぎ、袖を通した瞬間の気持ちよさまで整えます。</p>
+        </li>
+        <li class="reason r">
+          <svg class="ico" viewBox="0 0 48 48" fill="none" aria-hidden="true">
+            <rect x="4" y="8" width="40" height="32" rx="10" fill="var(--sun-tint)"/>
+            <path d="M24 13c-5 6-9 10-9 15a9 9 0 0 0 18 0c0-5-4-9-9-15z" fill="none" stroke="var(--soap-deep)" stroke-width="3" stroke-linejoin="round"/>
+            <circle cx="21" cy="29" r="2.6" fill="var(--sun)"/>
+          </svg>
+          <h3>しみ抜きは、無料です。</h3>
+          <p>食べこぼしや皮脂汚れなど、通常のしみ抜きに追加料金はいただきません。落ちにくい古いしみも、まずはご相談ください。</p>
+        </li>
+        <li class="reason r">
+          <svg class="ico" viewBox="0 0 48 48" fill="none" aria-hidden="true">
+            <rect x="4" y="8" width="40" height="32" rx="10" fill="var(--soap-tint)"/>
+            <path d="M11 30V22l9-6 9 6v8" fill="none" stroke="var(--soap-deep)" stroke-width="3" stroke-linejoin="round"/>
+            <path d="M29 24h5l4 5v5h-9z" fill="none" stroke="var(--soap-deep)" stroke-width="3" stroke-linejoin="round"/>
+            <circle cx="17" cy="34" r="3" fill="var(--sun)"/>
+            <circle cx="32" cy="34" r="3" fill="var(--sun)"/>
+          </svg>
+          <h3>玄関先で、受け渡し完結。</h3>
+          <p>ご自宅・オフィスへの集荷とお届けは、合計1,500円以上で無料。平日は夜19時までの時間帯をご指定いただけます。</p>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ============ PRICE ============ -->
+  <section class="band" id="price">
+    <div class="wrap">
+      <div class="head r">
+        <p class="eyebrow">Price list</p>
+        <h2 class="h2">わかりやすい、一律料金。</h2>
+        <p>表示はすべて税込価格です。お預かり時に仕上がり日と合計金額をお伝えしますので、あとから追加になることはありません。</p>
+      </div>
+
+      <div class="price-top">
+        <div class="price-card r">
+          <span class="label">ワイシャツ</span>
+          <span class="yen">¥190<small>〜</small></span>
+          <span class="memo">タンブラー仕上げ／5枚以上で1枚¥170</span>
+        </div>
+        <div class="price-card r">
+          <span class="label">スーツ上下</span>
+          <span class="yen">¥1,200</span>
+          <span class="memo">ジャケット＋スラックスのセット</span>
+        </div>
+        <div class="price-card r">
+          <span class="label">コート</span>
+          <span class="yen">¥1,600</span>
+          <span class="memo">ウール・カシミヤも同額</span>
+        </div>
+      </div>
+
+      <div class="tables">
+        <div class="table-box r">
+          <h3>衣類</h3>
+          <table>
+            <tbody>
+              <tr><th scope="row">ワイシャツ（タンブラー）</th><td>¥190</td></tr>
+              <tr><th scope="row">ワイシャツ（ハンガー）</th><td>¥240</td></tr>
+              <tr><th scope="row">ジャケット</th><td>¥700</td></tr>
+              <tr><th scope="row">スラックス・スカート</th><td>¥550</td></tr>
+              <tr><th scope="row">スーツ上下</th><td>¥1,200</td></tr>
+              <tr><th scope="row">ワンピース</th><td>¥1,000</td></tr>
+              <tr><th scope="row">セーター・ニット</th><td>¥600</td></tr>
+              <tr><th scope="row">コート</th><td>¥1,600</td></tr>
+              <tr><th scope="row">ダウンジャケット</th><td>¥2,200</td></tr>
+              <tr><th scope="row">学生服 上下</th><td>¥1,300</td></tr>
+              <tr><th scope="row">ネクタイ</th><td>¥400</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="table-box r">
+          <h3>ふとん・その他／オプション</h3>
+          <table>
+            <tbody>
+              <tr><th scope="row">毛布（シングル）</th><td>¥1,800</td></tr>
+              <tr><th scope="row">羽毛ふとん（シングル）</th><td>¥3,300</td></tr>
+              <tr><th scope="row">カーテン（1㎡あたり）</th><td>¥450</td></tr>
+              <tr><th scope="row">スニーカー（1足）</th><td>¥1,500</td></tr>
+              <tr><th scope="row">撥水加工</th><td>+¥400〜</td></tr>
+              <tr><th scope="row">シーズン保管（最長9か月）</th><td>1点 +¥300</td></tr>
+              <tr><th scope="row">しみ抜き（通常）</th><td class="free">無料</td></tr>
+              <tr><th scope="row">ボタン付け・ほつれ直し</th><td class="free">無料</td></tr>
+              <tr><th scope="row">集荷・お届け（1,500円以上）</th><td class="free">無料</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <p class="note">※特殊素材・装飾付きのお品物、着物・礼服は別途お見積りとなります。※上記以外の品目もお気軽にお問い合わせください。</p>
+    </div>
+  </section>
+
+  <!-- ============ SERVICES ============ -->
+  <section class="band band--tint" id="service">
+    <div class="wrap">
+      <div class="head r">
+        <p class="eyebrow">Service</p>
+        <h2 class="h2">衣類から、ふとん・靴まで。</h2>
+        <p>ご家庭で洗いにくいものこそ、お任せください。取扱いの主な品目です。</p>
+      </div>
+      <ul class="services">
+        <li class="service r">
+          <svg class="ico" viewBox="0 0 32 32" fill="none" stroke="var(--soap-deep)" stroke-width="2.4" stroke-linejoin="round" aria-hidden="true"><path d="M16 5l-5 2-6 3 2 7 3-1v10h12V16l3 1 2-7-6-3-5-2z"/></svg>
+          衣類全般<span>スーツ・シャツ・コート</span>
+        </li>
+        <li class="service r">
+          <svg class="ico" viewBox="0 0 32 32" fill="none" stroke="var(--soap-deep)" stroke-width="2.4" stroke-linejoin="round" aria-hidden="true"><rect x="8" y="5" width="16" height="7" rx="3.5"/><rect x="3" y="14" width="26" height="13" rx="5"/><path d="M3 20.5h26"/></svg>
+          ふとん・毛布<span>羽毛・こたつ布団も</span>
+        </li>
+        <li class="service r">
+          <svg class="ico" viewBox="0 0 32 32" fill="none" stroke="var(--soap-deep)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 6h26"/><path d="M7 6v18M12 6v18M20 6v18M25 6v18"/><path d="M7 24q2.5 3 5 0M20 24q2.5 3 5 0"/></svg>
+          カーテン<span>採寸・取り外しも相談可</span>
+        </li>
+        <li class="service r">
+          <svg class="ico" viewBox="0 0 32 32" fill="none" stroke="var(--soap-deep)" stroke-width="2.4" stroke-linejoin="round" aria-hidden="true"><path d="M5 20V9h6l5 6 9 4c2 .8 2 4 0 4H8a3 3 0 0 1-3-3z"/></svg>
+          靴・バッグ<span>スニーカー・革製品</span>
+        </li>
+        <li class="service r">
+          <svg class="ico" viewBox="0 0 32 32" fill="none" stroke="var(--soap-deep)" stroke-width="2.4" stroke-linejoin="round" aria-hidden="true"><path d="M16 5l-5 2H4v9h5v12h14V16h5V7h-7l-5-2z"/><path d="M16 7v21M9 21h14"/></svg>
+          着物・礼服<span>職人による手洗い</span>
+        </li>
+        <li class="service r">
+          <svg class="ico" viewBox="0 0 32 32" fill="none" stroke="var(--soap-deep)" stroke-width="2.4" stroke-linejoin="round" aria-hidden="true"><path d="M16 4c-5 6-9 10-9 14a9 9 0 0 0 18 0c0-4-4-8-9-14z"/></svg>
+          撥水・防虫加工<span>雨や虫からお守りします</span>
+        </li>
+        <li class="service r">
+          <svg class="ico" viewBox="0 0 32 32" fill="none" stroke="var(--soap-deep)" stroke-width="2.4" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="7" width="22" height="20" rx="4"/><path d="M5 13h22M13 7V4M19 7V4"/></svg>
+          シーズン保管<span>最長9か月お預かり</span>
+        </li>
+        <li class="service r">
+          <svg class="ico" viewBox="0 0 32 32" fill="none" stroke="var(--soap-deep)" stroke-width="2.4" stroke-linejoin="round" aria-hidden="true"><circle cx="16" cy="11" r="5"/><path d="M6 27a10 10 0 0 1 20 0"/></svg>
+          制服・作業着<span>法人契約も承ります</span>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ============ FLOW ============ -->
+  <section class="band" id="flow">
+    <div class="wrap">
+      <div class="head r">
+        <p class="eyebrow">Flow</p>
+        <h2 class="h2">ご利用は、4つのステップで。</h2>
+        <p>店頭でのお持ち込みも、ご自宅への集荷も、流れは同じです。</p>
+      </div>
+      <ol class="flow">
+        <li class="step r">
+          <span class="step-no">1</span>
+          <h3>お持ち込み・集荷依頼</h3>
+          <p>店頭にお持ちいただくか、お電話でご連絡ください。前日18時までのご依頼で、翌日の集荷に伺います。</p>
+        </li>
+        <li class="step r">
+          <span class="step-no">2</span>
+          <h3>検品とお見積り</h3>
+          <p>素材・しみの状態・付属品を一点ずつ確認します。その場で仕上がり日と合計金額をお伝えします。</p>
+        </li>
+        <li class="step r">
+          <span class="step-no">3</span>
+          <h3>洗い・手仕上げ</h3>
+          <p>汚れに合わせて洗い方を変え、プレスは職人の手作業で。ボタンのゆるみやほつれも直してお返しします。</p>
+        </li>
+        <li class="step r">
+          <span class="step-no">4</span>
+          <h3>お渡し・お届け</h3>
+          <p>店頭は最短で当日18時からお渡しできます。お届けはご希望の時間帯を指定いただけます。</p>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- ============ SHOP INFO ============ -->
+  <section class="band band--tint" id="shop">
+    <div class="wrap">
+      <div class="head r">
+        <p class="eyebrow">Shop info</p>
+        <h2 class="h2">店舗のご案内</h2>
+      </div>
+      <div class="info">
+        <div class="panel r">
+          <dl>
+            <dt>店名</dt><dd>クリーニング こもれび 本店</dd>
+            <dt>住所</dt><dd>〒000-0000<br>東京都◯◯区◯◯町1-2-3</dd>
+            <dt>アクセス</dt><dd>◯◯線 ◯◯駅 東口から徒歩4分</dd>
+            <dt>駐車場</dt><dd>店舗前に2台（無料）</dd>
+            <dt>お支払い</dt><dd>現金／各種クレジットカード／電子マネー／QRコード決済</dd>
+            <dt>定休日</dt><dd>毎週水曜・年末年始</dd>
+          </dl>
+          <div class="map">
+            <svg viewBox="0 0 480 200" role="img" aria-label="店舗周辺の簡易地図">
+              <rect width="480" height="200" fill="var(--soap-tint)"/>
+              <path d="M0 132h480" stroke="var(--card)" stroke-width="26"/>
+              <path d="M188 0v200" stroke="var(--card)" stroke-width="18"/>
+              <path d="M356 0v200" stroke="var(--card)" stroke-width="12"/>
+              <rect x="36" y="26" width="112" height="70" rx="10" fill="var(--card)" opacity=".65"/>
+              <rect x="230" y="30" width="90" height="62" rx="10" fill="var(--card)" opacity=".65"/>
+              <rect x="392" y="150" width="70" height="36" rx="8" fill="var(--card)" opacity=".65"/>
+              <g transform="translate(196 60)">
+                <path d="M22 0C10 0 0 9.5 0 21.5 0 34 14 46 20.5 55.6a1.8 1.8 0 0 0 3 0C30 46 44 34 44 21.5 44 9.5 34 0 22 0z" fill="var(--sun)"/>
+                <circle cx="22" cy="21" r="8" fill="var(--card)"/>
+              </g>
+              <text x="252" y="90" font-size="15" font-family="sans-serif" fill="var(--soap-deep)">こもれび</text>
+              <rect x="374" y="42" width="76" height="30" rx="15" fill="var(--card)" opacity=".9"/>
+              <text x="412" y="62" font-size="14" font-family="sans-serif" text-anchor="middle" fill="var(--soap-deep)">◯◯駅</text>
+            </svg>
+            <p class="map-cap">◯◯駅 東口を出て、大通りを南へ徒歩4分。角のパン屋さんの隣です。</p>
+          </div>
+        </div>
+
+        <div class="panel r">
+          <div class="tel-block">
+            <span class="cap">ご予約・お問い合わせ</span>
+            <a class="tel-num" href="tel:0120000000">
+              <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8.1 9.8a16 16 0 0 0 6 6l1.2-1.2a2 2 0 0 1 2.1-.5c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.8 2.1z"/></svg>
+              0120-000-000
+            </a>
+            <span class="cap">受付時間 9:00〜19:00（水曜を除く）</span>
+          </div>
+          <table class="hours">
+            <caption class="eyebrow" style="margin-bottom:.6rem;">Business hours</caption>
+            <tbody>
+              <tr><th scope="row">月・火</th><td>9:00〜19:00</td></tr>
+              <tr><th scope="row">水</th><td class="closed">定休日</td></tr>
+              <tr><th scope="row">木・金</th><td>9:00〜19:00</td></tr>
+              <tr><th scope="row">土</th><td>9:00〜18:00</td></tr>
+              <tr><th scope="row">日・祝</th><td>9:00〜18:00</td></tr>
+            </tbody>
+          </table>
+          <p class="note">※集荷・お届けの最終受付は、各日とも営業終了の1時間前までとなります。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ FAQ ============ -->
+  <section class="band" id="faq">
+    <div class="wrap">
+      <div class="head r">
+        <p class="eyebrow">FAQ</p>
+        <h2 class="h2">よくあるご質問</h2>
+      </div>
+      <div class="faq">
+        <details class="r">
+          <summary><span class="q">Q</span>仕上がりまで、どのくらいかかりますか？</summary>
+          <p class="a">通常は3日ほどでお渡ししています。お急ぎの場合は、11時までにお預かりした一部の品目にかぎり、当日18時からのお渡しに対応しています。</p>
+        </details>
+        <details class="r">
+          <summary><span class="q">Q</span>しみ抜きに追加料金はかかりますか？</summary>
+          <p class="a">通常のしみ抜きは無料です。時間が経って変色したしみなど、特殊な処理が必要な場合のみ、作業前にお見積りをお伝えします。ご了承いただいてから作業に入りますので、勝手に追加されることはありません。</p>
+        </details>
+        <details class="r">
+          <summary><span class="q">Q</span>集荷は何点からお願いできますか？</summary>
+          <p class="a">点数の制限はありません。合計1,500円以上で集荷・お届けが無料になります。それ未満の場合は、1回あたり300円を頂戴しています。</p>
+        </details>
+        <details class="r">
+          <summary><span class="q">Q</span>保管サービスはどのくらい預かってもらえますか？</summary>
+          <p class="a">最長9か月まで、温度と湿度を管理した専用倉庫でお預かりします。料金は1点あたり300円です。オフシーズンのコートやダウンをお預けいただくと、ご自宅の収納がすっきりします。</p>
+        </details>
+        <details class="r">
+          <summary><span class="q">Q</span>着物や礼服もお願いできますか？</summary>
+          <p class="a">承ります。着物は専門の職人が手作業で対応するため、通常より10日ほどお時間をいただきます。ご予定がお決まりの場合は、お預かり時にお知らせください。</p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ CTA ============ -->
+  <section class="band">
+    <div class="wrap">
+      <div class="cta-panel r">
+        <h2>まずは一着、お試しください。</h2>
+        <p>「この汚れは落ちるかな」「この素材は洗えるかな」——そんなご相談だけでも大歓迎です。店頭でもお電話でも、お気軽にお声がけください。</p>
+        <div class="cta-actions">
+          <a class="btn btn--primary" href="tel:0120000000">
+            <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8.1 9.8a16 16 0 0 0 6 6l1.2-1.2a2 2 0 0 1 2.1-.5c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.8 2.1z"/></svg>
+            0120-000-000
+          </a>
+          <a class="btn btn--ghost" href="#shop">店舗情報を見る</a>
+        </div>
+        <p class="hero-note">受付 9:00〜19:00／毎週水曜定休</p>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-in">
+      <a class="brand" href="#top">
+        <svg class="brand-mark" viewBox="0 0 40 40" aria-hidden="true">
+          <circle cx="20" cy="20" r="19" fill="var(--soap-tint)"/>
+          <path d="M20 9c-4.4 0-8 3.4-8 7.6 0 1.9.8 3.6 2.1 5l5.2 5.7c.4.4 1 .4 1.4 0l5.2-5.7c1.3-1.4 2.1-3.1 2.1-5C28 12.4 24.4 9 20 9z" fill="none" stroke="var(--soap-deep)" stroke-width="2" stroke-linejoin="round"/>
+          <circle cx="17.4" cy="16.6" r="2.6" fill="var(--sun)"/>
+        </svg>
+        <span class="brand-name">クリーニング こもれび
+          <span class="brand-sub">KOMOREBI CLEANING</span>
+        </span>
+      </a>
+      <nav class="footer-links" aria-label="フッターメニュー">
+        <a href="#reason">選ばれる理由</a>
+        <a href="#price">料金</a>
+        <a href="#service">取扱い品目</a>
+        <a href="#flow">ご利用の流れ</a>
+        <a href="#shop">店舗情報</a>
+        <a href="#faq">よくある質問</a>
+      </nav>
+    </div>
+    <p class="disclaimer">※本ページはデザインサンプルです。店名・住所・電話番号・料金などの情報はすべて架空のものであり、実在の店舗とは関係ありません。</p>
+    <p class="copy">© 2026 KOMOREBI CLEANING (sample)</p>
+  </div>
+</footer>
+
+<div class="call-bar">
+  <a class="btn btn--primary" href="tel:0120000000">
+    <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8.1 9.8a16 16 0 0 0 6 6l1.2-1.2a2 2 0 0 1 2.1-.5c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.8 2.1z"/></svg>
+    電話する（0120-000-000）
+  </a>
+  <span class="cap">受付 9:00〜19:00／水曜定休</span>
+</div>
+
+<script>
+(function () {
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* --- header shadow on scroll --- */
+  var header = document.querySelector('.site-header');
+  var onScroll = function () {
+    header.classList.toggle('is-scrolled', window.scrollY > 8);
+  };
+  onScroll();
+  window.addEventListener('scroll', onScroll, { passive: true });
+
+  /* --- scroll reveal --- */
+  var items = document.querySelectorAll('.r');
+  if (reduce || !('IntersectionObserver' in window)) {
+    items.forEach(function (el) { el.classList.add('in'); });
+  } else {
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (!entry.isIntersecting) return;
+        var el = entry.target;
+        var siblings = Array.prototype.slice.call(el.parentNode.children);
+        var i = Math.min(siblings.indexOf(el), 5);
+        el.style.transitionDelay = (i * 70) + 'ms';
+        el.classList.add('in');
+        io.unobserve(el);
+      });
+    }, { rootMargin: '0px 0px -8% 0px', threshold: 0.08 });
+    items.forEach(function (el) { io.observe(el); });
+  }
+
+  /* --- ambient soap bubbles in the hero --- */
+  var canvas = document.getElementById('bubbles');
+  if (!canvas || !canvas.getContext) return;
+  var ctx = canvas.getContext('2d');
+  var hero = canvas.parentNode;
+  var bubbles = [];
+  var w = 0, h = 0, raf = null;
+
+  function accent() {
+    var v = getComputedStyle(document.documentElement).getPropertyValue('--soap').trim();
+    return v || '#4E9AA1';
+  }
+
+  function seed() {
+    bubbles = [];
+    var count = Math.max(8, Math.min(18, Math.round(w / 90)));
+    for (var i = 0; i < count; i++) {
+      bubbles.push({
+        x: Math.random() * w,
+        y: Math.random() * h,
+        r: 7 + Math.random() * 27,
+        v: 0.12 + Math.random() * 0.28,
+        drift: (Math.random() - 0.5) * 0.3,
+        phase: Math.random() * Math.PI * 2,
+        alpha: 0.08 + Math.random() * 0.1
+      });
+    }
+  }
+
+  function resize() {
+    var dpr = Math.min(window.devicePixelRatio || 1, 2);
+    w = hero.clientWidth;
+    h = hero.clientHeight;
+    canvas.width = w * dpr;
+    canvas.height = h * dpr;
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    seed();
+    if (reduce) draw();
+  }
+
+  function draw() {
+    ctx.clearRect(0, 0, w, h);
+    var color = accent();
+    for (var i = 0; i < bubbles.length; i++) {
+      var b = bubbles[i];
+      ctx.beginPath();
+      ctx.arc(b.x, b.y, b.r, 0, Math.PI * 2);
+      ctx.globalAlpha = b.alpha;
+      ctx.fillStyle = color;
+      ctx.fill();
+      ctx.globalAlpha = b.alpha * 1.6;
+      ctx.lineWidth = 1.2;
+      ctx.strokeStyle = color;
+      ctx.stroke();
+    }
+    ctx.globalAlpha = 1;
+  }
+
+  function tick() {
+    for (var i = 0; i < bubbles.length; i++) {
+      var b = bubbles[i];
+      b.phase += 0.008;
+      b.y -= b.v;
+      b.x += Math.sin(b.phase) * 0.35 + b.drift * 0.2;
+      if (b.y + b.r < -10) {
+        b.y = h + b.r + Math.random() * 40;
+        b.x = Math.random() * w;
+      }
+    }
+    draw();
+    raf = requestAnimationFrame(tick);
+  }
+
+  resize();
+  window.addEventListener('resize', resize);
+  if (!reduce) {
+    raf = requestAnimationFrame(tick);
+    document.addEventListener('visibilitychange', function () {
+      if (document.hidden) {
+        cancelAnimationFrame(raf);
+      } else {
+        raf = requestAnimationFrame(tick);
+      }
+    });
+  }
+})();
+</script>
+</body>
+</html>
