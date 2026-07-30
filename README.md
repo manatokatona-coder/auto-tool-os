@@ -32,7 +32,34 @@ cp .env.example .env
 WordPressのアプリケーションパスワードは 管理画面 → ユーザー → プロフィール →
 「アプリケーションパスワード」から発行できます。
 
-## 使い方(手動で1記事ずつ)
+## 使い方(1コマンドで①〜⑤まで通しで実行)
+
+`scripts/run_pipeline.py` を使うと、①リサーチ→②アウトライン→③本文生成→④Claudeレビュー→
+⑤WordPress下書き投稿までを1コマンドで実行できます。**⑤は常に `status: draft` で登録するだけで、
+公開(publish)は一切行いません。** 実際にサイトに公開するかどうかは、必ず人がWordPress管理画面で
+下書き内容(価格等の`[要確認]`箇所、④のレビュー指摘、法令面の表現)を確認してから判断してください。
+
+```bash
+python scripts/run_pipeline.py \
+  --slug rakuten-mattress-2026 \
+  --title "【比較】マットレスおすすめ5選" \
+  --keyword "マットレス おすすめ" \
+  --sub-keywords "マットレス 選び方,マットレス 硬さ" \
+  --persona "腰痛に悩む30代の会社員" \
+  --competitors path/to/competitors.txt \
+  --category 3
+```
+
+`queue/*.yaml` と同じ形式のファイルからも実行できます(競合情報はYAML内の`competitors`を使用):
+
+```bash
+python scripts/run_pipeline.py --queue-file queue/example-keyword.yaml
+```
+
+実行後、④のレビュー結果がターミナルにも表示されます。それを読んでから
+WordPressの下書きを確認・修正・公開してください。
+
+## 使い方(手動で1記事ずつ、各ステップを確認しながら進めたい場合)
 
 ```bash
 # ① リサーチ(競合のタイトル・見出しをテキストファイルに貼り付けておく)
