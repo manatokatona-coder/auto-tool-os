@@ -1,0 +1,486 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>南洋舎クリーニング｜杉並区和泉・代田橋 シミ抜き専科の街のクリーニング店</title>
+<meta name="description" content="東京都杉並区和泉の南洋舎クリーニング。店主は杉並区技能功労者表彰を受賞し、シミ抜き・手仕上げに対応。代田橋エリアの街のクリーニング店です。">
+<script>document.documentElement.classList.add('js');</script>
+<style>
+  :root{
+    --bg:#F7F6FB;
+    --panel:#FFFFFF;
+    --ink:#15141F;
+    --ink-2:#5B5A6C;
+    --ink-3:#8A899C;
+    --line:rgba(21,20,31,.09);
+    --violet:#6D4CF0;
+    --violet-2:#9B7BFF;
+    --mint:#14C9A7;
+    --mint-2:#57E6C9;
+    --coral:#FF6A4D;
+    --coral-2:#FF9270;
+    --dark:#121022;
+    --dark-2:#1C1934;
+    --glass-bg:rgba(255,255,255,.66);
+    --glass-brd:rgba(255,255,255,.8);
+    --glass-bg-dark:rgba(255,255,255,.08);
+    --glass-brd-dark:rgba(255,255,255,.16);
+    --r-xl:32px;
+    --r-lg:24px;
+    --r-md:16px;
+    --shadow:0 24px 60px -28px rgba(30,20,80,.30);
+    --shadow-sm:0 10px 30px -16px rgba(30,20,80,.28);
+    --font: -apple-system,BlinkMacSystemFont,"Hiragino Sans","Hiragino Kaku Gothic ProN","Yu Gothic UI","Yu Gothic",sans-serif;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  @media (prefers-reduced-motion: reduce){ html{scroll-behavior:auto;} }
+  body{
+    margin:0;
+    font-family:var(--font);
+    color:var(--ink);
+    background:var(--bg);
+    line-height:1.7;
+    -webkit-font-smoothing:antialiased;
+    font-size:17px;
+  }
+  img,svg{display:block;max-width:100%;}
+  a{color:inherit;}
+  h1,h2,h3{margin:0;line-height:1.3;letter-spacing:-.02em;}
+  p{margin:0;}
+  .wrap{max-width:1120px;margin:0 auto;padding:0 24px;}
+  .sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;}
+  .skip-link{position:absolute;left:12px;top:-60px;background:var(--dark);color:#fff;padding:.7rem 1.1rem;border-radius:999px;z-index:1000;transition:top .2s;font-weight:700;}
+  .skip-link:focus{top:12px;}
+
+  /* ---------- scroll reveal ---------- */
+  .js .r{opacity:0;transform:translateY(22px);transition:opacity .7s cubic-bezier(.2,.7,.3,1),transform .7s cubic-bezier(.2,.7,.3,1);}
+  .js .r.in{opacity:1;transform:none;}
+  @media (prefers-reduced-motion: reduce){ .js .r{opacity:1;transform:none;transition:none;} }
+
+  /* ---------- floating pill nav ---------- */
+  .nav-wrap{position:sticky;top:14px;z-index:200;padding:0 16px;}
+  .nav{
+    max-width:960px;margin:0 auto;
+    display:flex;align-items:center;justify-content:space-between;gap:16px;
+    background:var(--glass-bg);
+    border:1px solid var(--glass-brd);
+    backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);
+    border-radius:999px;
+    padding:.6rem .7rem .6rem 1.3rem;
+    box-shadow:var(--shadow-sm);
+  }
+  .brand{display:flex;align-items:center;gap:.55rem;font-weight:800;font-size:1rem;white-space:nowrap;}
+  .brand-dot{width:11px;height:11px;border-radius:50%;background:linear-gradient(135deg,var(--violet),var(--mint));flex:none;}
+  .nav-links{display:flex;gap:4px;list-style:none;margin:0;padding:0;overflow-x:auto;scrollbar-width:none;}
+  .nav-links::-webkit-scrollbar{display:none;}
+  .nav-links a{display:block;padding:.5rem .85rem;border-radius:999px;font-size:.86rem;font-weight:700;color:var(--ink-2);white-space:nowrap;text-decoration:none;transition:background .2s,color .2s;}
+  .nav-links a:hover,.nav-links a:focus-visible{background:rgba(21,20,31,.06);color:var(--ink);}
+  .nav-cta{flex:none;display:inline-flex;align-items:center;gap:.4rem;background:var(--dark);color:#fff;padding:.6rem 1.1rem;border-radius:999px;font-weight:800;font-size:.86rem;text-decoration:none;white-space:nowrap;}
+  .nav-cta svg{width:15px;height:15px;}
+
+  /* ---------- buttons ---------- */
+  .btn{display:inline-flex;align-items:center;justify-content:center;gap:.5rem;padding:1rem 1.6rem;border-radius:999px;font-weight:800;font-size:1rem;text-decoration:none;border:1px solid transparent;transition:transform .2s,box-shadow .2s,background .2s;}
+  .btn:active{transform:translateY(1px);}
+  .btn-primary{background:linear-gradient(135deg,var(--violet),var(--mint));color:#fff;box-shadow:0 16px 34px -14px rgba(109,76,240,.55);}
+  .btn-primary:hover{box-shadow:0 20px 42px -14px rgba(109,76,240,.65);}
+  .btn-ghost{background:var(--glass-bg);border-color:var(--glass-brd);color:var(--ink);backdrop-filter:blur(12px);}
+  .btn-ghost:hover{background:#fff;}
+  .btn svg{width:18px;height:18px;flex:none;}
+
+  /* ---------- hero ---------- */
+  .hero{position:relative;overflow:hidden;padding:76px 0 60px;}
+  .aurora{position:absolute;inset:-10% -10% auto -10%;height:820px;z-index:-1;filter:blur(60px);opacity:.55;}
+  .aurora span{position:absolute;border-radius:50%;}
+  .aurora .a1{width:520px;height:520px;left:-6%;top:-8%;background:var(--violet);animation:float1 22s ease-in-out infinite;}
+  .aurora .a2{width:460px;height:460px;right:-8%;top:6%;background:var(--mint);animation:float2 26s ease-in-out infinite;}
+  .aurora .a3{width:380px;height:380px;left:32%;top:22%;background:var(--coral);opacity:.7;animation:float3 19s ease-in-out infinite;}
+  @keyframes float1{0%,100%{transform:translate(0,0)}50%{transform:translate(40px,50px)}}
+  @keyframes float2{0%,100%{transform:translate(0,0)}50%{transform:translate(-50px,30px)}}
+  @keyframes float3{0%,100%{transform:translate(0,0)}50%{transform:translate(20px,-40px)}}
+  @media (prefers-reduced-motion: reduce){ .aurora span{animation:none;} }
+
+  .hero-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:48px;align-items:center;}
+  .badge-row{display:flex;flex-wrap:wrap;gap:.5rem;margin-bottom:1.4rem;}
+  .pill{display:inline-flex;align-items:center;gap:.4rem;background:var(--glass-bg);border:1px solid var(--glass-brd);backdrop-filter:blur(10px);padding:.42rem .9rem;border-radius:999px;font-size:.82rem;font-weight:700;color:var(--ink-2);}
+  .pill svg{width:14px;height:14px;flex:none;color:var(--violet);}
+  .hero h1{font-size:clamp(2.2rem,4.6vw,3.6rem);font-weight:900;letter-spacing:-.03em;}
+  .grad-text{background:linear-gradient(100deg,var(--violet),var(--mint) 45%,var(--violet-2) 90%);background-size:220% 220%;-webkit-background-clip:text;background-clip:text;color:transparent;animation:gradmove 9s ease-in-out infinite;}
+  @keyframes gradmove{0%,100%{background-position:0% 50%}50%{background-position:100% 50%}}
+  @media (prefers-reduced-motion: reduce){ .grad-text{animation:none;} }
+  .hero p.lead{margin-top:1.3rem;font-size:1.14rem;color:var(--ink-2);max-width:46ch;}
+  .hero-actions{margin-top:2rem;display:flex;flex-wrap:wrap;gap:.85rem;}
+  .hero-note{margin-top:1rem;font-size:.84rem;color:var(--ink-3);}
+
+  .hero-card{
+    position:relative;background:var(--glass-bg);border:1px solid var(--glass-brd);
+    backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);
+    border-radius:var(--r-xl);padding:2rem;box-shadow:var(--shadow);
+  }
+  .medal{width:56px;height:56px;border-radius:16px;background:linear-gradient(135deg,var(--violet),var(--mint));display:flex;align-items:center;justify-content:center;flex:none;box-shadow:0 12px 24px -10px rgba(109,76,240,.5);}
+  .medal svg{width:30px;height:30px;color:#fff;}
+  .hero-card-top{display:flex;align-items:center;gap:1rem;margin-bottom:1.1rem;}
+  .hero-card-top h2{font-size:1.02rem;font-weight:800;}
+  .hero-card-top p{font-size:.84rem;color:var(--ink-3);margin-top:.15rem;}
+  .hero-card ul{list-style:none;margin:0;padding:0;display:grid;gap:.7rem;}
+  .hero-card li{display:flex;align-items:center;gap:.6rem;font-size:.92rem;color:var(--ink-2);padding-top:.7rem;border-top:1px solid var(--line);}
+  .hero-card li:first-child{border-top:none;padding-top:0;}
+  .hero-card li svg{width:16px;height:16px;color:var(--mint);flex:none;}
+
+  /* ---------- marquee ---------- */
+  .ticker{border-top:1px solid var(--line);border-bottom:1px solid var(--line);background:var(--panel);padding:1.05rem 0;overflow:hidden;}
+  .ticker-track{display:flex;width:max-content;gap:2.4rem;animation:marquee 30s linear infinite;}
+  .ticker:hover .ticker-track{animation-play-state:paused;}
+  @keyframes marquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+  @media (prefers-reduced-motion: reduce){ .ticker-track{animation:none;} .ticker{overflow-x:auto;} }
+  .ticker-item{display:flex;align-items:center;gap:.55rem;font-weight:800;font-size:.98rem;color:var(--ink-2);white-space:nowrap;}
+  .ticker-item svg{width:16px;height:16px;color:var(--violet);flex:none;}
+
+  /* ---------- section shells ---------- */
+  section{padding:96px 0;}
+  .eyebrow{display:inline-flex;align-items:center;gap:.45rem;font-size:.82rem;font-weight:800;color:var(--violet);letter-spacing:.02em;margin-bottom:.9rem;}
+  .eyebrow::before{content:"";width:20px;height:2px;background:var(--violet);border-radius:2px;}
+  h2.title{font-size:clamp(1.7rem,3vw,2.4rem);font-weight:900;max-width:22ch;}
+  .section-head{margin-bottom:3rem;}
+  .section-head p.sub{margin-top:1rem;color:var(--ink-2);font-size:1.04rem;max-width:56ch;}
+
+  /* ---------- bento grid ---------- */
+  .bento{display:grid;grid-template-columns:repeat(4,1fr);grid-auto-rows:minmax(150px,auto);gap:18px;}
+  .bento-card{
+    background:var(--panel);border:1px solid var(--line);border-radius:var(--r-lg);
+    padding:1.8rem;box-shadow:var(--shadow-sm);display:flex;flex-direction:column;gap:.9rem;
+    transition:transform .3s,box-shadow .3s;position:relative;overflow:hidden;
+  }
+  .bento-card:hover{transform:translateY(-4px);box-shadow:var(--shadow);}
+  .bento-1{grid-column:span 2;grid-row:span 2;}
+  .bento-2{grid-column:span 2;}
+  .bento-3{grid-column:span 2;}
+  .bento-4{grid-column:span 2;}
+  .b-icon{width:52px;height:52px;border-radius:14px;display:flex;align-items:center;justify-content:center;flex:none;}
+  .b-icon svg{width:26px;height:26px;color:#fff;}
+  .bic-violet{background:linear-gradient(135deg,var(--violet),var(--violet-2));}
+  .bic-mint{background:linear-gradient(135deg,var(--mint),var(--mint-2));}
+  .bic-coral{background:linear-gradient(135deg,var(--coral),var(--coral-2));}
+  .bic-dark{background:linear-gradient(135deg,var(--dark),var(--dark-2));}
+  .bento-card h3{font-size:1.18rem;font-weight:800;}
+  .bento-card p{color:var(--ink-2);font-size:.96rem;}
+  .bento-1 h3{font-size:1.5rem;}
+  .bento-1 .b-visual{margin-top:auto;display:flex;gap:.5rem;flex-wrap:wrap;}
+  .chip{font-size:.78rem;font-weight:700;background:rgba(109,76,240,.09);color:var(--violet);padding:.32rem .7rem;border-radius:999px;}
+
+  /* ---------- award spotlight ---------- */
+  .spotlight{background:linear-gradient(135deg,var(--dark),var(--dark-2));border-radius:var(--r-xl);padding:3.2rem;position:relative;overflow:hidden;color:#fff;}
+  .spotlight::before{content:"";position:absolute;width:460px;height:460px;border-radius:50%;background:linear-gradient(135deg,var(--violet),var(--mint));opacity:.35;filter:blur(70px);top:-160px;right:-120px;}
+  .spot-grid{display:grid;grid-template-columns:auto 1fr;gap:2.2rem;align-items:center;position:relative;}
+  .spot-medal{width:96px;height:96px;border-radius:26px;background:var(--glass-bg-dark);border:1px solid var(--glass-brd-dark);backdrop-filter:blur(10px);display:flex;align-items:center;justify-content:center;flex:none;}
+  .spot-medal svg{width:48px;height:48px;color:var(--mint-2);}
+  .spotlight .eyebrow{color:var(--mint-2);}
+  .spotlight .eyebrow::before{background:var(--mint-2);}
+  .spotlight h2{font-size:clamp(1.4rem,2.6vw,1.9rem);font-weight:900;margin-bottom:.7rem;}
+  .spotlight p{color:rgba(255,255,255,.78);font-size:1.02rem;max-width:60ch;}
+  .spotlight .src{margin-top:1rem;font-size:.82rem;color:rgba(255,255,255,.5);}
+
+  /* ---------- access / shop info ---------- */
+  .access-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px;align-items:start;}
+  .board{background:var(--panel);border:1px solid var(--line);border-radius:var(--r-lg);padding:2.2rem;box-shadow:var(--shadow-sm);}
+  .board-row{display:flex;gap:1rem;padding:1rem 0;border-top:1px solid var(--line);}
+  .board-row:first-child{border-top:none;padding-top:0;}
+  .board-row .k{flex:none;width:108px;font-weight:800;font-size:.9rem;color:var(--ink-3);}
+  .board-row .v{font-size:1rem;font-weight:600;}
+  .board-row a{text-decoration:none;color:var(--violet);font-weight:800;}
+  .caution{margin-top:1.4rem;display:flex;gap:.6rem;background:rgba(255,106,77,.08);border:1px solid rgba(255,106,77,.22);border-radius:var(--r-md);padding:1rem 1.2rem;font-size:.88rem;color:#B94A2F;}
+  .caution svg{width:18px;height:18px;flex:none;margin-top:.1rem;}
+  .map-card{background:linear-gradient(135deg,var(--violet),var(--mint));border-radius:var(--r-lg);padding:2.2rem;color:#fff;display:flex;flex-direction:column;gap:1rem;min-height:280px;position:relative;overflow:hidden;}
+  .map-card::after{content:"";position:absolute;inset:0;background:radial-gradient(circle at 80% 20%,rgba(255,255,255,.35),transparent 55%);}
+  .map-pin{width:56px;height:56px;border-radius:16px;background:rgba(255,255,255,.22);backdrop-filter:blur(6px);display:flex;align-items:center;justify-content:center;position:relative;}
+  .map-pin svg{width:28px;height:28px;color:#fff;}
+  .map-card h3{font-size:1.2rem;font-weight:800;position:relative;}
+  .map-card p{color:rgba(255,255,255,.92);font-size:.96rem;position:relative;}
+  .map-card .btn-ghost{background:rgba(255,255,255,.2);border-color:rgba(255,255,255,.4);color:#fff;margin-top:auto;position:relative;align-self:flex-start;}
+  .map-card .btn-ghost:hover{background:rgba(255,255,255,.32);}
+
+  /* ---------- FAQ ---------- */
+  .faq-list{display:grid;gap:14px;max-width:820px;}
+  details.faq-item{background:var(--panel);border:1px solid var(--line);border-radius:var(--r-md);padding:1.3rem 1.5rem;box-shadow:var(--shadow-sm);}
+  details.faq-item summary{cursor:pointer;list-style:none;display:flex;align-items:center;justify-content:space-between;gap:1rem;font-weight:800;font-size:1.02rem;}
+  details.faq-item summary::-webkit-details-marker{display:none;}
+  .faq-chevron{width:22px;height:22px;border-radius:50%;background:rgba(109,76,240,.09);display:flex;align-items:center;justify-content:center;flex:none;transition:transform .25s;}
+  .faq-chevron svg{width:12px;height:12px;color:var(--violet);}
+  details.faq-item[open] .faq-chevron{transform:rotate(180deg);}
+  .faq-a{margin-top:.9rem;color:var(--ink-2);font-size:.96rem;padding-top:.9rem;border-top:1px solid var(--line);}
+
+  /* ---------- CTA band ---------- */
+  .cta-band{background:linear-gradient(135deg,var(--dark),var(--dark-2));border-radius:var(--r-xl);padding:3.4rem 2.4rem;text-align:center;position:relative;overflow:hidden;color:#fff;}
+  .cta-band::before{content:"";position:absolute;width:520px;height:520px;border-radius:50%;background:linear-gradient(135deg,var(--violet),var(--mint));opacity:.4;filter:blur(80px);left:50%;top:-260px;transform:translateX(-50%);}
+  .cta-band h2{font-size:clamp(1.7rem,3.4vw,2.4rem);font-weight:900;position:relative;}
+  .cta-band .tel-big{display:inline-flex;align-items:center;gap:.6rem;font-size:clamp(1.8rem,4vw,2.6rem);font-weight:900;color:#fff;text-decoration:none;margin-top:1.4rem;position:relative;}
+  .cta-band .tel-big svg{width:32px;height:32px;color:var(--mint-2);}
+  .cta-band p.note{margin-top:1rem;color:rgba(255,255,255,.6);font-size:.86rem;position:relative;}
+
+  /* ---------- footer ---------- */
+  footer{padding:52px 0 120px;}
+  .foot-grid{display:flex;justify-content:space-between;flex-wrap:wrap;gap:1.5rem;border-top:1px solid var(--line);padding-top:2rem;}
+  .foot-brand{font-weight:900;font-size:1.05rem;}
+  .foot-addr{color:var(--ink-2);font-size:.92rem;margin-top:.5rem;}
+  .foot-disclaimer{max-width:560px;color:var(--ink-3);font-size:.82rem;line-height:1.8;}
+
+  /* ---------- mobile call bar ---------- */
+  .call-bar{position:fixed;left:0;right:0;bottom:0;z-index:300;display:none;padding:12px;background:rgba(247,246,251,.9);backdrop-filter:blur(14px);border-top:1px solid var(--line);}
+  .call-bar a{display:flex;align-items:center;justify-content:center;gap:.6rem;background:linear-gradient(135deg,var(--violet),var(--mint));color:#fff;padding:.95rem;border-radius:999px;font-weight:800;font-size:1rem;text-decoration:none;box-shadow:0 14px 30px -14px rgba(109,76,240,.6);}
+  .call-bar svg{width:18px;height:18px;}
+
+  @media (max-width: 980px){
+    .hero-grid{grid-template-columns:1fr;gap:36px;}
+    .bento{grid-template-columns:repeat(2,1fr);}
+    .bento-1{grid-column:span 2;grid-row:span 1;}
+    .bento-2,.bento-3,.bento-4{grid-column:span 1;}
+    .access-grid{grid-template-columns:1fr;}
+    .spot-grid{grid-template-columns:1fr;text-align:left;}
+    .spotlight{padding:2.2rem;}
+  }
+  @media (max-width: 620px){
+    body{font-size:16px;}
+    section{padding:66px 0;}
+    .nav-links{display:none;}
+    .nav{padding:.55rem .6rem .55rem 1.1rem;}
+    .bento{grid-template-columns:1fr;}
+    .bento-1,.bento-2,.bento-3,.bento-4{grid-column:span 1;}
+    .call-bar{display:block;}
+    footer{padding-bottom:104px;}
+    .board-row{flex-direction:column;gap:.25rem;}
+    .board-row .k{width:auto;}
+  }
+</style>
+</head>
+<body>
+<a class="skip-link" href="#main">本文へスキップ</a>
+
+<div class="nav-wrap">
+  <nav class="nav" aria-label="サイト内ナビゲーション">
+    <div class="brand"><span class="brand-dot" aria-hidden="true"></span>南洋舎クリーニング</div>
+    <ul class="nav-links">
+      <li><a href="#features">選ばれる理由</a></li>
+      <li><a href="#award">表彰</a></li>
+      <li><a href="#access">アクセス</a></li>
+      <li><a href="#faq">よくある質問</a></li>
+    </ul>
+    <a class="nav-cta" href="tel:0333218723">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+      電話
+    </a>
+  </nav>
+</div>
+
+<main id="main">
+
+  <section class="hero">
+    <div class="aurora" aria-hidden="true"><span class="a1"></span><span class="a2"></span><span class="a3"></span></div>
+    <div class="wrap hero-grid">
+      <div>
+        <div class="badge-row">
+          <span class="pill"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>東京都クリーニング生活衛生同業組合 加盟店</span>
+          <span class="pill"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2 15 8l6 1-4.5 4.5L17.5 20 12 17l-5.5 3 1-6.5L3 9l6-1z"/></svg>杉並区技能功労者表彰</span>
+        </div>
+        <h1 class="r">その一着に、<br><span class="grad-text">職人のシミ抜き。</span></h1>
+        <p class="lead r">東京都杉並区和泉・代田橋エリアの南洋舎クリーニング。杉並区より技能功労者として表彰された店主が、シミ抜きと手仕上げに対応しています。</p>
+        <div class="hero-actions r">
+          <a class="btn btn-primary" href="tel:0333218723">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+            03-3321-8723 に電話する
+          </a>
+          <a class="btn btn-ghost" href="#access">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            アクセスを見る
+          </a>
+        </div>
+        <p class="hero-note r">※本ページはご提案用のデザイン案です。店舗様の確認を受けたものではありません。</p>
+      </div>
+      <div class="hero-card r">
+        <div class="hero-card-top">
+          <div class="medal"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="6"/><path d="M8.5 13.5 7 22l5-3 5 3-1.5-8.5"/></svg></div>
+          <div>
+            <h2>杉並区技能功労者表彰</h2>
+            <p>店主が受賞（平成25年度）</p>
+          </div>
+        </div>
+        <ul>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>シミ抜き対応</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>手仕上げ対応</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>京王線 代田橋エリア</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <div class="ticker" aria-hidden="true">
+    <div class="ticker-track">
+      <span class="ticker-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 15 8l6 1-4.5 4.5L17.5 20 12 17l-5.5 3 1-6.5L3 9l6-1z"/></svg>杉並区技能功労者表彰</span>
+      <span class="ticker-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>シミ抜き専科</span>
+      <span class="ticker-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16v16H4z"/><path d="M4 9h16"/></svg>手仕上げ</span>
+      <span class="ticker-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>東京都クリーニング組合加盟</span>
+      <span class="ticker-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>杉並区 和泉・代田橋</span>
+      <span class="ticker-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 15 8l6 1-4.5 4.5L17.5 20 12 17l-5.5 3 1-6.5L3 9l6-1z"/></svg>杉並区技能功労者表彰</span>
+      <span class="ticker-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>シミ抜き専科</span>
+      <span class="ticker-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16v16H4z"/><path d="M4 9h16"/></svg>手仕上げ</span>
+      <span class="ticker-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>東京都クリーニング組合加盟</span>
+      <span class="ticker-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>杉並区 和泉・代田橋</span>
+    </div>
+  </div>
+
+  <section id="features">
+    <div class="wrap">
+      <div class="section-head r">
+        <div class="eyebrow">選ばれる理由</div>
+        <h2 class="title">確認できている、南洋舎クリーニングの強み</h2>
+        <p class="sub">東京都クリーニング生活衛生同業組合サイトに掲載されている情報をもとに構成しています。</p>
+      </div>
+      <div class="bento">
+        <div class="bento-card bento-1 r">
+          <div class="b-icon bic-violet"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M9 12l2 2 4-4"/></svg></div>
+          <h3>シミ抜きに対応</h3>
+          <p>東京都クリーニング生活衛生同業組合の掲載情報によると、シミ抜きに対応しているクリーニング店です。気になるシミはまずお電話でご相談ください。</p>
+          <div class="b-visual"><span class="chip">組合サイト掲載</span><span class="chip">要電話相談</span></div>
+        </div>
+        <div class="bento-card bento-2 r">
+          <div class="b-icon bic-mint"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4h16v16H4z"/><path d="M4 9h16"/><path d="M9 4v5"/></svg></div>
+          <h3>手仕上げ</h3>
+          <p>組合サイトの紹介情報に、手仕上げへの対応が掲載されています。</p>
+        </div>
+        <div class="bento-card bento-3 r">
+          <div class="b-icon bic-coral"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2 15 8l6 1-4.5 4.5L17.5 20 12 17l-5.5 3 1-6.5L3 9l6-1z"/></svg></div>
+          <h3>技能功労者表彰</h3>
+          <p>店主が杉並区技能功労者として表彰された実績があります（平成25年度）。</p>
+        </div>
+        <div class="bento-card bento-4 r">
+          <div class="b-icon bic-dark"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
+          <h3>代田橋エリアの街の店</h3>
+          <p>東京都杉並区和泉1-22-9、京王線 代田橋エリアで営業しています。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="award">
+    <div class="wrap">
+      <div class="spotlight r">
+        <div class="spot-grid">
+          <div class="spot-medal"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="6"/><path d="M8.5 13.5 7 22l5-3 5 3-1.5-8.5"/></svg></div>
+          <div>
+            <div class="eyebrow">確認済みの実績</div>
+            <h2>店主が杉並区技能功労者表彰を受賞</h2>
+            <p>東京都クリーニング生活衛生同業組合の掲載情報によると、南洋舎クリーニングの店主は平成25年度に杉並区技能功労者として表彰されています。長年の技術が地域から評価されてきたクリーニング店です。</p>
+            <p class="src">出典：東京都クリーニング生活衛生同業組合 掲載ページ</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="access">
+    <div class="wrap">
+      <div class="section-head r">
+        <div class="eyebrow">アクセス・店舗情報</div>
+        <h2 class="title">南洋舎クリーニングの店舗情報</h2>
+        <p class="sub">来店前に、営業時間など最新情報のお電話でのご確認をおすすめします。</p>
+      </div>
+      <div class="access-grid">
+        <div class="board r">
+          <div class="board-row"><div class="k">店名</div><div class="v">南洋舎クリーニング</div></div>
+          <div class="board-row"><div class="k">住所</div><div class="v">東京都杉並区和泉1-22-9</div></div>
+          <div class="board-row"><div class="k">電話番号</div><div class="v"><a href="tel:0333218723">03-3321-8723</a></div></div>
+          <div class="board-row"><div class="k">エリア</div><div class="v">京王線 代田橋エリア</div></div>
+          <div class="board-row"><div class="k">加盟組合</div><div class="v">東京都クリーニング生活衛生同業組合</div></div>
+          <div class="board-row"><div class="k">営業時間</div><div class="v">参考情報：9:00〜19:00（要確認）</div></div>
+          <div class="board-row"><div class="k">定休日</div><div class="v">参考情報：日曜・祝日（要確認）</div></div>
+          <div class="caution">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><path d="M12 9v4"/><path d="M12 17h.01"/></svg>
+            <span>営業時間・定休日は複数の情報サイトの記載が一致しているものの、店舗による一次情報での確認が取れていません。ご来店・お電話の前に最新情報をご確認ください。</span>
+          </div>
+        </div>
+        <div class="map-card r">
+          <div class="map-pin"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
+          <h3>お電話でのお問い合わせがスムーズです</h3>
+          <p>シミ抜きのご相談、営業時間の確認など、まずはお電話ください。</p>
+          <a class="btn btn-ghost" href="tel:0333218723">03-3321-8723</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="faq">
+    <div class="wrap">
+      <div class="section-head r">
+        <div class="eyebrow">よくある質問</div>
+        <h2 class="title">ご来店前によくいただくご質問</h2>
+      </div>
+      <div class="faq-list">
+        <details class="faq-item r">
+          <summary>シミ抜きの相談はできますか？<span class="faq-chevron"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></span></summary>
+          <p class="faq-a">はい。東京都クリーニング生活衛生同業組合の掲載情報によると、シミ抜き・手仕上げに対応しているとのことです。まずはお電話でご相談ください。</p>
+        </details>
+        <details class="faq-item r">
+          <summary>営業時間・定休日を教えてください<span class="faq-chevron"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></span></summary>
+          <p class="faq-a">一部の情報サイトでは9:00〜19:00、日曜・祝日定休と案内されていますが、店舗による一次情報での確認が取れていません。ご来店前に必ずお電話でご確認ください。</p>
+        </details>
+        <details class="faq-item r">
+          <summary>駐車場はありますか？<span class="faq-chevron"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></span></summary>
+          <p class="faq-a">現時点で確認が取れていません。お電話でご確認ください。</p>
+        </details>
+        <details class="faq-item r">
+          <summary>クレジットカードなど、現金以外の支払いはできますか？<span class="faq-chevron"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></span></summary>
+          <p class="faq-a">現時点で確認が取れていません。お電話でご確認ください。</p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="cta-band r">
+        <div class="eyebrow" style="color:var(--mint-2)">まずはお電話ください</div>
+        <h2>シミ抜き・手仕上げのご相談を承ります</h2>
+        <a class="tel-big" href="tel:0333218723">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          03-3321-8723
+        </a>
+        <p class="note">東京都杉並区和泉1-22-9・京王線 代田橋エリア／営業時間は要確認</p>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <div class="foot-brand">南洋舎クリーニング</div>
+        <div class="foot-addr">東京都杉並区和泉1-22-9　03-3321-8723</div>
+      </div>
+      <p class="foot-disclaimer">本ページはご提案用のデザイン案です。店舗様の確認を受けたものではありません。掲載情報は東京都クリーニング生活衛生同業組合サイト等の公開情報をもとにしており、営業時間・定休日は一次情報での確認が取れていないため参考情報です。ご利用の際は事前にお電話でご確認ください。なお「南洋舎」の店名は杉並区内の他エリア（成田東・阿佐谷南など）にも見られ、本ページは東京都杉並区和泉1-22-9の店舗を対象としています。</p>
+    </div>
+  </div>
+</footer>
+
+<div class="call-bar">
+  <a href="tel:0333218723">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+    電話で相談 03-3321-8723
+  </a>
+</div>
+
+<script>
+(function(){
+  if (!('IntersectionObserver' in window)) return;
+  var els = document.querySelectorAll('.r');
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+    });
+  }, { threshold: .12, rootMargin: '0px 0px -8% 0px' });
+  els.forEach(function(el){ io.observe(el); });
+})();
+</script>
+</body>
+</html>
