@@ -16,28 +16,22 @@ button { font: inherit; }
 
 /* ---------- tokens ---------- */
 :root {
-  --paper:      #F7F2E9;
-  --paper-2:    #F0E7D5;
-  --card:       #FFFFFF;
-  --ink:        #2A2420;
-  --ink-2:      #6E6255;
-  --line:       #E6DBC6;
-  --indigo:       #24405E;
-  --indigo-deep:  #16293D;
-  --indigo-tint:  #E4E9EE;
-  --wood:       #A9754A;
-  --wood-tint:  #F1E3D0;
+  --white:      #FFFFFF;
+  --paper-2:    #F2F5F8;
+  --ink:        #1B2430;
+  --ink-2:      #5C6672;
+  --line:       #E2E7ED;
+  --indigo:       #1F3A5C;
+  --indigo-deep:  #13253B;
+  --indigo-tint:  #E7ECF1;
+  --gold:       #AD8A3B;
+  --gold-tint:  #F5EFDD;
   --hanko:      #A5362D;
-  --hanko-tint: #F3E0DC;
-  --btn-bg:     #16293D;
-  --btn-fg:     #F7F2E9;
-  --shadow:     0 18px 40px -28px rgba(30, 24, 16, .45);
-  --shadow-sm:  0 10px 22px -18px rgba(30, 24, 16, .5);
+  --btn-fg:     #FFFFFF;
+  --shadow:     0 20px 44px -30px rgba(19, 37, 59, .5);
+  --shadow-sm:  0 10px 22px -18px rgba(19, 37, 59, .45);
 
-  --r-panel: 20px;
-  --r-card:  12px;
-  --r-pill:  999px;
-
+  --r-pill: 999px;
   --font-display: "Hiragino Mincho ProN", "Hiragino Mincho Pro", "Yu Mincho", "YuMincho", "Noto Serif JP", "Source Han Serif JP", "BIZ UDMincho", serif;
   --font-body:  "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Noto Sans JP", "Yu Gothic", "游ゴシック", Meiryo, sans-serif;
   --font-num:   "Avenir Next", "Segoe UI", "Helvetica Neue", var(--font-body);
@@ -47,9 +41,9 @@ button { font: inherit; }
 }
 
 /* ---------- base ---------- */
-:root { background: var(--paper); }
+:root { background: var(--white); }
 body {
-  background: var(--paper);
+  background: var(--white);
   color: var(--ink);
   font-family: var(--font-body);
   font-size: 1.0625rem;
@@ -58,35 +52,34 @@ body {
   overflow-x: hidden;
 }
 :where(a, button, summary):focus-visible {
-  outline: 2px solid var(--indigo);
+  outline: 2px solid var(--gold);
   outline-offset: 3px;
-  border-radius: 4px;
+  border-radius: 3px;
 }
 
 .wrap { width: min(100% - 2.5rem, var(--wrap)); margin-inline: auto; }
-.band { padding-block: clamp(4rem, 9vw, 6.5rem); scroll-margin-top: 84px; }
+.band { padding-block: clamp(3.6rem, 8vw, 6rem); scroll-margin-top: 84px; }
 .band--tint { background: var(--paper-2); }
 
 .skip {
   position: absolute; left: 1rem; top: -4rem; z-index: 60;
-  background: var(--card); color: var(--ink);
+  background: var(--white); color: var(--ink);
   padding: .6rem 1.1rem; border-radius: var(--r-pill); box-shadow: var(--shadow-sm);
   transition: top .2s ease;
 }
 .skip:focus { top: 1rem; }
 
 /* ---------- section heads ---------- */
-.head { display: flex; flex-direction: column; gap: .7rem; margin-bottom: clamp(2rem, 4vw, 3rem); }
+.head { display: flex; flex-direction: column; gap: .6rem; margin-bottom: clamp(2rem, 4vw, 2.8rem); }
 .eyebrow {
   font-family: var(--font-num);
-  font-size: .8rem; font-weight: 700;
-  letter-spacing: .2em; text-transform: uppercase;
-  color: var(--wood);
-  display: flex; align-items: center; gap: .7rem;
+  font-size: .78rem; font-weight: 700;
+  letter-spacing: .22em; text-transform: uppercase;
+  color: var(--gold);
 }
 .h2 {
   font-family: var(--font-display);
-  font-size: clamp(1.6rem, 3.2vw, 2.2rem);
+  font-size: clamp(1.55rem, 3vw, 2.1rem);
   font-weight: 600; line-height: 1.7; letter-spacing: .03em;
   text-wrap: balance; word-break: auto-phrase;
 }
@@ -95,16 +88,19 @@ body {
 /* ---------- header ---------- */
 .site-header {
   position: sticky; top: 0; z-index: 50;
-  background: color-mix(in srgb, var(--paper) 85%, transparent);
+  background: color-mix(in srgb, var(--white) 88%, transparent);
   backdrop-filter: blur(12px);
   border-bottom: 1px solid transparent;
-  transition: border-color .25s ease, background .25s ease;
+  transition: border-color .25s ease;
 }
 .site-header.is-scrolled { border-bottom-color: var(--line); }
 .header-in { display: flex; align-items: center; gap: 1rem; padding-block: .85rem; }
 .brand { display: flex; align-items: center; gap: .65rem; text-decoration: none; flex: 0 0 auto; }
-.brand-mark { width: 36px; height: 36px; flex: 0 0 auto; }
-.brand-name { font-family: var(--font-display); font-weight: 600; font-size: 1.14rem; letter-spacing: .04em; line-height: 1.3; }
+.brand-mark {
+  width: 36px; height: 36px; flex: 0 0 auto; border-radius: 50%;
+  background: var(--indigo); display: grid; place-items: center;
+}
+.brand-name { font-family: var(--font-display); font-weight: 600; font-size: 1.12rem; letter-spacing: .04em; line-height: 1.3; }
 .brand-sub { display: block; font-family: var(--font-num); font-size: .58rem; letter-spacing: .18em; color: var(--ink-2); font-weight: 600; }
 .nav { display: flex; gap: .1rem; margin-left: auto; overflow-x: auto; scrollbar-width: none; }
 .nav::-webkit-scrollbar { display: none; }
@@ -115,9 +111,7 @@ body {
   transition: color .2s ease, background .2s ease;
 }
 .nav a:hover { color: var(--ink); background: var(--indigo-tint); }
-@media (max-width: 1180px) {
-  .nav a { font-size: .86rem; padding: .4rem .55rem; }
-}
+@media (max-width: 1180px) { .nav a { font-size: .86rem; padding: .4rem .55rem; } }
 .header-cta { flex: 0 0 auto; }
 
 /* ---------- buttons ---------- */
@@ -128,220 +122,213 @@ body {
   padding: .85rem 1.6rem; border-radius: var(--r-pill); border: 1.5px solid transparent;
   transition: transform .18s ease, box-shadow .22s ease, background .2s ease, border-color .2s ease;
 }
-.btn--primary { background: var(--btn-bg); color: var(--btn-fg); box-shadow: var(--shadow-sm); }
+.btn--primary { background: var(--gold); color: var(--indigo-deep); box-shadow: var(--shadow-sm); }
 .btn--primary:hover { transform: translateY(-2px); box-shadow: var(--shadow); }
-.btn--ghost { background: var(--card); color: var(--ink); border-color: var(--line); }
+.btn--outline { background: transparent; color: var(--white); border-color: color-mix(in srgb, var(--white) 55%, transparent); }
+.btn--outline:hover { border-color: var(--white); transform: translateY(-2px); }
+.btn--ghost { background: var(--white); color: var(--ink); border-color: var(--line); }
 .btn--ghost:hover { border-color: var(--indigo); transform: translateY(-2px); }
 .btn--sm { padding: .6rem 1.2rem; font-size: .92rem; }
 .btn .ic { width: 17px; height: 17px; flex: 0 0 auto; }
 
-/* ---------- hero ---------- */
-.hero { position: relative; padding-block: clamp(2.5rem, 6vw, 4.5rem) clamp(3.5rem, 8vw, 6rem); overflow: hidden; }
-.hero::before {
-  content: ""; position: absolute; inset: 0;
-  background:
-    repeating-linear-gradient(90deg,
-      color-mix(in srgb, var(--indigo) 5%, transparent) 0 2px,
-      transparent 2px 64px);
-  opacity: .5;
-  pointer-events: none;
+/* ---------- hero (solid indigo band) ---------- */
+.hero {
+  position: relative; overflow: hidden;
+  background: var(--indigo-deep);
+  padding-block: clamp(3.4rem, 8vw, 5.5rem) clamp(3.8rem, 9vw, 6rem);
 }
-.hero::after {
-  content: ""; position: absolute; inset: -10% -20% auto -20%; height: 90%;
-  background: radial-gradient(50% 46% at 78% 22%, color-mix(in srgb, var(--wood) 16%, transparent), transparent 70%);
-  pointer-events: none;
+.hero-mark {
+  position: absolute; right: -2%; top: 50%; transform: translateY(-50%);
+  font-family: var(--font-display); font-weight: 600;
+  font-size: clamp(16rem, 32vw, 26rem); line-height: 1;
+  color: color-mix(in srgb, var(--white) 5%, transparent);
+  pointer-events: none; user-select: none;
 }
-.hero-in {
-  position: relative; z-index: 1;
-  display: grid; grid-template-columns: 1.15fr .85fr; gap: clamp(2rem, 4vw, 3.5rem); align-items: center;
+.hero-in { position: relative; z-index: 1; max-width: 40em; }
+.hero-badge {
+  display: inline-flex; align-items: center; gap: .55rem;
+  border: 1px solid color-mix(in srgb, var(--white) 30%, transparent);
+  border-radius: var(--r-pill); padding: .38rem 1rem;
+  font-size: .88rem; color: color-mix(in srgb, var(--white) 88%, transparent);
 }
-.hero-copy { display: flex; flex-direction: column; align-items: flex-start; gap: 1.3rem; }
-.pill {
-  display: inline-flex; align-items: center; gap: .5rem;
-  background: var(--card); border: 1px solid var(--line);
-  padding: .38rem 1rem; border-radius: var(--r-pill);
-  font-size: .88rem; color: var(--ink-2); box-shadow: var(--shadow-sm);
-}
-.pill .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--hanko); }
+.hero-badge .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--gold); }
 .hero h1 {
   font-family: var(--font-display);
-  font-size: clamp(2.05rem, 5vw, 3.15rem);
-  font-weight: 600; line-height: 1.55; letter-spacing: .02em;
+  font-size: clamp(2.1rem, 5vw, 3.1rem);
+  font-weight: 600; line-height: 1.6; letter-spacing: .03em;
+  color: var(--white); margin-block: 1.2rem 1rem;
   text-wrap: balance; word-break: auto-phrase;
 }
-.hero h1 .accent {
-  background: linear-gradient(transparent 68%, color-mix(in srgb, var(--wood) 55%, transparent) 68%);
-}
-.hero-lead { color: var(--ink-2); max-width: 30em; font-size: 1.06rem; }
-.hero-actions { display: flex; flex-wrap: wrap; gap: .8rem; align-items: center; }
-.hero-note { font-size: .92rem; color: var(--ink-2); }
-.hero-points { display: flex; flex-wrap: wrap; gap: .5rem .6rem; }
-.point {
-  display: inline-flex; align-items: center; gap: .4rem;
-  font-size: .92rem; font-weight: 700;
-  background: var(--indigo-tint); color: var(--indigo-deep);
-  padding: .35rem .85rem; border-radius: var(--r-pill);
-}
-.hero-art { display: flex; justify-content: center; }
-.hero-art svg { width: min(100%, 320px); height: auto; }
+.hero h1 .accent { color: var(--gold); }
+.hero-lead { color: color-mix(in srgb, var(--white) 78%, transparent); max-width: 30em; font-size: 1.05rem; }
+.hero-actions { display: flex; flex-wrap: wrap; gap: .8rem; align-items: center; margin-top: 1.5rem; }
+.hero-note { font-size: .9rem; color: color-mix(in srgb, var(--white) 62%, transparent); margin-top: 1.2rem; }
 
-/* ---------- reasons ---------- */
-.reasons { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.2rem; }
-.reason {
-  background: var(--card); border: 1px solid var(--line); border-radius: var(--r-card);
-  padding: 2rem 1.6rem 1.8rem; box-shadow: var(--shadow-sm);
-  display: flex; flex-direction: column; gap: .7rem;
-}
-.reason .ico {
-  width: 52px; height: 52px; padding: 11px; border-radius: 12px;
-  background: var(--indigo); box-shadow: var(--shadow-sm);
-  margin-bottom: .5rem;
-}
-.reason h3 { font-family: var(--font-display); font-size: 1.2rem; font-weight: 600; line-height: 1.6; }
-.reason p { font-size: .96rem; color: var(--ink-2); }
-
-/* ---------- inquiry / price ---------- */
-.info-2col { display: grid; grid-template-columns: 1.05fr .95fr; gap: 1.2rem; align-items: start; }
-.panel {
-  background: var(--card); border: 1px solid var(--line);
-  border-radius: var(--r-panel); padding: clamp(1.6rem, 3vw, 2.2rem); box-shadow: var(--shadow-sm);
-}
-.tel-block { display: flex; flex-direction: column; gap: .2rem; margin-bottom: 1.1rem; }
-.tel-block .cap { font-size: .86rem; color: var(--ink-2); }
-.tel-num {
-  font-family: var(--font-num); font-weight: 700; font-size: clamp(1.8rem, 4vw, 2.3rem);
-  letter-spacing: .02em; text-decoration: none; color: var(--ink); font-variant-numeric: tabular-nums;
-  display: inline-flex; align-items: center; gap: .5rem;
-}
-.tel-num .ic { width: 22px; height: 22px; color: var(--indigo); }
-.note { font-size: .88rem; color: var(--ink-2); margin-top: 1rem; }
-.hero-points.tight .point { background: var(--wood-tint); color: var(--hanko); }
-
-/* ---------- flow ---------- */
-.flow { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1.6rem 1.2rem; }
-.step { display: flex; flex-direction: column; gap: .6rem; position: relative; }
-.step-no {
-  width: 42px; height: 42px; border-radius: 50%;
-  background: var(--indigo); color: var(--paper);
-  display: grid; place-items: center;
-  font-family: var(--font-num); font-weight: 700; font-size: 1.02rem;
+/* ---------- testimonial ---------- */
+.testimonial {
+  background: var(--white); border: 1px solid var(--line); border-radius: 4px;
+  padding: clamp(1.8rem, 4vw, 2.6rem) clamp(1.8rem, 5vw, 3.2rem);
+  display: grid; grid-template-columns: auto 1fr; gap: 1.4rem; align-items: start;
   box-shadow: var(--shadow-sm);
 }
-.step h3 { font-family: var(--font-display); font-size: 1.1rem; font-weight: 600; }
-.step p { font-size: .96rem; color: var(--ink-2); }
+.testimonial .mark {
+  font-family: var(--font-display); font-size: 4.5rem; line-height: 1; color: var(--hanko);
+  font-weight: 700;
+}
+.testimonial blockquote {
+  font-family: var(--font-display); font-size: clamp(1.1rem, 2.2vw, 1.4rem);
+  line-height: 1.85; color: var(--ink); font-weight: 600; text-wrap: balance;
+}
+.testimonial cite {
+  display: block; margin-top: 1rem; font-style: normal; font-size: .92rem; color: var(--ink-2);
+}
+.testimonial cite a { color: var(--indigo); text-decoration: underline; text-underline-offset: 3px; }
 
-/* ---------- shop info ---------- */
-.info dl { display: grid; grid-template-columns: 7em 1fr; gap: .1rem 1rem; font-size: 1rem; }
-.info dt { color: var(--ink-2); font-size: .92rem; padding-block: .6rem; }
-.info dd { padding-block: .6rem; }
-.info dt + dd { border-bottom: 1px dashed var(--line); }
-.info dl > dt { border-bottom: 1px dashed var(--line); }
-.info dl > dt:last-of-type, .info dl > dd:last-of-type { border-bottom: 0; }
-.hours { width: 100%; border-collapse: collapse; font-size: 1rem; margin-top: .4rem; }
-.hours th, .hours td { padding: .6rem .2rem; text-align: left; font-weight: 400; }
-.hours td { text-align: right; font-family: var(--font-num); font-variant-numeric: tabular-nums; }
-.hours tr + tr th, .hours tr + tr td { border-top: 1px dashed var(--line); }
-.access-list { display: flex; flex-direction: column; gap: .1rem; }
-.access-list li {
-  display: flex; align-items: baseline; gap: .8rem;
-  padding-block: .7rem; font-size: 1rem;
+/* ---------- ribbon (こだわり) ---------- */
+.ribbon {
+  display: grid; grid-template-columns: repeat(3, 1fr);
 }
-.access-list li + li { border-top: 1px dashed var(--line); }
-.access-list .st { font-family: var(--font-display); font-weight: 600; }
-.access-list .walk {
-  margin-left: auto; white-space: nowrap;
-  font-family: var(--font-num); font-variant-numeric: tabular-nums; color: var(--ink-2);
+.ribbon-item {
+  padding: 0 1.6rem; display: flex; flex-direction: column; gap: .7rem;
+  border-left: 1px solid var(--line);
 }
-.panel-h {
-  font-family: var(--font-display); font-size: 1.12rem; font-weight: 600;
-  padding-bottom: .8rem; margin-bottom: 1rem; border-bottom: 1px solid var(--line);
+.ribbon-item:first-child { border-left: none; padding-left: 0; }
+.ribbon-item .num {
+  font-family: var(--font-num); font-size: .85rem; font-weight: 700;
+  color: var(--gold); letter-spacing: .1em;
+}
+.ribbon-item h3 { font-family: var(--font-display); font-size: 1.15rem; font-weight: 600; line-height: 1.6; }
+.ribbon-item p { font-size: .95rem; color: var(--ink-2); }
+@media (max-width: 760px) {
+  .ribbon { grid-template-columns: 1fr; }
+  .ribbon-item { border-left: none; border-top: 1px solid var(--line); padding: 1.4rem 0 0; }
+  .ribbon-item:first-child { border-top: none; padding-top: 0; }
 }
 
-.stamp {
+/* ---------- price ticket ---------- */
+.ticket {
   position: relative;
-  display: inline-flex; align-items: center; gap: .5rem;
-  border: 2px solid var(--hanko); color: var(--hanko);
-  border-radius: var(--r-pill); padding: .3rem .9rem .3rem .6rem;
-  font-family: var(--font-display); font-size: .82rem; font-weight: 600;
-  transform: rotate(-3deg);
+  background: var(--indigo-deep); color: var(--white);
+  padding: clamp(2rem, 5vw, 2.8rem) clamp(1.8rem, 5vw, 3rem);
+  clip-path: polygon(
+    0 10px, 2.5% 0, 5% 10px, 7.5% 0, 10% 10px, 12.5% 0, 15% 10px, 17.5% 0, 20% 10px, 22.5% 0, 25% 10px, 27.5% 0, 30% 10px, 32.5% 0, 35% 10px, 37.5% 0, 40% 10px, 42.5% 0, 45% 10px, 47.5% 0, 50% 10px, 52.5% 0, 55% 10px, 57.5% 0, 60% 10px, 62.5% 0, 65% 10px, 67.5% 0, 70% 10px, 72.5% 0, 75% 10px, 77.5% 0, 80% 10px, 82.5% 0, 85% 10px, 87.5% 0, 90% 10px, 92.5% 0, 95% 10px, 97.5% 0, 100% 10px,
+    100% calc(100% - 10px), 97.5% 100%, 95% calc(100% - 10px), 92.5% 100%, 90% calc(100% - 10px), 87.5% 100%, 85% calc(100% - 10px), 82.5% 100%, 80% calc(100% - 10px), 77.5% 100%, 75% calc(100% - 10px), 72.5% 100%, 70% calc(100% - 10px), 67.5% 100%, 65% calc(100% - 10px), 62.5% 100%, 60% calc(100% - 10px), 57.5% 100%, 55% calc(100% - 10px), 52.5% 100%, 50% calc(100% - 10px), 47.5% 100%, 45% calc(100% - 10px), 42.5% 100%, 40% calc(100% - 10px), 37.5% 100%, 35% calc(100% - 10px), 32.5% 100%, 30% calc(100% - 10px), 27.5% 100%, 25% calc(100% - 10px), 22.5% 100%, 20% calc(100% - 10px), 17.5% 100%, 15% calc(100% - 10px), 12.5% 100%, 10% calc(100% - 10px), 7.5% 100%, 5% calc(100% - 10px), 2.5% 100%, 0 calc(100% - 10px)
+  );
 }
-.stamp .dot2 { width: 20px; height: 20px; border-radius: 50%; border: 1.5px solid var(--hanko); display: grid; place-items: center; font-size: .6rem; }
+.ticket-in { display: grid; grid-template-columns: 1.2fr .8fr; gap: 2rem; align-items: center; }
+.ticket h3 { font-family: var(--font-display); font-size: 1.4rem; font-weight: 600; line-height: 1.7; margin-bottom: .7rem; }
+.ticket p { color: color-mix(in srgb, var(--white) 78%, transparent); font-size: .98rem; }
+.ticket-tel { text-align: right; }
+.ticket-tel .cap { display: block; font-size: .82rem; color: var(--gold); margin-bottom: .3rem; }
+.ticket-tel a {
+  font-family: var(--font-num); font-weight: 700; font-size: clamp(1.5rem, 3.4vw, 2rem);
+  color: var(--white); text-decoration: none; font-variant-numeric: tabular-nums;
+}
+@media (max-width: 760px) { .ticket-in { grid-template-columns: 1fr; } .ticket-tel { text-align: left; } }
+
+/* ---------- flow timeline ---------- */
+.timeline { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; position: relative; }
+.timeline::before {
+  content: ""; position: absolute; left: 8%; right: 8%; top: 28px; height: 1px;
+  background: var(--line);
+}
+.tl-step { display: flex; flex-direction: column; align-items: center; text-align: center; gap: .8rem; padding-inline: .6rem; }
+.tl-ring {
+  position: relative; z-index: 1;
+  width: 56px; height: 56px; border-radius: 50%;
+  border: 2px solid var(--indigo); background: var(--white);
+  display: grid; place-items: center;
+  font-family: var(--font-num); font-weight: 700; font-size: 1.15rem; color: var(--indigo);
+}
+.tl-step h3 { font-family: var(--font-display); font-size: 1.08rem; font-weight: 600; }
+.tl-step p { font-size: .93rem; color: var(--ink-2); max-width: 20em; }
+@media (max-width: 760px) {
+  .timeline { grid-template-columns: 1fr; gap: 2rem; }
+  .timeline::before { display: none; }
+}
+
+/* ---------- shop info board ---------- */
+.board {
+  background: var(--indigo-deep); color: var(--white);
+  border-radius: 4px; padding: clamp(1.8rem, 4vw, 2.8rem);
+  display: grid; grid-template-columns: 1fr 1fr; gap: 2.2rem;
+}
+.board h3 { font-family: var(--font-display); font-size: 1.05rem; font-weight: 600; color: var(--gold); margin-bottom: 1.1rem; }
+.board dl { display: grid; grid-template-columns: 6em 1fr; gap: .1rem 1rem; font-size: .98rem; }
+.board dt { color: color-mix(in srgb, var(--white) 60%, transparent); font-size: .88rem; padding-block: .55rem; }
+.board dd { padding-block: .55rem; }
+.board dt + dd { border-bottom: 1px dashed color-mix(in srgb, var(--white) 18%, transparent); }
+.board dl > dt { border-bottom: 1px dashed color-mix(in srgb, var(--white) 18%, transparent); }
+.board dl > dt:last-of-type, .board dl > dd:last-of-type { border-bottom: 0; }
+.board a { color: var(--white); text-decoration: underline; text-underline-offset: 3px; }
+.board .note { font-size: .88rem; color: color-mix(in srgb, var(--white) 70%, transparent); margin-top: 1rem; }
+.hours { width: 100%; border-collapse: collapse; font-size: .96rem; margin-top: .6rem; }
+.hours th, .hours td { padding: .5rem .1rem; text-align: left; font-weight: 400; color: color-mix(in srgb, var(--white) 85%, transparent); }
+.hours td { text-align: right; font-family: var(--font-num); font-variant-numeric: tabular-nums; }
+.hours tr + tr th, .hours tr + tr td { border-top: 1px dashed color-mix(in srgb, var(--white) 18%, transparent); }
+@media (max-width: 760px) { .board { grid-template-columns: 1fr; } }
 
 /* ---------- FAQ ---------- */
-.faq { display: flex; flex-direction: column; gap: .7rem; max-width: 760px; margin-inline: auto; }
-.faq details {
-  background: var(--card); border: 1px solid var(--line); border-radius: var(--r-card);
-  padding: .3rem 1.3rem; box-shadow: var(--shadow-sm);
-}
+.faq { display: flex; flex-direction: column; max-width: 760px; margin-inline: auto; }
+.faq details { border-top: 1px solid var(--line); padding-block: .3rem; }
+.faq details:last-child { border-bottom: 1px solid var(--line); }
 .faq summary {
   list-style: none; cursor: pointer;
   display: flex; align-items: flex-start; gap: .8rem;
-  padding-block: 1.05rem;
+  padding-block: 1.15rem;
   font-family: var(--font-display); font-weight: 600; font-size: 1.04rem; line-height: 1.7;
 }
 .faq summary::-webkit-details-marker { display: none; }
 .faq summary::after {
   content: ""; flex: 0 0 auto; margin-left: auto; margin-top: .55rem;
-  width: 11px; height: 11px;
-  border-right: 2px solid var(--indigo); border-bottom: 2px solid var(--indigo);
+  width: 10px; height: 10px;
+  border-right: 2px solid var(--gold); border-bottom: 2px solid var(--gold);
   transform: rotate(45deg); transition: transform .25s ease;
 }
 .faq details[open] summary::after { transform: rotate(-135deg); }
-.faq .q {
-  flex: 0 0 auto; color: var(--indigo);
-  font-family: var(--font-num); font-weight: 700; font-size: 1.05rem; line-height: 1.7;
-}
-.faq .a { padding: 0 0 1.15rem 1.9rem; font-size: 1rem; color: var(--ink-2); }
+.faq .q { flex: 0 0 auto; color: var(--indigo); font-family: var(--font-num); font-weight: 700; font-size: 1.05rem; line-height: 1.7; }
+.faq .a { padding: 0 0 1.2rem 1.9rem; font-size: 1rem; color: var(--ink-2); }
 
 /* ---------- closing cta ---------- */
-.cta-panel {
-  background: linear-gradient(150deg, var(--indigo-tint), var(--wood-tint));
-  border: 1px solid var(--line); border-radius: var(--r-panel);
-  padding: clamp(2.2rem, 5vw, 3.4rem);
-  display: flex; flex-direction: column; align-items: center; gap: 1.1rem; text-align: center;
-}
-.cta-panel h2 { font-family: var(--font-display); font-size: clamp(1.5rem, 3.4vw, 2.1rem); font-weight: 600; line-height: 1.6; text-wrap: balance; }
-.cta-panel p { color: var(--ink-2); max-width: 40em; font-size: 1.05rem; }
+.cta-band { background: var(--indigo-deep); color: var(--white); position: relative; overflow: hidden; }
+.cta-in { position: relative; z-index: 1; text-align: center; display: flex; flex-direction: column; align-items: center; gap: 1.1rem; }
+.cta-band h2 { font-family: var(--font-display); font-size: clamp(1.5rem, 3.2vw, 2.05rem); font-weight: 600; line-height: 1.7; color: var(--white); text-wrap: balance; }
+.cta-band p { color: color-mix(in srgb, var(--white) 78%, transparent); max-width: 40em; font-size: 1.03rem; }
 .cta-actions { display: flex; flex-wrap: wrap; gap: .8rem; justify-content: center; }
 
 /* ---------- footer ---------- */
-.site-footer { border-top: 1px solid var(--line); padding-block: 2.6rem 3rem; }
-.footer-links { display: flex; flex-wrap: wrap; gap: .5rem 1.2rem; font-size: .96rem; }
-.footer-links a { text-decoration: none; color: var(--ink-2); }
-.footer-links a:hover { color: var(--ink); }
-.disclaimer { font-size: .86rem; color: var(--ink-2); margin-top: 1.6rem; line-height: 1.85; }
-.copy { font-family: var(--font-num); font-size: .82rem; color: var(--ink-2); letter-spacing: .04em; margin-top: .4rem; }
+.site-footer { background: var(--indigo-deep); color: color-mix(in srgb, var(--white) 70%, transparent); padding-block: 2.4rem 2.8rem; }
+.footer-in { display: flex; flex-wrap: wrap; gap: 1.4rem; justify-content: space-between; align-items: flex-start; }
+.footer-links { display: flex; flex-wrap: wrap; gap: .5rem 1.2rem; font-size: .94rem; }
+.footer-links a { text-decoration: none; color: color-mix(in srgb, var(--white) 70%, transparent); }
+.footer-links a:hover { color: var(--white); }
+.disclaimer { font-size: .84rem; margin-top: 1.6rem; line-height: 1.85; color: color-mix(in srgb, var(--white) 55%, transparent); }
+.copy { font-family: var(--font-num); font-size: .8rem; letter-spacing: .04em; margin-top: .4rem; color: color-mix(in srgb, var(--white) 55%, transparent); }
 
 /* ---------- mobile call bar ---------- */
 .call-bar {
   display: none;
   position: fixed; left: 0; right: 0; bottom: 0; z-index: 45;
   padding: .65rem .9rem calc(.65rem + env(safe-area-inset-bottom));
-  background: color-mix(in srgb, var(--paper) 90%, transparent);
+  background: color-mix(in srgb, var(--indigo-deep) 96%, transparent);
   backdrop-filter: blur(12px);
-  border-top: 1px solid var(--line);
 }
 .call-bar .btn { width: 100%; }
-.call-bar .cap { display: block; text-align: center; font-size: .8rem; color: var(--ink-2); margin-top: .35rem; }
+.call-bar .cap { display: block; text-align: center; font-size: .8rem; color: color-mix(in srgb, var(--white) 70%, transparent); margin-top: .35rem; }
 
 /* ---------- reveal ---------- */
 .js .r { opacity: 0; transform: translateY(14px); }
 .js .r.in { opacity: 1; transform: none; transition: opacity .6s ease, transform .6s cubic-bezier(.22,.7,.3,1); }
 
 /* ---------- responsive ---------- */
-@media (max-width: 900px) {
-  .hero-in { grid-template-columns: 1fr; }
-  .hero-art { order: -1; }
-  .hero-art svg { width: min(70%, 240px); }
-  .info-2col { grid-template-columns: 1fr; }
-}
 @media (max-width: 720px) {
   .header-cta { display: none; }
   .call-bar { display: block; }
   body { padding-bottom: 5.4rem; }
+  .testimonial { grid-template-columns: 1fr; }
+  .testimonial .mark { font-size: 3rem; }
 }
 @media (max-width: 560px) {
-  .hero-actions { width: 100%; }
   .hero-actions .btn { flex: 1 1 100%; }
   .cta-actions .btn { flex: 1 1 100%; }
 }
@@ -363,19 +350,18 @@ body {
 <header class="site-header" id="top">
   <div class="wrap header-in">
     <a class="brand" href="#top">
-      <svg class="brand-mark" viewBox="0 0 40 40" aria-hidden="true">
-        <circle cx="20" cy="20" r="19" fill="var(--indigo-tint)"/>
-        <path d="M13 26c1-8 3-13 7-13s6 5 7 13" fill="none" stroke="var(--indigo)" stroke-width="2" stroke-linecap="round"/>
-        <circle cx="20" cy="14" r="2.6" fill="var(--hanko)"/>
-      </svg>
+      <span class="brand-mark" aria-hidden="true">
+        <svg width="20" height="20" viewBox="0 0 20 20"><circle cx="10" cy="10" r="3" fill="none" stroke="#F5EFDD" stroke-width="1.6"/><path d="M10 3v3M10 14v3M3 10h3M14 10h3" stroke="#F5EFDD" stroke-width="1.6" stroke-linecap="round"/></svg>
+      </span>
       <span class="brand-name">近藤クリーニング商会
         <span class="brand-sub">KONDO CLEANING</span>
       </span>
     </a>
     <nav class="nav" aria-label="メインメニュー">
-      <a href="#reason">選ばれる理由</a>
-      <a href="#price">料金・ご相談</a>
-      <a href="#flow">ご利用の流れ</a>
+      <a href="#voice">お客様の声</a>
+      <a href="#reason">こだわり</a>
+      <a href="#price">料金</a>
+      <a href="#flow">流れ</a>
       <a href="#shop">店舗情報</a>
       <a href="#faq">よくある質問</a>
     </nav>
@@ -390,176 +376,138 @@ body {
 
   <!-- ============ HERO ============ -->
   <section class="hero">
+    <span class="hero-mark" aria-hidden="true">巧</span>
     <div class="wrap hero-in">
-      <div class="hero-copy">
-        <p class="pill r"><span class="dot"></span>杉並区方南｜方南銀座商店街・方南町駅 徒歩2分</p>
-        <h1 class="r">丁寧な、<br><span class="accent">しみ抜き</span>と手仕上げ。</h1>
-        <p class="hero-lead r">近藤クリーニング商会は、方南銀座商店街にある手仕上げ専門店です。一点ずつ手をかけて仕上げ、しみ抜きには定評をいただいています。方南町駅から徒歩2分、お気軽にお立ち寄りください。</p>
-        <ul class="hero-points r">
-          <li class="point">手仕上げ専門店</li>
-          <li class="point">しみ抜きに定評</li>
-          <li class="point">駅徒歩2分</li>
-        </ul>
-        <div class="hero-actions r">
-          <a class="btn btn--primary" href="tel:0333119460">
-            <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8.1 9.8a16 16 0 0 0 6 6l1.2-1.2a2 2 0 0 1 2.1-.5c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.8 2.1z"/></svg>
-            お電話でお問い合わせ
-          </a>
-          <a class="btn btn--ghost" href="#shop">アクセスを見る</a>
-        </div>
-        <p class="hero-note r">営業時間・定休日は店舗確認中です。最新の情報はお電話でご確認ください。</p>
+      <p class="hero-badge r"><span class="dot"></span>方南銀座商店街・方南町駅 徒歩2分</p>
+      <h1 class="r">一点ずつ手をかける、<br><span class="accent">しみ抜き</span>と手仕上げ。</h1>
+      <p class="hero-lead r">近藤クリーニング商会は、杉並区方南・方南銀座商店街にある手仕上げ専門店です。方南町駅から徒歩2分、お気軽にお立ち寄りください。</p>
+      <div class="hero-actions r">
+        <a class="btn btn--primary" href="tel:0333119460">
+          <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8.1 9.8a16 16 0 0 0 6 6l1.2-1.2a2 2 0 0 1 2.1-.5c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.8 2.1z"/></svg>
+          お電話でお問い合わせ
+        </a>
+        <a class="btn btn--outline" href="#voice">お客様の声を見る</a>
       </div>
+      <p class="hero-note r">営業時間・定休日は店舗確認中です。最新の情報はお電話でご確認ください。</p>
+    </div>
+  </section>
 
-      <div class="hero-art r" aria-hidden="true">
-        <svg viewBox="0 0 280 300" role="img">
-          <ellipse cx="140" cy="270" rx="100" ry="14" fill="var(--indigo-tint)"/>
-          <!-- shirt -->
-          <path d="M140 60 118 72 76 92q-12 6-15 18l-11 40q-3 9 6 13l28 12q9 4 12-6l9-22v110q0 10 10 10h54q10 0 10-10V147l9 22q3 10 12 6l28-12q9-4 6-13l-11-40q-3-12-15-18l-42-20-24-12z"
-                fill="var(--card)" stroke="var(--indigo)" stroke-width="4.5" stroke-linejoin="round"/>
-          <path d="M118 72l22 20 22-20" fill="none" stroke="var(--indigo)" stroke-width="4.5" stroke-linejoin="round"/>
-          <circle cx="140" cy="128" r="4" fill="var(--wood)"/>
-          <circle cx="140" cy="160" r="4" fill="var(--wood)"/>
-          <circle cx="140" cy="192" r="4" fill="var(--wood)"/>
-          <!-- iron resting on the shirt -->
-          <g transform="translate(150 150) rotate(-8)">
-            <path d="M0 34c0-20 14-34 34-34s34 14 34 34v10H0z" fill="var(--indigo-deep)" stroke="var(--indigo-deep)" stroke-width="2" stroke-linejoin="round"/>
-            <rect x="18" y="-14" width="32" height="16" rx="6" fill="var(--indigo-deep)"/>
-            <path d="M-6 10h86" stroke="var(--wood)" stroke-width="3" stroke-linecap="round"/>
-          </g>
-          <!-- steam -->
-          <path d="M196 96q6-10 0-20t0-20" fill="none" stroke="var(--wood)" stroke-width="3" stroke-linecap="round" opacity=".7"/>
-          <path d="M212 100q6-10 0-20t0-20" fill="none" stroke="var(--wood)" stroke-width="3" stroke-linecap="round" opacity=".5"/>
-          <!-- hanko stamp -->
-          <g transform="translate(48 40) rotate(-10)">
-            <circle cx="0" cy="0" r="26" fill="none" stroke="var(--hanko)" stroke-width="3"/>
-            <text x="0" y="-2" text-anchor="middle" font-family="var(--font-display)" font-size="13" fill="var(--hanko)" font-weight="700">手仕上</text>
-            <text x="0" y="14" text-anchor="middle" font-family="var(--font-display)" font-size="10" fill="var(--hanko)">仕上済</text>
-          </g>
-        </svg>
+  <!-- ============ TESTIMONIAL ============ -->
+  <section class="band" id="voice">
+    <div class="wrap">
+      <div class="head r">
+        <p class="eyebrow">Voice</p>
+        <h2 class="h2">お客様の声</h2>
+      </div>
+      <div class="testimonial r">
+        <span class="mark" aria-hidden="true">"</span>
+        <div>
+          <blockquote>昔ながらの店舗、しみ抜きが丁寧。</blockquote>
+          <cite>— <a href="https://www.ekiten.jp/shop_3137349/" target="_blank" rel="noopener">エキテンに寄せられた口コミより</a></cite>
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- ============ REASONS ============ -->
+  <!-- ============ REASONS (ribbon) ============ -->
   <section class="band band--tint" id="reason">
     <div class="wrap">
       <div class="head r">
-        <p class="eyebrow">Our promise</p>
-        <h2 class="h2">方南銀座で長く続く、<br>手仕上げの店です。</h2>
-        <p>近藤クリーニング商会が大切にしている、三つのことをご紹介します。</p>
+        <p class="eyebrow">Our craft</p>
+        <h2 class="h2">近藤クリーニング商会の、三つのこだわり。</h2>
       </div>
-      <ul class="reasons">
-        <li class="reason r">
-          <svg class="ico" viewBox="0 0 32 32" fill="none" stroke="var(--paper)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 24V13l10-6 10 6v11"/><path d="M6 24h20"/><path d="M13 24v-8h6v8"/></svg>
-          <h3>手仕上げ専門店です。</h3>
-          <p>一点ずつ手をかけて仕上げます。折り目やシルエットにこだわりたい方に、長く選ばれてきました。</p>
-        </li>
-        <li class="reason r">
-          <svg class="ico" viewBox="0 0 32 32" fill="none" stroke="var(--paper)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 4c-5 6-9 10-9 15a9 9 0 0 0 18 0c0-5-4-9-9-15z"/></svg>
-          <h3>しみ抜きに定評があります。</h3>
-          <p>落ちにくいしみも、まずはご相談ください。丁寧な作業に定評をいただいています。</p>
-        </li>
-        <li class="reason r">
-          <svg class="ico" viewBox="0 0 32 32" fill="none" stroke="var(--paper)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="16" cy="16" r="11"/><path d="M16 10v6l4 3"/></svg>
-          <h3>方南町駅から徒歩2分。</h3>
-          <p>方南銀座商店街に位置し、駅からすぐ。お仕事帰りにも立ち寄りやすい場所にあります。</p>
-        </li>
-      </ul>
+      <div class="ribbon r">
+        <div class="ribbon-item">
+          <span class="num">01</span>
+          <h3>手仕上げ専門店</h3>
+          <p>一点ずつ手をかけて仕上げます。折り目やシルエットにこだわりたい方に選ばれてきました。</p>
+        </div>
+        <div class="ribbon-item">
+          <span class="num">02</span>
+          <h3>しみ抜きに定評</h3>
+          <p>落ちにくいしみも、まずはご相談ください。丁寧な作業で長く支持されています。</p>
+        </div>
+        <div class="ribbon-item">
+          <span class="num">03</span>
+          <h3>駅から徒歩2分</h3>
+          <p>方南銀座商店街に位置し、方南町駅からすぐ。お仕事帰りにも立ち寄りやすい場所です。</p>
+        </div>
+      </div>
     </div>
   </section>
 
-  <!-- ============ PRICE / INQUIRY ============ -->
+  <!-- ============ PRICE (ticket) ============ -->
   <section class="band" id="price">
     <div class="wrap">
-      <div class="head r">
-        <p class="eyebrow">Price</p>
-        <h2 class="h2">料金は、お気軽に<br>お問い合わせください。</h2>
-        <p>お品物の種類や状態によって変わります。お電話または店頭で、仕上がり日とあわせてご案内します。</p>
-      </div>
-      <div class="info-2col">
-        <div class="panel r">
-          <div class="tel-block">
-            <span class="cap">お見積り・ご相談</span>
-            <a class="tel-num" href="tel:0333119460">
-              <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8.1 9.8a16 16 0 0 0 6 6l1.2-1.2a2 2 0 0 1 2.1-.5c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.8 2.1z"/></svg>
-              03-3311-9460
-            </a>
-            <span class="cap">営業時間は店舗確認中です</span>
+      <div class="ticket r">
+        <div class="ticket-in">
+          <div>
+            <h3>料金は、お気軽にお問い合わせください。</h3>
+            <p>お品物の種類や状態によって変わります。お電話または店頭で、仕上がり日とあわせてご案内します。「このしみは落ちますか」といったご相談だけでも大丈夫です。</p>
           </div>
-          <p class="note">「このしみは落ちますか」「この素材でも大丈夫ですか」といったご相談だけでも承ります。お品物を拝見して、仕上がり日と料金をお伝えします。</p>
-        </div>
-        <div class="panel r">
-          <h3 class="panel-h">当店について</h3>
-          <ul class="hero-points tight">
-            <li class="point">手仕上げ専門</li>
-            <li class="point">しみ抜き</li>
-          </ul>
-          <p class="note" style="margin-top:1.2rem;">取扱い品目の詳細は、お電話でお気軽にお尋ねください。まずはご相談からで大丈夫です。</p>
+          <div class="ticket-tel">
+            <span class="cap">お見積り・ご相談</span>
+            <a href="tel:0333119460">03-3311-9460</a>
+          </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ============ FLOW ============ -->
+  <!-- ============ FLOW (timeline) ============ -->
   <section class="band band--tint" id="flow">
     <div class="wrap">
       <div class="head r">
         <p class="eyebrow">Flow</p>
         <h2 class="h2">ご利用は、3つのステップで。</h2>
-        <p>お品物をお持ちいただいてから、お渡しまでの流れです。</p>
       </div>
-      <ol class="flow">
-        <li class="step r">
-          <span class="step-no">1</span>
+      <div class="timeline">
+        <div class="tl-step r">
+          <span class="tl-ring">1</span>
           <h3>店頭にお持ち込み</h3>
-          <p>方南町駅から徒歩2分。お品物の状態を確認しながら、受付いたします。</p>
-        </li>
-        <li class="step r">
-          <span class="step-no">2</span>
+          <p>方南町駅から徒歩2分。お品物の状態を確認しながら受付します。</p>
+        </div>
+        <div class="tl-step r">
+          <span class="tl-ring">2</span>
           <h3>手仕上げ</h3>
           <p>一点ずつ手をかけて仕上げます。しみが気になる場合は、あわせてご相談ください。</p>
-        </li>
-        <li class="step r">
-          <span class="step-no">3</span>
+        </div>
+        <div class="tl-step r">
+          <span class="tl-ring">3</span>
           <h3>お渡し</h3>
           <p>仕上がり日はお預かり時にご案内します。店頭でお受け取りください。</p>
-        </li>
-      </ol>
+        </div>
+      </div>
     </div>
   </section>
 
-  <!-- ============ SHOP INFO ============ -->
+  <!-- ============ SHOP INFO (board) ============ -->
   <section class="band" id="shop">
     <div class="wrap">
       <div class="head r">
         <p class="eyebrow">Shop info</p>
         <h2 class="h2">店舗のご案内</h2>
       </div>
-      <div class="info-2col">
-        <div class="panel r">
+      <div class="board r">
+        <div>
+          <h3>基本情報</h3>
           <dl>
             <dt>店名</dt><dd>近藤クリーニング商会</dd>
             <dt>住所</dt><dd>東京都杉並区方南2-11-5</dd>
             <dt>電話</dt><dd><a href="tel:0333119460">03-3311-9460</a></dd>
             <dt>周辺</dt><dd>方南銀座商店街</dd>
+            <dt>アクセス</dt><dd>方南町駅 徒歩約2分</dd>
           </dl>
-          <h3 class="panel-h" style="margin-top:1.8rem;">最寄り駅からのアクセス</h3>
-          <ul class="access-list">
-            <li><span class="st">方南町駅</span><span class="walk">徒歩約2分</span></li>
-          </ul>
         </div>
-
-        <div class="panel r">
-          <h3 class="panel-h">営業時間について</h3>
-          <p class="note" style="margin-top:0;">複数の情報サイトでは「7:00〜20:00、水曜定休」という記載が見られますが、当ページでは一次情報として確認できていません。ご来店・お問い合わせの前に、お電話でのご確認をおすすめします。</p>
-          <table class="hours" style="margin-top:1.2rem; opacity:.7;">
-            <caption class="eyebrow" style="margin-bottom:.6rem;">参考情報（要確認）</caption>
+        <div>
+          <h3>営業時間について</h3>
+          <p class="note" style="margin-top:0;">複数の情報サイトでは「7:00〜20:00、水曜定休」という記載が見られますが、当ページでは一次情報として確認できていません。ご来店前に、お電話でのご確認をおすすめします。</p>
+          <table class="hours">
             <tbody>
               <tr><th scope="row">月〜火・木〜土</th><td>7:00〜20:00 目安</td></tr>
               <tr><th scope="row">水</th><td>定休日 目安</td></tr>
             </tbody>
           </table>
-          <p class="note">駐車場・お支払い方法は確認中です。</p>
         </div>
       </div>
     </div>
@@ -594,21 +542,18 @@ body {
   </section>
 
   <!-- ============ CTA ============ -->
-  <section class="band">
-    <div class="wrap">
-      <div class="cta-panel r">
-        <span class="stamp"><span class="dot2">印</span>手仕上げ専門</span>
-        <h2>まずは一着、ご相談ください。</h2>
-        <p>しみの状態や素材のことでご不安があれば、お電話だけでも構いません。方南銀座商店街で、丁寧にお仕上げします。</p>
-        <div class="cta-actions">
-          <a class="btn btn--primary" href="tel:0333119460">
-            <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8.1 9.8a16 16 0 0 0 6 6l1.2-1.2a2 2 0 0 1 2.1-.5c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.8 2.1z"/></svg>
-            03-3311-9460
-          </a>
-          <a class="btn btn--ghost" href="#shop">店舗情報を見る</a>
-        </div>
-        <p class="hero-note">方南町駅 徒歩2分／方南銀座商店街</p>
+  <section class="band cta-band">
+    <div class="wrap cta-in r">
+      <h2>まずは一着、ご相談ください。</h2>
+      <p>しみの状態や素材のことでご不安があれば、お電話だけでも構いません。方南銀座商店街で、丁寧にお仕上げします。</p>
+      <div class="cta-actions">
+        <a class="btn btn--primary" href="tel:0333119460">
+          <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8.1 9.8a16 16 0 0 0 6 6l1.2-1.2a2 2 0 0 1 2.1-.5c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.8 2.1z"/></svg>
+          03-3311-9460
+        </a>
+        <a class="btn btn--outline" href="#shop">店舗情報を見る</a>
       </div>
+      <p class="hero-note">方南町駅 徒歩2分／方南銀座商店街</p>
     </div>
   </section>
 
@@ -616,21 +561,20 @@ body {
 
 <footer class="site-footer">
   <div class="wrap">
-    <div class="footer-in" style="display:flex; flex-wrap:wrap; gap:1.4rem; justify-content:space-between; align-items:flex-start;">
+    <div class="footer-in">
       <a class="brand" href="#top">
-        <svg class="brand-mark" viewBox="0 0 40 40" aria-hidden="true">
-          <circle cx="20" cy="20" r="19" fill="var(--indigo-tint)"/>
-          <path d="M13 26c1-8 3-13 7-13s6 5 7 13" fill="none" stroke="var(--indigo)" stroke-width="2" stroke-linecap="round"/>
-          <circle cx="20" cy="14" r="2.6" fill="var(--hanko)"/>
-        </svg>
+        <span class="brand-mark" aria-hidden="true">
+          <svg width="20" height="20" viewBox="0 0 20 20"><circle cx="10" cy="10" r="3" fill="none" stroke="#F5EFDD" stroke-width="1.6"/><path d="M10 3v3M10 14v3M3 10h3M14 10h3" stroke="#F5EFDD" stroke-width="1.6" stroke-linecap="round"/></svg>
+        </span>
         <span class="brand-name">近藤クリーニング商会
           <span class="brand-sub">KONDO CLEANING</span>
         </span>
       </a>
       <nav class="footer-links" aria-label="フッターメニュー">
-        <a href="#reason">選ばれる理由</a>
-        <a href="#price">料金・ご相談</a>
-        <a href="#flow">ご利用の流れ</a>
+        <a href="#voice">お客様の声</a>
+        <a href="#reason">こだわり</a>
+        <a href="#price">料金</a>
+        <a href="#flow">流れ</a>
         <a href="#shop">店舗情報</a>
         <a href="#faq">よくある質問</a>
       </nav>
