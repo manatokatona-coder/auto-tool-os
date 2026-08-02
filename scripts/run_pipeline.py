@@ -154,6 +154,11 @@ def main():
         "WordPress管理画面で内容を見てから公開してください。このコマンドは公開(publish)を"
         "一切行いません。"
     )
+    print(
+        "\n確認が終わり、日時を指定して予約公開したい場合は以下を実行してください"
+        "(このコマンド自体には予約機能を含めていません。必ずレビュー後に手動で):\n"
+        f"  python scripts/05_post_to_wordpress.py --slug {slug} --schedule 2026-08-05T09:00:00"
+    )
 
 
 if __name__ == "__main__":
