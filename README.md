@@ -59,6 +59,22 @@ python scripts/run_pipeline.py --queue-file queue/example-keyword.yaml
 実行後、④のレビュー結果がターミナルにも表示されます。それを読んでから
 WordPressの下書きを確認・修正・公開してください。
 
+## スケジュール(予約)投稿
+
+内容を確認し終えたら、`05_post_to_wordpress.py` に `--schedule` を付けて実行すると、
+指定した日時にWordPress側が自動で公開してくれます(それまでは下書き同様に編集・
+予約取り消しが可能)。**必ず内容を確認した後、人が個別に実行してください**
+(`run_pipeline.py` には予約機能を含めていません。無人実行の結果を未確認のまま
+自動公開させないための意図的な設計です)。
+
+```bash
+python scripts/05_post_to_wordpress.py --slug rakuten-mattress-2026 \
+  --schedule 2026-08-05T09:00:00
+```
+
+日時はWordPressサイトのタイムゾーン設定で解釈されます。複数記事を毎日1本ずつ
+公開したい場合は、記事ごとに `--schedule` の日時をずらして実行してください。
+
 ## 使い方(手動で1記事ずつ、各ステップを確認しながら進めたい場合)
 
 ```bash
