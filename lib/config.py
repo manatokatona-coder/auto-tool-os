@@ -13,6 +13,11 @@ WP_URL = os.environ.get("WP_URL", "").rstrip("/")
 WP_USER = os.environ.get("WP_USER")
 WP_APP_PASSWORD = os.environ.get("WP_APP_PASSWORD")
 
+INSTAGRAM_USER_ID = os.environ.get("INSTAGRAM_USER_ID")
+INSTAGRAM_ACCESS_TOKEN = os.environ.get("INSTAGRAM_ACCESS_TOKEN")
+THREADS_USER_ID = os.environ.get("THREADS_USER_ID")
+THREADS_ACCESS_TOKEN = os.environ.get("THREADS_ACCESS_TOKEN")
+
 REPO_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 ARTICLES_DIR = os.path.join(REPO_ROOT, "articles")
 QUEUE_DIR = os.path.join(REPO_ROOT, "queue")
