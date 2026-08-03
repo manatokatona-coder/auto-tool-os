@@ -41,7 +41,7 @@ def main():
     draft = read_text(args.slug, "03_draft.md")
 
     print("レビュー中...")
-    review = ask_claude(SYSTEM_PROMPT, build_prompt(draft), max_tokens=2000)
+    review = ask_claude(SYSTEM_PROMPT, build_prompt(draft), max_tokens=4000)
 
     path = write_text(args.slug, "04_review.md", review)
     print(f"完了: {path}")

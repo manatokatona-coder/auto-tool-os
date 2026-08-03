@@ -69,7 +69,7 @@ def main():
     raw = ask_claude(
         SYSTEM_PROMPT,
         build_prompt(args.title, args.keyword, args.sub_keywords, args.persona, research_notes),
-        max_tokens=2000,
+        max_tokens=4000,
     )
     outline = parse_outline(raw)
 
