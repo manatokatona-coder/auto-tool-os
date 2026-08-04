@@ -1,0 +1,56 @@
+name: Generate article drafts
+
+# queue/ に新しいキュー(YAML)が追加されたら、①リサーチ→②アウトライン→③本文生成を
+# 自動実行し、下書きをPRとして提出する。④(レビュー)・⑤(WordPress投稿)は
+# 人が対応する半自動運用(全自動公開はしない)。
+
+on:
+  workflow_dispatch: {}
+  schedule:
+    # 毎週月曜 09:00 JST (00:00 UTC) にキューを処理
+    - cron: "0 0 * * 1"
+  push:
+    branches: [main]
+    paths:
+      - "queue/*.yaml"
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Generate drafts for new queue entries
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+        run: python scripts/run_queue.py --all-new
+
+      - name: Create pull request with generated drafts
+        uses: peter-evans/create-pull-request@v6
+        with:
+          commit-message: "Add auto-generated article draft(s)"
+          branch: auto/article-drafts
+          delete-branch: true
+          title: "新しい記事下書き(自動生成)"
+          body: |
+            queue/ の内容から Claude が①リサーチ→②アウトライン→③本文生成 を自動実行しました。
+
+            **必ずマージ前に人がレビューしてください**(事実確認・表現チェック・
+            景品表示法/ステマ規制/薬機法などの確認)。
+
+            マージ後、レビューが完了した記事は `scripts/05_post_to_wordpress.py` で
+            WordPressに下書き投稿してください(投稿もstatus=draftになるため、
+            最終公開はWordPress管理画面から人が行います)。
+          add-paths: |
+            articles/**
