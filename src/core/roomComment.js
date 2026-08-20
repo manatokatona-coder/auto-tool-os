@@ -14,6 +14,7 @@
 import { TONES } from '../data/tones.js';
 import { buildRoomTags, formatTags } from '../data/hashtags.js';
 import { eventLine, EVENT_CLOSERS } from '../data/saleEvents.js';
+import { priceMoveVariants, discountPercent, validatePrices } from './price.js';
 import { makeRng, pick, shuffle } from './rng.js';
 import { validateRoomComment } from './validate.js';
 import { ROOM_MAX, ROOM_PREVIEW } from './textLength.js';
@@ -47,6 +48,45 @@ function buildHookLine(tone, ctx, rng) {
 }
 
 /**
+ * 値引き商品の1行目を作る。冒頭に価格の変化を置くのが狙い。
+ *
+ * 価格表記は長さ違いで何通りかあるので、42文字に収まる組み合わせの中から選ぶ。
+ * 選ぶ優先順位は「訴求（hook）が入っていること」が先で、価格表記の細かさは後。
+ * 価格だけの行にして訴求が消えるより、価格表記を短くして訴求を残すほうが読まれるため。
+ */
+function buildSaleHookLine(tone, ctx, rng, priceVariants) {
+  const candidates = [];
+  for (const pv of priceVariants) {
+    for (const tpl of tone.saleIntro) {
+      candidates.push({
+        line: fill(tpl, { ...ctx, priceMove: pv.text }).trim(),
+        rank: pv.rank,
+        hasHook: tpl.includes('{hook}'),
+      });
+    }
+  }
+
+  const fitting = candidates.filter((c) => len(c.line) <= ROOM_PREVIEW);
+  if (fitting.length === 0) {
+    const shortest = candidates.reduce((a, b) => (len(a.line) <= len(b.line) ? a : b));
+    return { line: shortest.line, fitsPreview: false };
+  }
+
+  // 訴求（hook）が入っているものを優先する。
+  // 価格だけの行にして訴求が消えるより、価格表記を短くして訴求を残すほうが読まれるため。
+  const withHook = fitting.filter((c) => c.hasHook);
+  const pool = withHook.length > 0 ? withHook : fitting;
+
+  // 価格表記は詳しいほど良いが、いちばん詳しい形だけに絞ると
+  // 42文字に収まる言い回しが1〜2通りしか残らず、3パターン出しても同じ文になる。
+  // そこで1段階だけ簡素な価格表記も許して、言い回しの幅を確保する。
+  const top = Math.max(...pool.map((c) => c.rank));
+  const near = pool.filter((c) => c.rank >= top - 1);
+
+  return { line: pick(rng, shuffle(rng, near)).line, fitsPreview: true };
+}
+
+/**
  * 楽天ROOM用の紹介文を1本生成する。
  *
  * @param {object} input 商品情報と生成条件
@@ -65,6 +105,9 @@ export function generateRoomComment(input) {
     tone: toneId = 'friendly',
     event = 'none',
     off = null,
+    mode = 'normal',
+    regularPrice = null,
+    salePrice = null,
     season = 'all',
     needsPr = false,
     hasOriginalPhoto = true,
@@ -80,7 +123,16 @@ export function generateRoomComment(input) {
   const rng = makeRng(`${seed}|${name}|${toneId}|${lengthKey}`);
 
   const ctx = { name, pain, hook, caution, scene, merit: merits[0] || '' };
-  const { line: hookLine, fitsPreview } = buildHookLine(tone, ctx, rng);
+
+  // 値引き率は、通常価格とセール価格の両方があればそこから出す（手入力より確実なため）。
+  const computedOff = discountPercent(regularPrice, salePrice) ?? off;
+  const priceVariants =
+    mode === 'sale' ? priceMoveVariants({ regular: regularPrice, sale: salePrice, off }) : [];
+
+  const { line: hookLine, fitsPreview } =
+    priceVariants.length > 0
+      ? buildSaleHookLine(tone, ctx, rng, priceVariants)
+      : buildHookLine(tone, ctx, rng);
 
   const blocks = [];
 
@@ -108,7 +160,7 @@ export function generateRoomComment(input) {
   blocks.push(pick(rng, tone.outro));
 
   if (preset.withEvent) {
-    const ev = eventLine(event, off);
+    const ev = eventLine(event, computedOff);
     if (ev) blocks.push(`${ev}。${pick(rng, EVENT_CLOSERS)}`);
   }
 
@@ -139,6 +191,11 @@ export function generateRoomComment(input) {
   }
 
   const validation = validateRoomComment(text, { needsPr });
+  const priceIssues = validatePrices({ mode, regular: regularPrice, sale: salePrice, off });
+  if (priceIssues.length > 0) {
+    validation.issues = [...priceIssues, ...validation.issues];
+    validation.ok = !validation.issues.some((i) => i.severity === 'block');
+  }
 
   return {
     text,
@@ -150,6 +207,10 @@ export function generateRoomComment(input) {
     validation,
     seed: String(seed),
     tone: tone.id,
+    mode,
+    /** 冒頭に使った価格表記。X投稿側でも同じものを使い回す。 */
+    priceMove: priceVariants[0]?.text ?? null,
+    discountPercent: computedOff,
   };
 }
 

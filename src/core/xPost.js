@@ -16,6 +16,7 @@ import { X_PATTERNS } from '../data/tones.js';
 import { buildXTags, formatTags } from '../data/hashtags.js';
 import { EVENTS } from '../data/saleEvents.js';
 import { makeRng } from './rng.js';
+import { priceMoveVariants, discountPercent } from './price.js';
 import { validateXPost } from './validate.js';
 import { xLength, X_MAX_WEIGHTED } from './textLength.js';
 
@@ -59,6 +60,9 @@ export function generateXPost(input) {
     extraTags = [],
     theme = '',
     items = [],
+    mode = 'normal',
+    regularPrice = null,
+    salePrice = null,
     seed = 'default',
   } = input;
 
@@ -66,9 +70,21 @@ export function generateXPost(input) {
   const rng = makeRng(`${seed}|${name}|${patternId}`);
   const eventLabel = EVENTS[event]?.label || '';
 
+  const computedOff = discountPercent(regularPrice, salePrice) ?? off;
+  const priceMove =
+    mode === 'sale'
+      ? priceMoveVariants({ regular: regularPrice, sale: salePrice, off })[0]?.text ?? null
+      : null;
+
   let lines = pattern
-    .build({ name, pain, hook, merits, event: eventLabel, off, theme, items })
+    .build({ name, pain, hook, merits, event: eventLabel, off: computedOff, theme, items, priceMove })
     .filter(Boolean);
+
+  // 値引き商品は、型にかかわらず価格の変化を上のほうに置く。
+  // 「セール速報型」のように本文へ既に入っている場合は重ねない。
+  if (priceMove && !lines.some((l) => l.includes(priceMove))) {
+    lines.splice(1, 0, priceMove);
+  }
 
   if (needsPr) lines = ['PR', ...lines];
 
@@ -117,6 +133,7 @@ export function generateXPost(input) {
     tags: workingTags,
     validation,
     pattern: pattern.id,
+    priceMove,
     linkPlacement,
     /** リンクの置き方によって注意点が変わるので、UIでそのまま出せるように返す。 */
     linkNote:

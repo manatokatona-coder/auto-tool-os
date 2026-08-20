@@ -36,6 +36,13 @@ export {
   graphemes,
 } from './core/textLength.js';
 export { makeRng, seedFrom, pick, shuffle } from './core/rng.js';
+export {
+  parsePrice,
+  formatYen,
+  discountPercent,
+  priceMoveVariants,
+  validatePrices,
+} from './core/price.js';
 export { findNgWords, checkPrLabel, validateRoomComment, validateXPost } from './core/validate.js';
 export { generateRoomComment, generateRoomVariants, LENGTH_PRESETS } from './core/roomComment.js';
 export { generateXPost, generateXVariants, LINK_PLACEMENTS } from './core/xPost.js';

@@ -25,6 +25,13 @@ export const TONES = {
       '{hook}。それだけのために買ったけど、正解でした。',
       '{pain}。そんな人にこそ見てほしいやつ。',
     ],
+    /** 値引き中の商品向け。価格の変化を先頭に置く型。 */
+    saleIntro: [
+      '{priceMove}。{hook}',
+      '{priceMove}！{hook}',
+      '{priceMove}。いま下がってます。{hook}',
+      '{priceMove}。ずっと迷ってたなら今かも。',
+    ],
     bridge: [
       'いいなと思ってるのはこのへん。',
       '使ってみて良かったのはこの3つ。',
@@ -57,6 +64,13 @@ export const TONES = {
       '{hook}という点に惹かれて購入しました。',
       '{pain}。そんな方に向けて、使ってみた感想をまとめます。',
       '{name}を使い始めて、{hook}という変化がありました。',
+    ],
+    /** 値引き中の商品向け。価格の変化を先頭に置く型。 */
+    saleIntro: [
+      '{priceMove}。{hook}',
+      '{priceMove}。値下がりしている今が狙い目です。',
+      '{priceMove}。{pain}。そんな方に向けた内容です。',
+      '{priceMove}。使ってみた感想をまとめます。',
     ],
     bridge: [
       '良かった点は次のとおりです。',
@@ -91,6 +105,13 @@ export const TONES = {
       '正直、期待してなかったです。{hook}のは想定外でした。',
       '{pain}。金で解決しにいった結果です。',
     ],
+    /** 値引き中の商品向け。価格の変化を先頭に置く型。 */
+    saleIntro: [
+      '{priceMove}。{hook}',
+      '{priceMove}。安いから薦めるわけではないです。',
+      '{priceMove}。それでも人を選びます。',
+      '{priceMove}。値段以外の理由を書きます。',
+    ],
     bridge: [
       'それでも手放せない理由。',
       '短所を踏まえたうえで、良い点。',
@@ -124,6 +145,12 @@ export const TONES = {
       '{pain}。これで解決。',
       '結論：{hook}。',
     ],
+    /** 値引き中の商品向け。価格の変化を先頭に置く型。 */
+    saleIntro: [
+      '{priceMove}／{hook}',
+      '{priceMove}。{hook}',
+      '{priceMove}',
+    ],
     bridge: ['ポイント', '要点', 'できること'],
     cautionLead: ['※{caution}', '注意：{caution}', '△ {caution}'],
     scene: ['用途：{scene}', '出番：{scene}', '使う場面：{scene}'],
@@ -144,6 +171,12 @@ export const TONES = {
       '{pain}。その時間をなくしたくて導入しました。結果、{hook}。',
       '{pain}。仕事終わりにこれが限界で、買いました。',
       '時間で元を取るタイプの買い物。{hook}。',
+    ],
+    /** 値引き中の商品向け。価格の変化を先頭に置く型。 */
+    saleIntro: [
+      '{priceMove}。{hook}',
+      '{priceMove}。時間を金で買う判断。',
+      '{priceMove}。{pain}。そんな人向け。',
     ],
     bridge: [
       '時短につながっているのはこの3点。',
@@ -194,8 +227,8 @@ export const X_PATTERNS = {
     id: 'news',
     label: 'セール速報型',
     desc: 'イベント初動に投げる。タイムラインで拾われやすい',
-    build: ({ event, name, hook, off }) => [
-      `【${event}】${off ? `${off}%OFF ` : ''}${name}`,
+    build: ({ event, name, hook, off, priceMove }) => [
+      `【${event}】${priceMove || (off ? `${off}%OFF` : '')} ${name}`.replace(/\s+/g, ' ').trim(),
       `${hook}。`,
     ],
   },
