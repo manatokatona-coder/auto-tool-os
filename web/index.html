@@ -1,0 +1,211 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#bf0000">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="ROOM投稿">
+<meta name="description" content="楽天ROOMの一人暮らし向けSALE商品の紹介文とX投稿文を作るツール">
+<title>楽天ROOM 一人暮らしSALE 投稿メーカー</title>
+<link rel="apple-touch-icon" href="./icon-180.png">
+<link rel="icon" href="./icon.svg" type="image/svg+xml">
+<link rel="manifest" href="./manifest.webmanifest">
+<link rel="stylesheet" href="./style.css">
+</head>
+<body>
+
+<header>
+  <h1>楽天ROOM 一人暮らしSALE 投稿メーカー</h1>
+  <p class="today" id="today">読み込み中…</p>
+</header>
+
+<main>
+  <!-- ① ネタ出し -->
+  <section id="tab-ideas">
+    <div class="card">
+      <h2>今日の投稿ネタ</h2>
+      <p class="sub">季節・カテゴリ・マニアック度で、一人暮らし向けの題材を出します。</p>
+
+      <div class="row">
+        <div>
+          <label for="idea-season">季節</label>
+          <select id="idea-season"></select>
+        </div>
+        <div>
+          <label for="idea-cat">カテゴリ</label>
+          <select id="idea-cat"></select>
+        </div>
+      </div>
+
+      <label for="idea-maniac">切り口</label>
+      <select id="idea-maniac">
+        <option value="">すべて</option>
+        <option value="0">王道・鉄板（検索数が多い）</option>
+        <option value="1">知る人ぞ知る（差がつく）</option>
+        <option value="2">マニアック（競合が少ない）</option>
+      </select>
+
+      <label for="idea-q">キーワードで探す（任意）</label>
+      <input id="idea-q" type="search" placeholder="例：部屋干し、収納、狭いキッチン" autocomplete="off">
+
+      <button class="primary" id="btn-ideas">ネタを出す</button>
+      <button class="secondary" id="btn-theme">まとめ投稿のテーマを出す</button>
+    </div>
+
+    <div id="ideas-out"></div>
+  </section>
+
+  <!-- ② ROOM紹介文 -->
+  <section id="tab-room" hidden>
+    <div class="card">
+      <h2>楽天ROOM 紹介文</h2>
+      <p class="sub">500文字以内・冒頭42文字にフックを置く型で作ります。</p>
+
+      <label for="f-name">商品名 <span style="color:var(--accent)">*</span></label>
+      <input id="f-name" type="text" placeholder="例：衣類乾燥除湿機" autocomplete="off">
+
+      <div class="row">
+        <div>
+          <label for="f-cat">カテゴリ</label>
+          <select id="f-cat"></select>
+        </div>
+        <div>
+          <label for="f-tone">文体</label>
+          <select id="f-tone"></select>
+        </div>
+      </div>
+
+      <label for="f-pain">読み手の悩み（イントロになります）</label>
+      <input id="f-pain" type="text" placeholder="例：部屋干しが乾かなくて生乾き臭がする" autocomplete="off">
+
+      <label for="f-hook">ひとことでいうと（訴求）</label>
+      <input id="f-hook" type="text" placeholder="例：部屋干しが数時間で乾き切る" autocomplete="off">
+
+      <label for="f-merits">良かった点（1行に1つ、3つまで）</label>
+      <textarea id="f-merits" placeholder="洗濯物の下に置くだけ&#10;梅雨も冬の結露も同じ1台で対応&#10;サーキュレーター機能付きなら送風にも使える"></textarea>
+
+      <label for="f-caution">正直なデメリット（信頼度が上がります）</label>
+      <input id="f-caution" type="text" placeholder="例：排水タンクを毎回捨てる手間はある" autocomplete="off">
+
+      <label for="f-scene">よく使う場面</label>
+      <input id="f-scene" type="text" placeholder="例：梅雨の部屋干し" autocomplete="off">
+
+      <label for="f-exp">自分の体験メモ（そのまま本文に入ります）</label>
+      <textarea id="f-exp" placeholder="例：夜に干して朝には乾いてました。前は2日かかっていたのが嘘みたいです。"></textarea>
+
+      <label for="f-event">セール</label>
+      <select id="f-event"></select>
+
+      <div class="row">
+        <div>
+          <label for="f-off">割引率%</label>
+          <input id="f-off" type="number" inputmode="numeric" min="1" max="99" placeholder="30">
+        </div>
+        <div>
+          <label for="f-length">分量</label>
+          <select id="f-length"></select>
+        </div>
+      </div>
+
+      <label class="check"><input type="checkbox" id="f-photo" checked> 自分で撮った写真を使う（#オリジナル写真を入れる）</label>
+      <label class="check"><input type="checkbox" id="f-pr"> 商品提供・イベント参加・お試しクーポンあり（PR表記が必須）</label>
+
+      <button class="primary" id="btn-room">紹介文を3パターン作る</button>
+      <button class="secondary" id="btn-room-again">別パターンを出す</button>
+    </div>
+
+    <div id="room-out"></div>
+  </section>
+
+  <!-- ③ X投稿 -->
+  <section id="tab-x" hidden>
+    <div class="card">
+      <h2>X（旧Twitter）投稿</h2>
+      <p class="sub">「ROOM紹介文」タブの入力をそのまま使います。日本語140文字相当の上限に自動で収めます。</p>
+
+      <label for="x-url">リンク（ROOMの投稿URL / 商品ページURL）</label>
+      <input id="x-url" type="url" inputmode="url" placeholder="https://room.rakuten.co.jp/…" autocomplete="off">
+
+      <label for="x-link">リンクの置き方</label>
+      <select id="x-link"></select>
+
+      <label for="x-patterns">出す型（複数選択可）</label>
+      <select id="x-patterns" multiple size="5"></select>
+
+      <button class="primary" id="btn-x">X投稿を作る</button>
+      <button class="secondary" id="btn-x-list">まとめ投稿（リスト型）を作る</button>
+
+      <p class="note">
+        2025年8月の楽天アフィリエイト規約改定で、<strong>他人の投稿への返信やコメント欄にアフィリエイトリンクを貼る行為は禁止</strong>になりました。
+        自分の投稿へのセルフリプは対象外です。
+      </p>
+    </div>
+
+    <div id="x-out"></div>
+  </section>
+
+  <!-- ④ チェック -->
+  <section id="tab-check" hidden>
+    <div class="card">
+      <h2>投稿前チェック</h2>
+      <p class="sub">書いた文章を貼ると、文字数・NG表現・PR表記をまとめて見ます。</p>
+
+      <label for="c-text">チェックする文章</label>
+      <textarea id="c-text" style="min-height:160px" placeholder="ここに紹介文やポスト文を貼り付け"></textarea>
+
+      <label for="c-mode">どちら向けの文章か</label>
+      <select id="c-mode">
+        <option value="room">楽天ROOMの紹介文（500文字・冒頭42文字）</option>
+        <option value="x">Xのポスト（重み280 / 日本語140文字相当）</option>
+      </select>
+
+      <label class="check"><input type="checkbox" id="c-pr"> 商品提供・イベント参加などがある（PR表記が必須）</label>
+
+      <button class="primary" id="btn-check">チェックする</button>
+    </div>
+
+    <div id="check-out"></div>
+
+    <div class="card">
+      <h2>ルールの早見</h2>
+      <details>
+        <summary>PR表記が必須になるのはどんなとき？</summary>
+        <ul id="pr-cases"></ul>
+        <p>表記に使えるのは「PR」「広告」「宣伝」「プロモーション」など。「AD」「sponsored」は日本語話者に伝わらないため認められていません。置く位置はX・ROOMともに投稿の上部です。</p>
+      </details>
+      <details>
+        <summary>楽天ROOMの仕様まとめ</summary>
+        <ul>
+          <li>紹介文は500文字まで。超えると投稿できません。</li>
+          <li>一覧・検索結果では冒頭42文字までしか表示されません。</li>
+          <li>投稿（コレ！）は1時間100回・24時間200回・通算20,000回が上限。</li>
+          <li>ランクボーナスはB=+1%、A=+2%、S=+3%。B以上にはオリジナル写真の投稿が必須。</li>
+          <li>ピックアップ欄は毎週金曜更新。掲載されているのはオリジナル写真の投稿です。</li>
+        </ul>
+      </details>
+      <details>
+        <summary>ハッシュタグの考え方</summary>
+        <p>タグを付けすぎると、読み手がタグ側へ流れて自分の投稿から離脱します（自爆タグ）。ROOMは5個前後、Xは3個前後に絞るのが無難です。投稿内容と関係のない人気タグを入れる行為は楽天アフィリエイトの禁止事項にあたります。</p>
+      </details>
+    </div>
+  </section>
+</main>
+
+<nav>
+  <button data-tab="ideas" aria-selected="true">ネタ出し</button>
+  <button data-tab="room" aria-selected="false">ROOM文</button>
+  <button data-tab="x" aria-selected="false">X投稿</button>
+  <button data-tab="check" aria-selected="false">チェック</button>
+</nav>
+
+<div class="toast" id="toast"></div>
+
+<footer>
+  楽天ROOM 一人暮らしSALE 投稿メーカー / 生成した文章は投稿前に必ず自分で確認してください
+</footer>
+
+<script type="module" src="./app.js"></script>
+</body>
+</html>
