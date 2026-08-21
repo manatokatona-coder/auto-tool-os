@@ -37,6 +37,11 @@ const HELP = `楽天ROOM 一人暮らしSALE 投稿メーカー
   --pr                      商品提供・イベント参加あり（PR表記を必須にする）
 
 room 固有:
+  --layout <型>             ${RT.LAYOUT_LIST.map((l) => l.id).join(' / ')}（既定 influencer）
+  --signature <署名タグ>     自分のオリ写タグ（例: ちぇる。オリ写⸜❤︎⸝）
+  --target <誰向けか>        区切り線の上に出る一行
+  --accent <絵文字>          投稿全体で揃えるアクセント（既定 🤎）
+  --keywords <検索ワード>    タグの後ろに置く平テキスト（カンマ区切り・2つまで）
   --tone <文体>             ${RT.TONE_LIST.map((t) => t.id).join(' / ')}
   --length <分量>           ${Object.keys(RT.LENGTH_PRESETS).join(' / ')}
   --variants <件数>         生成するパターン数（既定3）
@@ -73,6 +78,11 @@ const options = {
   scene: { type: 'string' },
   experience: { type: 'string' },
   merits: { type: 'string' },
+  layout: { type: 'string' },
+  signature: { type: 'string' },
+  target: { type: 'string' },
+  accent: { type: 'string' },
+  keywords: { type: 'string' },
   url: { type: 'string' },
   pattern: { type: 'string' },
   link: { type: 'string' },
@@ -121,6 +131,13 @@ function resolveInput() {
     scene: values.scene ?? base.scene ?? '',
     experience: values.experience ?? '',
     tone: values.tone ?? 'friendly',
+    layout: values.layout ?? 'influencer',
+    signatureTag: values.signature ?? '',
+    target: values.target ?? '',
+    accent: values.accent ?? '🤎',
+    plainKeywords: values.keywords
+      ? values.keywords.split(/[,、]/).map((s) => s.trim()).filter(Boolean)
+      : [],
     length: values.length ?? 'standard',
     event: values.event ?? 'none',
     off: values.off ? Number(values.off) : null,
@@ -193,7 +210,7 @@ const commands = {
     for (const [i, v] of variants.entries()) {
       const L = v.validation.length;
       console.log(`\n${'='.repeat(56)}`);
-      console.log(`パターン${i + 1}（${RT.TONES[v.tone].label} / ${L.length}文字 / 冒頭42字${v.fitsPreview ? 'OK' : '超過'}）`);
+      console.log(`パターン${i + 1}（${RT.LAYOUTS[v.layout].label} / ${RT.TONES[v.tone].label} / ${L.length}文字 / 冒頭42字${v.fitsPreview ? 'OK' : '超過'}）`);
       console.log('='.repeat(56));
       console.log(v.text);
       console.log(`\n  一覧で見える範囲: ${v.preview}${L.previewFull ? '…' : ''}`);

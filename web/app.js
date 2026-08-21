@@ -31,6 +31,8 @@ function init() {
   bindActions();
   applyQueryParams();
   bindAutosave();
+  bindModeSwitch();
+  bindLayoutSwitch();
   registerServiceWorker();
 }
 
@@ -55,6 +57,8 @@ function fillSelects() {
   const patterns = RT.X_PATTERN_LIST.filter((p) => p.id !== 'list');
   $('x-patterns').append(...patterns.map((p) => opt(p.id, `${p.label}｜${p.desc}`)));
   for (const o of $('x-patterns').options) o.selected = ['empathy', 'problem', 'spec'].includes(o.value);
+
+  $('f-accent').append(...RT.ACCENT_EMOJI.map((e) => opt(e, `${e}  この色で揃える`)));
 
   $('pr-cases').append(
     ...RT.PR_REQUIRED_CASES.map((c) =>
@@ -97,8 +101,14 @@ function goTab(name) {
 const INPUT_IDS = [
   'f-name', 'f-cat', 'f-tone', 'f-pain', 'f-hook', 'f-merits', 'f-caution',
   'f-scene', 'f-exp', 'f-event', 'f-off', 'f-length', 'f-photo', 'f-pr',
+  'f-mode-normal', 'f-mode-sale', 'f-price-regular', 'f-price-sale',
+  'f-layout-influencer', 'f-layout-review', 'f-target', 'f-target-emoji',
+  'f-signature', 'f-accent', 'f-keywords', 'f-cta',
   'x-url', 'x-link', 'idea-season', 'idea-cat', 'idea-maniac',
 ];
+
+/** チェックボックスとラジオは checked、それ以外は value を読む。 */
+const isToggle = (node) => node.type === 'checkbox' || node.type === 'radio';
 
 function bindAutosave() {
   for (const id of INPUT_IDS) {
@@ -107,11 +117,59 @@ function bindAutosave() {
   }
 }
 
+/** 書き方の型の切り替え。型でしか使わない入力欄を出し入れする。 */
+function bindLayoutSwitch() {
+  const sync = () => {
+    const influencer = $('f-layout-influencer').checked;
+    $('influencer-fields').hidden = !influencer;
+    $('layout-note').textContent = influencer
+      ? 'キャッチ→✔リスト→体験談→誘導文の並びで作ります。ROOMで伸びている投稿の型です。'
+      : 'イントロ→メリット→デメリット→クロージングの3段構成で作ります。';
+  };
+  for (const id of ['f-layout-influencer', 'f-layout-review']) {
+    $(id).addEventListener('change', sync);
+  }
+  sync();
+}
+
+/** 通常商品／セール商品の切り替えと、価格欄の表示・割引率の自動計算。 */
+function bindModeSwitch() {
+  const sync = () => {
+    $('sale-fields').hidden = !$('f-mode-sale').checked;
+    updatePriceNote();
+  };
+  for (const id of ['f-mode-normal', 'f-mode-sale']) $(id).addEventListener('change', sync);
+  for (const id of ['f-price-regular', 'f-price-sale', 'f-off']) {
+    $(id).addEventListener('input', updatePriceNote);
+  }
+  sync();
+}
+
+/** 入力された価格から、実際に冒頭へ出る文字列をその場で見せる。 */
+function updatePriceNote() {
+  const note = $('price-note');
+  const regular = RT.parsePrice($('f-price-regular').value);
+  const sale = RT.parsePrice($('f-price-sale').value);
+  const off = $('f-off').value ? Number($('f-off').value) : null;
+  const variants = RT.priceMoveVariants({ regular, sale, off });
+
+  if (variants.length === 0) {
+    note.textContent = '通常価格とセール価格を入れると、紹介文の冒頭が「19,800円→9,900円（50%OFF）」の形になります。';
+    return;
+  }
+  if (regular && sale && regular <= sale) {
+    note.textContent = '通常価格がセール価格以下になっています。2つの欄が入れ替わっていないか確認してください。';
+    return;
+  }
+  const saved = regular && sale ? `・${RT.formatYen(regular - sale)}お得` : '';
+  note.textContent = `冒頭はこうなります：「${variants[0].text}」${saved}`;
+}
+
 function saveInput() {
   const data = {};
   for (const id of INPUT_IDS) {
     const n = $(id);
-    data[id] = n.type === 'checkbox' ? n.checked : n.value;
+    data[id] = isToggle(n) ? n.checked : n.value;
   }
   try {
     localStorage.setItem(STORE_KEY, JSON.stringify(data));
@@ -130,7 +188,7 @@ function restoreInput() {
   for (const [id, v] of Object.entries(data)) {
     const n = $(id);
     if (!n) continue;
-    if (n.type === 'checkbox') n.checked = Boolean(v);
+    if (isToggle(n)) n.checked = Boolean(v);
     else n.value = v;
   }
 }
@@ -138,7 +196,11 @@ function restoreInput() {
 /** iOSショートカットなどから ?name=…&url=… で開かれたときにフォームを埋める。 */
 function applyQueryParams() {
   const q = new URLSearchParams(location.search);
-  const map = { name: 'f-name', url: 'x-url', cat: 'f-cat', off: 'f-off', pain: 'f-pain', hook: 'f-hook' };
+  const map = {
+    name: 'f-name', url: 'x-url', cat: 'f-cat', off: 'f-off',
+    pain: 'f-pain', hook: 'f-hook',
+    price: 'f-price-regular', sale: 'f-price-sale',
+  };
   let touched = false;
   for (const [key, id] of Object.entries(map)) {
     const v = q.get(key);
@@ -146,6 +208,13 @@ function applyQueryParams() {
       $(id).value = v;
       touched = true;
     }
+  }
+  // 価格が渡ってきたら、セール商品として開く
+  if (q.get('sale') || q.get('price')) {
+    $('f-mode-sale').checked = true;
+    $('sale-fields').hidden = false;
+    updatePriceNote();
+    touched = true;
   }
   if (touched) {
     saveInput();
@@ -267,6 +336,16 @@ function readForm() {
     experience: $('f-exp').value.trim(),
     event: $('f-event').value,
     off: $('f-off').value ? Number($('f-off').value) : null,
+    layout: $('f-layout-review').checked ? 'review' : 'influencer',
+    target: $('f-target').value.trim(),
+    targetEmoji: $('f-target-emoji').value.trim(),
+    signatureTag: $('f-signature').value.trim(),
+    accent: $('f-accent').value || '🤎',
+    cta: $('f-cta').value.trim(),
+    plainKeywords: $('f-keywords').value.split('\n').map((s) => s.trim()).filter(Boolean).slice(0, 2),
+    mode: $('f-mode-sale').checked ? 'sale' : 'normal',
+    regularPrice: RT.parsePrice($('f-price-regular').value),
+    salePrice: RT.parsePrice($('f-price-sale').value),
     length: $('f-length').value,
     season: $('idea-season').value || RT.seasonOf(new Date()),
     hasOriginalPhoto: $('f-photo').checked,
@@ -336,6 +415,8 @@ function prefillFromProduct(p) {
   $('f-merits').value = (p.merits || []).join('\n');
   $('f-caution').value = p.caution || '';
   $('f-scene').value = (p.scenes || [])[0] || '';
+  if (!$('f-target').value) $('f-target').value = `${p.pain}人に`;
+  if (!$('f-target-emoji').value) $('f-target-emoji').value = RT.CATEGORY_EMOJI[p.cat] || '';
   saveInput();
 }
 
@@ -396,7 +477,11 @@ function renderRoom(reroll = false) {
       { text: `${L.length}／500字`, kind: L.over ? 'danger' : L.length > 460 ? 'warn' : 'ok' },
       { text: v.fitsPreview ? '冒頭42字に収まる' : '1行目が42字を超過', kind: v.fitsPreview ? 'ok' : 'warn' },
       { text: RT.TONES[v.tone].label },
+      { text: RT.LAYOUTS[v.layout].label },
     ];
+    if (v.mode === 'sale' && v.discountPercent) {
+      badges.splice(2, 0, { text: `${v.discountPercent}%OFF`, kind: 'warn' });
+    }
     out.append(
       resultCard({
         title: `パターン${i + 1}`,

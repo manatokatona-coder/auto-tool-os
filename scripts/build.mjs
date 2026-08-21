@@ -20,12 +20,14 @@ const DIST = join(ROOT, 'dist');
 /** 依存の浅い順。連結の順番がそのまま評価順になる。 */
 const MODULES = [
   'src/data/products.js',
+  'src/data/layouts.js',
   'src/data/tones.js',
   'src/data/hashtags.js',
   'src/data/saleEvents.js',
   'src/data/ngwords.js',
   'src/core/textLength.js',
   'src/core/rng.js',
+  'src/core/price.js',
   'src/core/validate.js',
   'src/core/roomComment.js',
   'src/core/xPost.js',
@@ -113,6 +115,8 @@ async function verifyBundle(bundle) {
   const required = [
     'generateRoomComment', 'generateRoomVariants', 'generateXPost', 'generateXVariants',
     'validateRoomComment', 'validateXPost', 'suggestIdeas', 'suggestTheme', 'searchProducts',
+    'LAYOUTS', 'LAYOUT_LIST', 'ACCENT_EMOJI', 'CATEGORY_EMOJI', 'CTA_TEMPLATES',
+    'parsePrice', 'formatYen', 'discountPercent', 'priceMoveVariants', 'validatePrices',
     'PRODUCTS', 'CATEGORIES', 'SEASONS', 'TONE_LIST', 'X_PATTERN_LIST', 'EVENT_LIST',
     'LENGTH_PRESETS', 'LINK_PLACEMENTS', 'PR_REQUIRED_CASES', 'ROOM_MAX', 'X_MAX_WEIGHTED',
     'seasonOf', 'suggestEvents', 'EVENTS', 'TONES', 'X_PATTERNS', 'ROOM_PREVIEW',
