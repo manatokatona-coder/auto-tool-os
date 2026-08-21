@@ -4,6 +4,14 @@
  */
 
 export { PRODUCTS, CATEGORIES, SEASONS, byCategory, byManiac, bySeason } from './data/products.js';
+export {
+  LAYOUTS,
+  LAYOUT_LIST,
+  DIVIDERS,
+  ACCENT_EMOJI,
+  CATEGORY_EMOJI,
+  CTA_TEMPLATES,
+} from './data/layouts.js';
 export { TONES, TONE_LIST, X_PATTERNS, X_PATTERN_LIST } from './data/tones.js';
 export {
   ROOM_BASE,

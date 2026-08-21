@@ -15,6 +15,14 @@ import { TONES } from '../data/tones.js';
 import { buildRoomTags, formatTags } from '../data/hashtags.js';
 import { eventLine, EVENT_CLOSERS } from '../data/saleEvents.js';
 import { priceMoveVariants, discountPercent, validatePrices } from './price.js';
+import {
+  LAYOUTS,
+  DIVIDERS,
+  CATEGORY_EMOJI,
+  POINT_DECOR,
+  POINT_MARK,
+  CTA_TEMPLATES,
+} from '../data/layouts.js';
 import { makeRng, pick, shuffle } from './rng.js';
 import { validateRoomComment } from './validate.js';
 import { ROOM_MAX, ROOM_PREVIEW } from './textLength.js';
@@ -87,6 +95,96 @@ function buildSaleHookLine(tone, ctx, rng, priceVariants) {
 }
 
 /**
+ * インフルエンサー型のキャッチ（1行目）を作る。
+ * 値引き商品なら価格の変化を先頭に置き、そうでなければ商品名と訴求で組む。
+ * どちらも42文字に収める。
+ */
+function buildInfluencerCatch(tone, ctx, rng, priceVariants, accent) {
+  const candidates = [];
+
+  if (priceVariants.length > 0) {
+    for (const pv of priceVariants) {
+      for (const emo of tone.catchEmo) {
+        candidates.push({
+          line: `${pv.text}${accent}${clause(ctx.hook)}${emo}`,
+          rank: pv.rank,
+          hasHook: Boolean(ctx.hook),
+        });
+      }
+    }
+  } else {
+    for (const tpl of tone.catchTemplates) {
+      for (const lead of tone.catchLead) {
+        for (const emo of tone.catchEmo) {
+          candidates.push({
+            line: fill(tpl, { ...ctx, lead, emo, accent }).trim(),
+            rank: 1,
+            hasHook: tpl.includes('{hook}'),
+          });
+        }
+      }
+    }
+  }
+
+  const fitting = candidates.filter((c) => len(c.line) <= ROOM_PREVIEW);
+  if (fitting.length === 0) {
+    const shortest = candidates.reduce((a, b) => (len(a.line) <= len(b.line) ? a : b));
+    return { line: shortest.line, fitsPreview: false };
+  }
+
+  const withHook = fitting.filter((c) => c.hasHook);
+  const poolAll = withHook.length > 0 ? withHook : fitting;
+  const top = Math.max(...poolAll.map((c) => c.rank));
+  const near = poolAll.filter((c) => c.rank >= top - 1);
+
+  return { line: pick(rng, shuffle(rng, near)).line, fitsPreview: true };
+}
+
+/**
+ * ✔リストを組み立てる。行末の飾りは全行には付けず、空文字を混ぜて散らす。
+ */
+function buildPointLines(points, rng, accent) {
+  const decor = shuffle(rng, POINT_DECOR);
+  return points.map((point, i) => {
+    const mark = decor[i % decor.length].replace('{accent}', accent);
+    return `${POINT_MARK}${clause(point)}${mark}`;
+  });
+}
+
+/**
+ * 体験メモを段落に割る。空行があればそこで、なければ1行ずつを1段落として扱う。
+ * 中身は書き手が書いたものなので、文字は一切いじらない。
+ */
+function splitParagraphs(text, max) {
+  if (!text) return [];
+  const byBlank = text.split(/\n\s*\n/).map((s) => s.trim()).filter(Boolean);
+  const parts = byBlank.length > 1 ? byBlank : text.split('\n').map((s) => s.trim()).filter(Boolean);
+  return parts.slice(0, max);
+}
+
+/**
+ * インフルエンサー型の本文を組み立てる。
+ * 並びは実例に合わせて キャッチ → 署名タグ → 誰向けか＋区切り線 → ✔リスト → 体験 → 誘導文。
+ */
+function buildInfluencerBlocks({
+  catchLine, signatureTag, target, cat, targetEmoji, points, paragraphs, cta, dividerIndex,
+}) {
+  const blocks = [catchLine];
+
+  if (signatureTag) blocks.push(signatureTag.startsWith('#') ? signatureTag : `#${signatureTag}`);
+
+  // 行頭の絵文字は指定があればそれを使い、なければカテゴリの既定を当てる。
+  const emoji = targetEmoji || CATEGORY_EMOJI[cat] || '';
+  blocks.push(`${emoji}${target}\n${DIVIDERS[dividerIndex]}`);
+
+  if (points.length > 0) blocks.push(points.join('\n'));
+  for (const para of paragraphs) blocks.push(para);
+  if (cta) blocks.push(cta);
+
+  return blocks;
+}
+
+/**
  * 楽天ROOM用の紹介文を1本生成する。
  *
  * @param {object} input 商品情報と生成条件
@@ -108,6 +206,13 @@ export function generateRoomComment(input) {
     mode = 'normal',
     regularPrice = null,
     salePrice = null,
+    layout: layoutId = 'influencer',
+    signatureTag = '',
+    target = '',
+    accent = '🤎',
+    targetEmoji = '',
+    cta = '',
+    plainKeywords = [],
     season = 'all',
     needsPr = false,
     hasOriginalPhoto = true,
@@ -119,8 +224,9 @@ export function generateRoomComment(input) {
   if (!name) throw new Error('商品名（name）は必須です');
 
   const tone = TONES[toneId] || TONES.friendly;
+  const layout = LAYOUTS[layoutId] || LAYOUTS.influencer;
   const preset = LENGTH_PRESETS[lengthKey] || LENGTH_PRESETS.standard;
-  const rng = makeRng(`${seed}|${name}|${toneId}|${lengthKey}`);
+  const rng = makeRng(`${seed}|${name}|${toneId}|${lengthKey}|${layout.id}`);
 
   const ctx = { name, pain, hook, caution, scene, merit: merits[0] || '' };
 
@@ -129,66 +235,95 @@ export function generateRoomComment(input) {
   const priceVariants =
     mode === 'sale' ? priceMoveVariants({ regular: regularPrice, sale: salePrice, off }) : [];
 
-  const { line: hookLine, fitsPreview } =
-    priceVariants.length > 0
+  const isInfluencer = layout.id === 'influencer';
+
+  const { line: hookLine, fitsPreview } = isInfluencer
+    ? buildInfluencerCatch(tone, ctx, rng, priceVariants, accent)
+    : priceVariants.length > 0
       ? buildSaleHookLine(tone, ctx, rng, priceVariants)
       : buildHookLine(tone, ctx, rng);
 
-  const blocks = [];
+  let chosenMerits = merits.slice(0, layout.maxPoints);
+  let paragraphs = splitParagraphs(experience, layout.maxParagraphs);
+  let workingTags = buildRoomTags({
+    cat, event, season, hasOriginalPhoto, extra: extraTags, limit: layout.maxTags,
+  });
+  let keywords = plainKeywords.filter(Boolean).slice(0, layout.maxKeywords);
+  let dividerIndex = 0;
 
-  // PR表記は必ず先頭。X・ROOMともに投稿の上部に置くよう案内されている。
-  if (needsPr) blocks.push('PR');
+  /** 今の材料から本文ブロックを組み直す。1つ削るたびに呼ぶ。 */
+  const compose = () => {
+    const blocks = [];
 
-  blocks.push(hookLine);
+    // PR表記は必ず先頭。X・ROOMともに投稿の上部に置くよう案内されている。
+    if (needsPr) blocks.push('PR');
 
-  // メイン：メリットを箇条書きに。読みやすさのため改行で区切る。
-  const chosenMerits = merits.slice(0, preset.merits);
-  if (chosenMerits.length > 0) {
-    const bridge = pick(rng, tone.bridge);
-    const bullet = tone.emoji.point || '・';
-    blocks.push([bridge, ...chosenMerits.map((m) => `${bullet}${m}`)].join('\n'));
-  }
-
-  // 体験メモは書き手のオリジナリティそのものなので、加工せずそのまま入れる。
-  if (preset.withExperience && experience) blocks.push(experience.trim());
-
-  // デメリットを添えると紹介文の信頼度が上がる。対処法まで書くのが人気ルーマーの型。
-  if (caution) blocks.push(fill(pick(rng, tone.cautionLead), ctx));
-
-  if (preset.withScene && scene) blocks.push(fill(pick(rng, tone.scene), ctx));
-
-  blocks.push(pick(rng, tone.outro));
-
-  if (preset.withEvent) {
-    const ev = eventLine(event, computedOff);
-    if (ev) blocks.push(`${ev}。${pick(rng, EVENT_CLOSERS)}`);
-  }
-
-  const tags = buildRoomTags({ cat, event, season, hasOriginalPhoto, extra: extraTags });
-
-  let body = blocks.filter(Boolean).join('\n\n');
-  let text = `${body}\n\n${formatTags(tags)}`;
-
-  // 500文字を超えたら、後ろから重要度の低いブロックを落として収める。
-  let guard = 0;
-  while (len(text) > ROOM_MAX && guard < 10) {
-    guard++;
-    const trimmed = blocks.filter(Boolean);
-    // 落とす順番：セール一文 → 使用シーン → 体験メモ → メリットの3つ目
-    if (preset.withEvent && trimmed.length > 3) {
-      blocks.splice(blocks.length - 1, 1);
-    } else if (chosenMerits.length > 2) {
-      chosenMerits.pop();
-      const bridge = pick(rng, tone.bridge);
-      const bullet = tone.emoji.point || '・';
-      const idx = blocks.findIndex((b) => b && b.includes(bullet));
-      if (idx >= 0) blocks[idx] = [bridge, ...chosenMerits.map((m) => `${bullet}${m}`)].join('\n');
+    if (isInfluencer) {
+      const targetLine = target || `${clause(pain)}。そんな人に`;
+      const ctaLine = (cta || pick(rng, CTA_TEMPLATES)).replace('{accent}', accent);
+      blocks.push(...buildInfluencerBlocks({
+        catchLine: hookLine,
+        signatureTag,
+        target: targetLine,
+        cat,
+        targetEmoji,
+        points: buildPointLines(chosenMerits, rng, accent),
+        paragraphs,
+        cta: ctaLine,
+        dividerIndex,
+      }));
+      // デメリットは実例の型には無い要素。書いてあれば誘導文の直前に一行だけ添える。
+      if (caution) blocks.splice(blocks.length - 1, 0, fill(pick(rng, tone.cautionLead), ctx));
     } else {
-      blocks.splice(2, 1);
+      blocks.push(hookLine);
+      if (chosenMerits.length > 0) {
+        const bridge = pick(rng, tone.bridge);
+        const bullet = tone.emoji.point || '・';
+        blocks.push([bridge, ...chosenMerits.map((m) => `${bullet}${m}`)].join('\n'));
+      }
+      if (preset.withExperience && paragraphs.length > 0) blocks.push(paragraphs.join('\n\n'));
+      if (caution) blocks.push(fill(pick(rng, tone.cautionLead), ctx));
+      if (preset.withScene && scene) blocks.push(fill(pick(rng, tone.scene), ctx));
+      blocks.push(pick(rng, tone.outro));
+      if (preset.withEvent) {
+        const ev = eventLine(event, computedOff);
+        if (ev) blocks.push(`${ev}。${pick(rng, EVENT_CLOSERS)}`);
+      }
     }
-    body = blocks.filter(Boolean).join('\n\n');
-    text = `${body}\n\n${formatTags(tags)}`;
+
+    return blocks.filter(Boolean);
+  };
+
+  // タグ行の末尾に置く平テキストは、読み手をタグ先へ逃がさずに検索へ当てるためのもの。
+  const tagLine = () => [formatTags(workingTags), ...keywords].join(' ').trim();
+
+  let body = compose().join('\n\n');
+  let text = `${body}\n\n${tagLine()}`;
+
+  // 500文字を超えたら飾りから削る。順番は
+  // 区切り線を短く → 平テキスト → ✔を後ろから → 体験段落を後ろから → タグ。
+  let guard = 0;
+  while (len(text) > ROOM_MAX && guard < 30) {
+    guard++;
+    if (isInfluencer && dividerIndex < DIVIDERS.length - 1) {
+      dividerIndex++;
+    } else if (keywords.length > 0) {
+      keywords.pop();
+    } else if (chosenMerits.length > (isInfluencer ? 3 : 2)) {
+      chosenMerits = chosenMerits.slice(0, -1);
+    } else if (paragraphs.length > 1) {
+      paragraphs = paragraphs.slice(0, -1);
+    } else if (workingTags.length > 3) {
+      workingTags = workingTags.slice(0, -1);
+    } else if (chosenMerits.length > 1) {
+      chosenMerits = chosenMerits.slice(0, -1);
+    } else {
+      break;
+    }
+    body = compose().join('\n\n');
+    text = `${body}\n\n${tagLine()}`;
   }
+
 
   const validation = validateRoomComment(text, { needsPr });
   const priceIssues = validatePrices({ mode, regular: regularPrice, sale: salePrice, off });
@@ -200,7 +335,9 @@ export function generateRoomComment(input) {
   return {
     text,
     body,
-    tags,
+    tags: workingTags,
+    keywords,
+    layout: layout.id,
     hookLine,
     fitsPreview,
     preview: Array.from(text).slice(0, ROOM_PREVIEW).join(''),

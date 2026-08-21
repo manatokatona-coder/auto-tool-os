@@ -63,6 +63,13 @@
       <h2>楽天ROOM 紹介文</h2>
       <p class="sub">500文字以内・冒頭42文字にフックを置く型で作ります。</p>
 
+      <label>書き方の型</label>
+      <div class="segmented" role="radiogroup" aria-label="書き方の型">
+        <label><input type="radio" name="f-layout" id="f-layout-influencer" value="influencer" checked><span>インフルエンサー型</span></label>
+        <label><input type="radio" name="f-layout" id="f-layout-review" value="review"><span>レビュー型</span></label>
+      </div>
+      <p class="note" id="layout-note">キャッチ→✔リスト→体験談→誘導文の並びで作ります。ROOMで伸びている投稿の型です。</p>
+
       <label for="f-name">商品名 <span style="color:var(--accent)">*</span></label>
       <input id="f-name" type="text" placeholder="例：衣類乾燥除湿機" autocomplete="off">
 
@@ -100,23 +107,49 @@
         <p class="note">通常価格は、楽天の商品ページに出ている価格をそのまま写してください。実際には販売していなかった価格と比べて書くと、景品表示法の不当な二重価格表示になります（比較に使う価格は、セール直前8週間のうち4週間以上そこで売られていた価格であることが原則）。</p>
       </div>
 
+      <div id="influencer-fields">
+        <label for="f-target">誰向けか（区切り線の上に出ます）</label>
+        <div class="row" style="grid-template-columns: 64px 1fr">
+          <div>
+            <label for="f-target-emoji" class="sr-label">絵文字</label>
+            <input id="f-target-emoji" type="text" maxlength="4" placeholder="🥤" autocomplete="off">
+          </div>
+          <div>
+            <label for="f-target" class="sr-label">対象</label>
+            <input id="f-target" type="text" placeholder="見た目も機能性もどっちも欲しい人に" autocomplete="off">
+          </div>
+        </div>
+
+        <label for="f-signature">署名タグ（自分のオリ写タグ）</label>
+        <input id="f-signature" type="text" placeholder="ちぇる。オリ写⸜❤︎⸝" autocomplete="off">
+
+        <label for="f-accent">アクセント絵文字</label>
+        <select id="f-accent"></select>
+
+        <label for="f-keywords">タグの後ろに置く検索ワード（1行に1つ、2つまで）</label>
+        <textarea id="f-keywords" style="min-height:60px" placeholder="暑さ対策&#10;車内を快適に"></textarea>
+
+        <label for="f-cta">誘導文（空なら自動で選びます）</label>
+        <input id="f-cta" type="text" placeholder="詳しくは 〘 楽天市場で詳細を見る 〙 をクリックしてください🎀" autocomplete="off">
+      </div>
+
       <label for="f-pain">読み手の悩み（イントロになります）</label>
       <input id="f-pain" type="text" placeholder="例：部屋干しが乾かなくて生乾き臭がする" autocomplete="off">
 
       <label for="f-hook">ひとことでいうと（訴求）</label>
       <input id="f-hook" type="text" placeholder="例：部屋干しが数時間で乾き切る" autocomplete="off">
 
-      <label for="f-merits">良かった点（1行に1つ、3つまで）</label>
-      <textarea id="f-merits" placeholder="洗濯物の下に置くだけ&#10;梅雨も冬の結露も同じ1台で対応&#10;サーキュレーター機能付きなら送風にも使える"></textarea>
+      <label for="f-merits">✔リストに出す良かった点（1行に1つ、6つまで）</label>
+      <textarea id="f-merits" placeholder="保冷・保温OKで飲み頃キープ&#10;セラミック加工でコーヒーも入れられる&#10;ストロー付きで飲みやすい&#10;しっかり閉まるフタで漏れにくい&#10;車のドリンクホルダーにも入る&#10;カラバリが可愛くて部屋に馴染む"></textarea>
 
-      <label for="f-caution">正直なデメリット（信頼度が上がります）</label>
+      <label for="f-caution">正直なデメリット（任意・書くと誘導文の前に入ります）</label>
       <input id="f-caution" type="text" placeholder="例：排水タンクを毎回捨てる手間はある" autocomplete="off">
 
       <label for="f-scene">よく使う場面</label>
       <input id="f-scene" type="text" placeholder="例：梅雨の部屋干し" autocomplete="off">
 
-      <label for="f-exp">自分の体験メモ（そのまま本文に入ります）</label>
-      <textarea id="f-exp" placeholder="例：夜に干して朝には乾いてました。前は2日かかっていたのが嘘みたいです。"></textarea>
+      <label for="f-exp">体験メモ（空行で区切ると段落になります・そのまま本文に入ります）</label>
+      <textarea id="f-exp" placeholder="最近は家でも車でもこればっかり&#10;&#10;バッグに入れても傾けても漏れにくいから&#10;安心感が全然違った"></textarea>
 
       <label for="f-event">セール</label>
       <select id="f-event"></select>

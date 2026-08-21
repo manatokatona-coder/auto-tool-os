@@ -32,6 +32,7 @@ function init() {
   applyQueryParams();
   bindAutosave();
   bindModeSwitch();
+  bindLayoutSwitch();
   registerServiceWorker();
 }
 
@@ -56,6 +57,8 @@ function fillSelects() {
   const patterns = RT.X_PATTERN_LIST.filter((p) => p.id !== 'list');
   $('x-patterns').append(...patterns.map((p) => opt(p.id, `${p.label}｜${p.desc}`)));
   for (const o of $('x-patterns').options) o.selected = ['empathy', 'problem', 'spec'].includes(o.value);
+
+  $('f-accent').append(...RT.ACCENT_EMOJI.map((e) => opt(e, `${e}  この色で揃える`)));
 
   $('pr-cases').append(
     ...RT.PR_REQUIRED_CASES.map((c) =>
@@ -99,6 +102,8 @@ const INPUT_IDS = [
   'f-name', 'f-cat', 'f-tone', 'f-pain', 'f-hook', 'f-merits', 'f-caution',
   'f-scene', 'f-exp', 'f-event', 'f-off', 'f-length', 'f-photo', 'f-pr',
   'f-mode-normal', 'f-mode-sale', 'f-price-regular', 'f-price-sale',
+  'f-layout-influencer', 'f-layout-review', 'f-target', 'f-target-emoji',
+  'f-signature', 'f-accent', 'f-keywords', 'f-cta',
   'x-url', 'x-link', 'idea-season', 'idea-cat', 'idea-maniac',
 ];
 
@@ -110,6 +115,21 @@ function bindAutosave() {
     $(id).addEventListener('change', saveInput);
     $(id).addEventListener('input', saveInput);
   }
+}
+
+/** 書き方の型の切り替え。型でしか使わない入力欄を出し入れする。 */
+function bindLayoutSwitch() {
+  const sync = () => {
+    const influencer = $('f-layout-influencer').checked;
+    $('influencer-fields').hidden = !influencer;
+    $('layout-note').textContent = influencer
+      ? 'キャッチ→✔リスト→体験談→誘導文の並びで作ります。ROOMで伸びている投稿の型です。'
+      : 'イントロ→メリット→デメリット→クロージングの3段構成で作ります。';
+  };
+  for (const id of ['f-layout-influencer', 'f-layout-review']) {
+    $(id).addEventListener('change', sync);
+  }
+  sync();
 }
 
 /** 通常商品／セール商品の切り替えと、価格欄の表示・割引率の自動計算。 */
@@ -316,6 +336,13 @@ function readForm() {
     experience: $('f-exp').value.trim(),
     event: $('f-event').value,
     off: $('f-off').value ? Number($('f-off').value) : null,
+    layout: $('f-layout-review').checked ? 'review' : 'influencer',
+    target: $('f-target').value.trim(),
+    targetEmoji: $('f-target-emoji').value.trim(),
+    signatureTag: $('f-signature').value.trim(),
+    accent: $('f-accent').value || '🤎',
+    cta: $('f-cta').value.trim(),
+    plainKeywords: $('f-keywords').value.split('\n').map((s) => s.trim()).filter(Boolean).slice(0, 2),
     mode: $('f-mode-sale').checked ? 'sale' : 'normal',
     regularPrice: RT.parsePrice($('f-price-regular').value),
     salePrice: RT.parsePrice($('f-price-sale').value),
@@ -388,6 +415,8 @@ function prefillFromProduct(p) {
   $('f-merits').value = (p.merits || []).join('\n');
   $('f-caution').value = p.caution || '';
   $('f-scene').value = (p.scenes || [])[0] || '';
+  if (!$('f-target').value) $('f-target').value = `${p.pain}人に`;
+  if (!$('f-target-emoji').value) $('f-target-emoji').value = RT.CATEGORY_EMOJI[p.cat] || '';
   saveInput();
 }
 
@@ -448,6 +477,7 @@ function renderRoom(reroll = false) {
       { text: `${L.length}／500字`, kind: L.over ? 'danger' : L.length > 460 ? 'warn' : 'ok' },
       { text: v.fitsPreview ? '冒頭42字に収まる' : '1行目が42字を超過', kind: v.fitsPreview ? 'ok' : 'warn' },
       { text: RT.TONES[v.tone].label },
+      { text: RT.LAYOUTS[v.layout].label },
     ];
     if (v.mode === 'sale' && v.discountPercent) {
       badges.splice(2, 0, { text: `${v.discountPercent}%OFF`, kind: 'warn' });

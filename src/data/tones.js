@@ -32,6 +32,25 @@ export const TONES = {
       '{priceMove}。いま下がってます。{hook}',
       '{priceMove}。ずっと迷ってたなら今かも。',
     ],
+
+    /** インフルエンサー型のキャッチ（1行目）用。{accent}はアクセント絵文字。 */
+    catchLead: [
+      '毎日使いたくなる',
+      'もう手放せない',
+      'ずっと探してた',
+      '買ってよかった',
+    ],
+    catchEmo: [
+      '🥹',
+      '🫶',
+      '😭',
+      '',
+    ],
+    catchTemplates: [
+      '{lead}{name}{accent}{hook}{emo}',
+      '{name}{accent}{hook}{emo}',
+      '{hook}{accent}{name}、買ってよかった{emo}',
+    ],
     bridge: [
       'いいなと思ってるのはこのへん。',
       '使ってみて良かったのはこの3つ。',
@@ -71,6 +90,22 @@ export const TONES = {
       '{priceMove}。値下がりしている今が狙い目です。',
       '{priceMove}。{pain}。そんな方に向けた内容です。',
       '{priceMove}。使ってみた感想をまとめます。',
+    ],
+
+    /** インフルエンサー型のキャッチ（1行目）用。{accent}はアクセント絵文字。 */
+    catchLead: [
+      '毎日使いたくなる',
+      '長く使えそうな',
+      '買ってよかった',
+    ],
+    catchEmo: [
+      '✨',
+      '',
+      '🤍',
+    ],
+    catchTemplates: [
+      '{lead}{name}{accent}{hook}{emo}',
+      '{name}{accent}{hook}{emo}',
     ],
     bridge: [
       '良かった点は次のとおりです。',
@@ -112,6 +147,21 @@ export const TONES = {
       '{priceMove}。それでも人を選びます。',
       '{priceMove}。値段以外の理由を書きます。',
     ],
+
+    /** インフルエンサー型のキャッチ（1行目）用。{accent}はアクセント絵文字。 */
+    catchLead: [
+      '期待してなかった',
+      '正直迷ってた',
+      '結局これに戻った',
+    ],
+    catchEmo: [
+      '',
+      '…',
+    ],
+    catchTemplates: [
+      '{lead}{name}{accent}{hook}{emo}',
+      '{name}{accent}{hook}{emo}',
+    ],
     bridge: [
       'それでも手放せない理由。',
       '短所を踏まえたうえで、良い点。',
@@ -151,6 +201,19 @@ export const TONES = {
       '{priceMove}。{hook}',
       '{priceMove}',
     ],
+
+    /** インフルエンサー型のキャッチ（1行目）用。{accent}はアクセント絵文字。 */
+    catchLead: [
+      '',
+    ],
+    catchEmo: [
+      '',
+      '✨',
+    ],
+    catchTemplates: [
+      '{name}{accent}{hook}{emo}',
+      '{hook}{accent}{name}{emo}',
+    ],
     bridge: ['ポイント', '要点', 'できること'],
     cautionLead: ['※{caution}', '注意：{caution}', '△ {caution}'],
     scene: ['用途：{scene}', '出番：{scene}', '使う場面：{scene}'],
@@ -177,6 +240,22 @@ export const TONES = {
       '{priceMove}。{hook}',
       '{priceMove}。時間を金で買う判断。',
       '{priceMove}。{pain}。そんな人向け。',
+    ],
+
+    /** インフルエンサー型のキャッチ（1行目）用。{accent}はアクセント絵文字。 */
+    catchLead: [
+      '毎日の手間が減った',
+      '時間が浮いた',
+      '買ってよかった',
+    ],
+    catchEmo: [
+      '',
+      '⏱',
+      '✨',
+    ],
+    catchTemplates: [
+      '{lead}{name}{accent}{hook}{emo}',
+      '{name}{accent}{hook}{emo}',
     ],
     bridge: [
       '時短につながっているのはこの3点。',
