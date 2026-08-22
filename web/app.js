@@ -18,6 +18,7 @@ const el = (tag, props = {}, children = []) => {
 };
 
 const STORE_KEY = 'room-tool.input.v1';
+const KEY_STORE = 'room-tool.rakuten-keys.v1';
 let seedCounter = 0;
 
 /* ------------------------------------------------------------------ 起動 */
@@ -33,6 +34,7 @@ function init() {
   bindAutosave();
   bindModeSwitch();
   bindLayoutSwitch();
+  restoreKeys();
   registerServiceWorker();
 }
 
@@ -353,6 +355,219 @@ function readForm() {
   };
 }
 
+/* ------------------------------------------------- 商品をURLから読み込む */
+
+function loadKeys() {
+  try {
+    return JSON.parse(localStorage.getItem(KEY_STORE) || '{}');
+  } catch {
+    return {};
+  }
+}
+
+function saveKeys() {
+  try {
+    localStorage.setItem(KEY_STORE, JSON.stringify({
+      applicationId: $('imp-appid').value.trim(),
+      accessKey: $('imp-key').value.trim(),
+    }));
+  } catch {
+    /* 保存できなくても、その場の取り込みは動く */
+  }
+}
+
+/**
+ * 楽天のAPIを呼ぶ。まず fetch で試し、CORSで弾かれたらJSONPに切り替える。
+ * JSONPはscriptタグでの読み込みなのでCORSの制限を受けない。
+ */
+async function callRakutenApi(itemCode, keys) {
+  const direct = RT.buildSearchUrl({ ...keys, itemCode });
+  try {
+    const res = await fetch(direct);
+    const json = await res.json().catch(() => null);
+    const apiError = json && RT.extractApiError(json, res.status);
+    if (apiError) throw new Error(apiError);
+    if (res.ok && json) return json;
+    throw new Error(RT.describeApiError({ status: res.status }));
+  } catch (e) {
+    if (e.message && !/Failed to fetch|NetworkError|CORS/i.test(e.message)) throw e;
+    return await callRakutenJsonp(itemCode, keys);
+  }
+}
+
+/** JSONPでの呼び出し。CORSに阻まれたときの逃げ道。 */
+function callRakutenJsonp(itemCode, keys) {
+  return new Promise((resolve, reject) => {
+    const fn = `roomToolJsonp${Date.now()}`;
+    const script = document.createElement('script');
+    const timer = setTimeout(() => {
+      cleanup();
+      reject(new Error('楽天APIから応答がありませんでした。キーと許可ドメインの設定を確認してください'));
+    }, 12000);
+
+    const cleanup = () => {
+      clearTimeout(timer);
+      delete window[fn];
+      script.remove();
+    };
+
+    window[fn] = (data) => {
+      cleanup();
+      resolve(data);
+    };
+    script.onerror = () => {
+      cleanup();
+      reject(new Error('楽天APIを呼び出せませんでした。キーと許可ドメインの設定を確認してください'));
+    };
+
+    script.src = RT.buildSearchUrl({ ...keys, itemCode, callback: fn });
+    document.head.append(script);
+  });
+}
+
+async function importFromUrl() {
+  const out = $('imp-out');
+  out.replaceChildren();
+
+  const parsed = RT.parseRakutenUrl($('imp-url').value);
+  if (!parsed.ok) {
+    out.append(el('p', { className: 'note', textContent: parsed.message }));
+    return;
+  }
+
+  // URLだけでも先にリンク欄へ入れておく。ここまではキーがなくてもできる。
+  if (!$('x-url').value) $('x-url').value = parsed.canonicalUrl;
+  saveInput();
+
+  const keys = { applicationId: $('imp-appid').value.trim(), accessKey: $('imp-key').value.trim() };
+  if (!keys.applicationId) {
+    out.append(el('p', { className: 'note', textContent: 'リンクは取り込みました。商品名や価格まで自動で入れるには、下の「楽天APIキーの設定」を開いてキーを入れてください。キーなしで進めるなら「コピーした文章から読み取る」が使えます。' }));
+    $('imp-settings').open = true;
+    return;
+  }
+
+  const button = $('btn-import');
+  button.disabled = true;
+  button.textContent = '読み込み中…';
+
+  try {
+    const data = await callRakutenApi(parsed.itemCodeParam, keys);
+    const item = RT.firstItem(data);
+    if (!item) {
+      out.append(el('p', { className: 'note', textContent: 'この商品コードでは見つかりませんでした。商品ページのURLをもう一度確認してください。' }));
+      return;
+    }
+    renderImported(RT.mapItemToForm(item), parsed.canonicalUrl);
+    toast('商品を読み込みました');
+  } catch (e) {
+    out.append(el('p', { className: 'note', textContent: e.message }));
+  } finally {
+    button.disabled = false;
+    button.textContent = 'この商品を読み込む';
+  }
+}
+
+function importFromText() {
+  const out = $('imp-out');
+  out.replaceChildren();
+
+  const parsed = RT.parsePastedText($('imp-text').value);
+  if (!parsed.ok) {
+    out.append(el('p', { className: 'note', textContent: parsed.message }));
+    return;
+  }
+  renderImported({ ...parsed, pointOptions: [], catLabel: parsed.cat ? RT.CATEGORIES[parsed.cat] : null }, parsed.url);
+  toast('読み取りました');
+}
+
+/**
+ * 読み込んだ内容をフォームへ反映し、選ぶ余地のあるもの（短い商品名・✔の候補）は
+ * その場で選べるように出す。自動で決めきらないのは、どれを使うかが投稿の質に直結するため。
+ */
+function renderImported(form, url) {
+  const out = $('imp-out');
+  out.replaceChildren();
+
+  // すぐ決まるものは入れてしまう
+  $('f-name').value = form.name || '';
+  if (form.cat) $('f-cat').value = form.cat;
+  if (form.salePrice) {
+    $('f-mode-sale').checked = true;
+    $('sale-fields').hidden = false;
+    $('f-price-sale').value = form.salePrice;
+    if (form.regularPrice) $('f-price-regular').value = form.regularPrice;
+    updatePriceNote();
+  }
+  if (url && !$('x-url').value) $('x-url').value = url;
+  saveInput();
+
+  const summary = [
+    form.shopName ? `ショップ: ${form.shopName}` : '',
+    form.catLabel ? `カテゴリ: ${form.catLabel}` : 'カテゴリ: 判定できず（手で選んでください）',
+    form.reviewCount ? `レビュー: ★${form.reviewAverage}（${form.reviewCount}件）` : '',
+  ].filter(Boolean);
+
+  const card = el('div', { className: 'result' }, [
+    el('div', { className: 'meta' }, [el('strong', { textContent: '読み込みました' })]),
+    ...summary.map((t) => el('p', { className: 'sub', textContent: t })),
+  ]);
+
+  if (form.nameRemoved?.length) {
+    card.append(el('p', { className: 'sub', textContent: `商品名から外した販促表記: ${form.nameRemoved.join(' ')}` }));
+  }
+
+  // 商品名の短縮候補
+  if (form.nameOptions?.length > 1) {
+    card.append(el('p', { className: 'sub', style: 'margin-top:10px', textContent: 'キャッチに使う商品名を選ぶ' }));
+    const chips = el('div', { className: 'chips' });
+    for (const option of form.nameOptions) {
+      const b = el('button', { type: 'button', textContent: option });
+      b.setAttribute('aria-pressed', String(option === $('f-name').value));
+      b.addEventListener('click', () => {
+        $('f-name').value = option;
+        saveInput();
+        for (const other of chips.children) other.setAttribute('aria-pressed', String(other === b));
+      });
+      chips.append(b);
+    }
+    card.append(chips);
+  }
+
+  // 商品説明から拾った✔の候補
+  if (form.pointOptions?.length) {
+    card.append(el('p', { className: 'sub', style: 'margin-top:12px', textContent: '✔リストに入れるものを選ぶ（6つまで）' }));
+    const list = el('ul', { className: 'picked' });
+    for (const option of form.pointOptions) {
+      const box = el('input', { type: 'checkbox' });
+      const li = el('li', {}, [box, el('span', { textContent: option })]);
+      list.append(li);
+    }
+    const apply = el('button', { className: 'secondary', textContent: '選んだものを✔リストに入れる' });
+    apply.addEventListener('click', () => {
+      const picked = [...list.querySelectorAll('li')]
+        .filter((li) => li.querySelector('input').checked)
+        .map((li) => li.querySelector('span').textContent)
+        .slice(0, 6);
+      if (picked.length === 0) {
+        toast('入れるものを選んでください');
+        return;
+      }
+      $('f-merits').value = picked.join('\n');
+      saveInput();
+      toast(`${picked.length}件を入れました`);
+    });
+    card.append(list, apply);
+  }
+
+  const note = el('p', {
+    className: 'note',
+    textContent: '通常価格はAPIから取れません。二重価格で書くなら、商品ページに出ている通常価格を自分で入れてください。',
+  });
+  if (form.salePrice) card.append(note);
+
+  out.append(card);
+}
+
 /* ------------------------------------------------------------ ①ネタ出し */
 
 function renderIdeas() {
@@ -650,6 +865,17 @@ function bindActions() {
   $('btn-x').addEventListener('click', renderX);
   $('btn-x-list').addEventListener('click', () => renderXList(null));
   $('btn-check').addEventListener('click', renderCheck);
+  $('btn-import').addEventListener('click', importFromUrl);
+  $('btn-import-text').addEventListener('click', importFromText);
+  for (const id of ['imp-appid', 'imp-key']) $(id).addEventListener('change', saveKeys);
+}
+
+/** APIキーを復元し、許可ドメインに入れる値を画面に出す。 */
+function restoreKeys() {
+  const keys = loadKeys();
+  if (keys.applicationId) $('imp-appid').value = keys.applicationId;
+  if (keys.accessKey) $('imp-key').value = keys.accessKey;
+  $('imp-domain').textContent = `このサイトのドメイン: ${location.hostname || '(ファイルから開いています)'}`;
 }
 
 function registerServiceWorker() {

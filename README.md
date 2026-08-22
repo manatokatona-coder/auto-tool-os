@@ -31,6 +31,14 @@
 - 割引率は切り捨てで計算する。四捨五入だと49.6%が50%になり、値引き率を実態より大きく見せてしまうため
 - 通常価格とセール価格が逆なら要修正として弾く。二重価格表示の注意（比較価格はセール直前8週間のうち4週間以上その価格で売られていた必要がある）を入力欄の直下に出す
 
+**商品URLから読み込める**
+- 楽天の商品ページのURLを貼ると、商品名・価格・商品説明・レビュー数を取り込んで入力欄を埋める
+- 商品名から `【楽天1位】【送料無料】` のような販促表記を自動で落とす。何を落としたかも表示する
+- 42文字のキャッチに使いやすいよう、短い商品名の候補を出して選べる
+- 商品説明を✔リストの候補に割る。送料・品番・返品などの事務連絡は除く
+- カテゴリを商品名から推定する（自信がなければ当てずに手で選んでもらう）
+- APIキーがなくても、商品ページからコピーした文章を貼れば商品名と価格を読み取れる
+
 **書き方の型を2つから選べる**
 - **インフルエンサー型（既定）** … 実際に伸びている投稿を分解した並び。キャッチ → 署名タグ → 誰向けか → 区切り線 → ✔リスト → 体験談 → 誘導文 → タグ
 - **レビュー型** … イントロ → メリット → デメリット → クロージングの3段構成
@@ -80,6 +88,33 @@ npm run serve      # 表示されたIPアドレスのURLをiPhoneで開く
 
 ---
 
+## 楽天APIキーの設定（URL読み込みを使う場合）
+
+商品URLからの読み込みには、楽天ウェブサービスのキーが要ります。
+コピペから読み取る経路だけ使うなら、設定は不要です。
+
+1. [楽天ウェブサービスでアプリを登録](https://webservice.rakuten.co.jp/app/create)する
+2. 種別を **「ウェブアプリケーション」** にする
+3. **許可ドメイン** に、このツールを開くドメインを入れる
+   - GitHub Pagesで公開しているなら `manatokatona-coder.github.io`
+   - 手元で確認するなら `localhost`
+4. 発行された **applicationId** と **accessKey** を、アプリの「楽天APIキーの設定」に入れる
+
+キーはその端末のブラウザにだけ保存されます。ウェブアプリケーション種別は
+「キーはブラウザから見えるので、許可ドメインで縛る」という前提の設計です。
+
+許可ドメインが合っていないと `HTTP_REFERRER_NOT_ALLOWED` が返ります。
+このツールはそれを「許可ドメインに入っていません」と言い換えて表示します。
+
+コマンドラインから使う場合は環境変数で渡します。
+
+```bash
+export RAKUTEN_APP_ID=...
+export RAKUTEN_ACCESS_KEY=...
+export RAKUTEN_REFERER=https://例.github.io/auto-tool-os/   # ウェブアプリ種別のキーの場合
+node src/cli.js url "https://item.rakuten.co.jp/shop/item/"
+```
+
 ## iOSショートカットとつなぐ
 
 楽天市場アプリの共有シートから、商品ページのURLを持ってきて起動できる。
@@ -111,6 +146,7 @@ node src/cli.js themes                                 # まとめ投稿のテ�
 node src/cli.js room --id l04 --signature "まなと。オリ写⸜❤︎⸝" --keywords "ひとり鍋,冬支度"
 node src/cli.js room --id l04 --layout review --tone real --event marathon --off 30
 node src/cli.js x --id l04 --url "https://room.rakuten.co.jp/..." --link selfReply
+node src/cli.js url "https://item.rakuten.co.jp/shop/item/"   # 商品情報を読み込む
 node src/cli.js check --file draft.txt --mode room
 node src/cli.js --help
 ```
@@ -135,6 +171,7 @@ src/
     textLength.js   ROOM 500/42文字、Xの重み付き280の計算
     rng.js          種を指定できる擬似乱数（同じ入力で同じ文章が出る）
     price.js        セール価格の計算と、冒頭に置く価格表記の組み立て
+    rakuten.js      商品URLの解析、楽天APIの呼び出し、商品名と説明の整形
     validate.js     文字数・NG表現・PR表記のチェック
     roomComment.js  ROOM紹介文の生成
     xPost.js        X投稿の生成
@@ -153,7 +190,7 @@ docs/
 依存パッケージはなし。Node.js 20以上で動く。
 
 ```bash
-npm test           # 80件のテスト
+npm test           # 109件のテスト
 npm run build      # dist/ を作る
 ```
 
