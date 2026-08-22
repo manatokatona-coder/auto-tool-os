@@ -175,7 +175,8 @@ function buildInfluencerBlocks({
 
   // 行頭の絵文字は指定があればそれを使い、なければカテゴリの既定を当てる。
   const emoji = targetEmoji || CATEGORY_EMOJI[cat] || '';
-  blocks.push(`${emoji}${target}\n${DIVIDERS[dividerIndex]}`);
+  const divider = DIVIDERS[dividerIndex];
+  blocks.push(target ? `${emoji}${target}\n${divider}` : divider);
 
   if (points.length > 0) blocks.push(points.join('\n'));
   for (const para of paragraphs) blocks.push(para);
@@ -259,7 +260,9 @@ export function generateRoomComment(input) {
     if (needsPr) blocks.push('PR');
 
     if (isInfluencer) {
-      const targetLine = target || `${clause(pain)}。そんな人に`;
+      // 誰向けかは、指定がなければ悩みから作る。どちらも無ければ行ごと出さない
+      // （「。そんな人に」だけが残ると読めなくなるため）。
+      const targetLine = target || (pain ? `${clause(pain)}。そんな人に` : '');
       const ctaLine = (cta || pick(rng, CTA_TEMPLATES)).replace('{accent}', accent);
       blocks.push(...buildInfluencerBlocks({
         catchLine: hookLine,

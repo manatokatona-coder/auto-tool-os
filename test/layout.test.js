@@ -182,3 +182,21 @@ test('3パターンの本文が重複しない', () => {
   assert.equal(vs.length, 3);
   assert.equal(new Set(vs.map((v) => v.body)).size, 3);
 });
+
+test('誰向けかも悩みも空なら、その行を出さずに区切り線だけにする', () => {
+  const r = generateRoomComment({
+    name: '除湿機', cat: 'clean', hook: '部屋干しが数時間で乾き切る',
+    target: '', pain: '', merits: ['置くだけ', '静か', '軽い'], seed: 'empty',
+  });
+  assert.ok(!r.text.includes('。そんな人に'), r.text.slice(0, 120));
+  assert.ok(!/\n[^\n]*[🧺🍳🛁]\n/.test(r.text), '絵文字だけの行が残っている');
+  assert.ok(DIVIDERS.some((d) => r.text.includes(d)), '区切り線が消えている');
+});
+
+test('悩みだけあれば、そこから誰向けかを作る', () => {
+  const r = generateRoomComment({
+    name: '除湿機', cat: 'clean', hook: '乾く', pain: '部屋干しが乾かない',
+    merits: ['置くだけ', '静か'], targetEmoji: '🧺', seed: 'p',
+  });
+  assert.ok(r.text.includes('🧺部屋干しが乾かない。そんな人に'), r.text.slice(0, 140));
+});

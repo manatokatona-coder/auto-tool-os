@@ -206,6 +206,46 @@ Xの上限は「重み付き280」で、文字種によって重みが違う。
 
 ---
 
+---
+
+## 6. 楽天市場商品検索APIで商品情報を引く
+
+商品URLから投稿の材料を取るために、楽天ウェブサービスの商品検索APIを使う。
+
+**エンドポイント**
+`https://openapi.rakuten.co.jp/ichibams/api/IchibaItem/Search/20260701`
+
+**検索条件**は keyword / genreId / itemCode / shopCode のいずれか1つ。
+商品URLから引くときは `itemCode` を使い、`shopCode:itemCode` の形で渡す。
+商品URLは `https://item.rakuten.co.jp/{shopCode}/{itemCode}/` なので、パスから作れる。
+
+**取れるもの**：itemName / itemPrice / itemCaption / itemUrl / affiliateUrl /
+shopName / reviewAverage / reviewCount / mediumImageUrls / genreId / pointRate。
+
+通常価格は含まれない。したがって二重価格を書くなら、書き手が商品ページを見て入れるしかない。
+
+**ブラウザから呼ぶときの制約**（実際にAPIへ投げて確認した）
+
+| 状況 | 返るもの | 意味 |
+| --- | --- | --- |
+| accessKey なし | 400 `accessKey must be present as a query parameter or in the header` | accessKeyは必須 |
+| Referer なし | 403 `REQUEST_CONTEXT_BODY_HTTP_REFERRER_MISSING` | ウェブアプリケーション種別はRefererを見る |
+| 未登録ドメインから | 403 `HTTP_REFERRER_NOT_ALLOWED` | 許可ドメインの登録が要る |
+
+つまり「ウェブアプリケーション」種別で登録し、**許可ドメインにツールを開くドメインを入れる**
+必要がある。キーがブラウザから見えることは前提で、ドメインで縛る設計になっている。
+
+`callback` パラメータでJSONPにも対応している。CORSで弾かれる環境では
+scriptタグ経由で読み込めるため、fetchが失敗したときの逃げ道に使える。
+
+→ ツール側の対応：URLから商品コードを取り出し、fetchで呼んで失敗したらJSONPへ切り替える。
+上の3つのエラーコードは、そのまま出しても何をすればいいか分からないので、
+「許可ドメインに入っていません」のような文言へ変えて表示する。
+
+商品名は `【楽天1位】【送料無料】…` のような販促表記が付くので、
+販促語を含む括弧だけを落とす（`【2個セット】` のような内容に関わるものは残す）。
+商品説明は記号と句点で割り、送料・品番・返品などの事務連絡を除いて✔リストの候補にする。
+
 ## 出典
 
 - [【クリック率UP】楽天ROOM紹介文の書き方｜5つのコツ（note）](https://note.com/master_poikatsu/n/n992243888824)
@@ -231,3 +271,5 @@ Xの上限は「重み付き280」で、文字種によって重みが違う。
 - [二重価格表示（消費者庁）](https://www.caa.go.jp/policies/policy/representation/fair_labeling/representation_regulation/double_price)
 - [セール期間における二重価格表示とは？景品表示法の基本と8週間ルール（マクロジ）](https://maclogi.co.jp/column/2135/?type=lecture)
 - [二重価格表示とは？8週間ルールや不当表示の事例を解説（マネーフォワード クラウド契約）](https://biz.moneyforward.com/contract/basic/20045/)
+- [楽天市場商品検索API（楽天ウェブサービス）](https://webservice.rakuten.co.jp/documentation/ichiba-item-search)
+- [Rakuten Ichiba Item Search API を Web application で使う方法（Zenn）](https://zenn.dev/sosa/articles/818703b4f21020)

@@ -32,6 +32,7 @@ const MODULES = [
   'src/core/roomComment.js',
   'src/core/xPost.js',
   'src/core/ideas.js',
+  'src/core/rakuten.js',
 ];
 
 /**
@@ -116,6 +117,7 @@ async function verifyBundle(bundle) {
     'generateRoomComment', 'generateRoomVariants', 'generateXPost', 'generateXVariants',
     'validateRoomComment', 'validateXPost', 'suggestIdeas', 'suggestTheme', 'searchProducts',
     'LAYOUTS', 'LAYOUT_LIST', 'ACCENT_EMOJI', 'CATEGORY_EMOJI', 'CTA_TEMPLATES',
+    'parseRakutenUrl', 'buildSearchUrl', 'cleanItemName', 'mapItemToForm', 'firstItem', 'parsePastedText', 'describeApiError', 'extractApiError',
     'parsePrice', 'formatYen', 'discountPercent', 'priceMoveVariants', 'validatePrices',
     'PRODUCTS', 'CATEGORIES', 'SEASONS', 'TONE_LIST', 'X_PATTERN_LIST', 'EVENT_LIST',
     'LENGTH_PRESETS', 'LINK_PLACEMENTS', 'PR_REQUIRED_CASES', 'ROOM_MAX', 'X_MAX_WEIGHTED',

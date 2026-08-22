@@ -25,6 +25,10 @@ const HELP = `楽天ROOM 一人暮らしSALE 投稿メーカー
   room                      ROOMの紹介文を生成
   x                         X（旧Twitter）の投稿文を生成
   check                     文章をチェック
+  url <商品URL>             楽天の商品URLから商品情報を読み込む
+                            環境変数: RAKUTEN_APP_ID / RAKUTEN_ACCESS_KEY
+                            ウェブアプリケーション種別のキーなら RAKUTEN_REFERER に
+                            登録済みのURLも入れる
 
 共通オプション:
   --id <商品ID>             同梱の商品辞書から引く（例: l04）
@@ -240,6 +244,48 @@ const commands = {
     }
   },
 
+  async url() {
+    const target = positionals[1] || values.url;
+    if (!target) fail('商品URLを渡してください。例: node src/cli.js url "https://item.rakuten.co.jp/…"');
+
+    const parsed = RT.parseRakutenUrl(target);
+    if (!parsed.ok) fail(parsed.message);
+    console.log(`商品コード: ${parsed.itemCodeParam}`);
+
+    const applicationId = process.env.RAKUTEN_APP_ID;
+    const accessKey = process.env.RAKUTEN_ACCESS_KEY;
+    if (!applicationId) {
+      fail('環境変数 RAKUTEN_APP_ID が設定されていません。https://webservice.rakuten.co.jp/app/create で発行できます');
+    }
+
+    // 「ウェブアプリケーション」種別のキーは、許可ドメインと一致するRefererが要る。
+    // その場合は RAKUTEN_REFERER に登録済みのURLを入れておく。
+    const referer = process.env.RAKUTEN_REFERER;
+    const res = await fetch(
+      RT.buildSearchUrl({ applicationId, accessKey, itemCode: parsed.itemCodeParam }),
+      referer ? { headers: { Referer: referer } } : undefined,
+    );
+
+    const json = await res.json().catch(() => null);
+    const apiError = json && RT.extractApiError(json, res.status);
+    if (apiError) fail(`${apiError}${referer ? '' : '\n       （環境変数 RAKUTEN_REFERER に登録済みのURLを入れると通ることがあります）'}`);
+    if (!res.ok) fail(RT.describeApiError({ status: res.status }));
+
+    const item = RT.firstItem(json);
+    if (!item) fail('この商品コードでは見つかりませんでした');
+
+    const form = RT.mapItemToForm(item);
+    console.log(`\n商品名  : ${form.name}`);
+    if (form.nameRemoved.length) console.log(`  外した: ${form.nameRemoved.join(' ')}`);
+    console.log(`短縮候補: ${form.nameOptions.join(' / ')}`);
+    console.log(`価格    : ${form.salePrice ? `${form.salePrice}円` : '取得できず'}`);
+    console.log(`カテゴリ: ${form.catLabel ?? '判定できず'}`);
+    if (form.reviewCount) console.log(`レビュー: ★${form.reviewAverage}（${form.reviewCount}件）`);
+    console.log('\n✔リストの候補:');
+    for (const point of form.pointOptions) console.log(`  ${point}`);
+    console.log('\n紹介文を作るには、この内容を room コマンドの --name / --merits に渡してください。');
+  },
+
   check() {
     const text = values.text ?? (values.file ? readFileSync(values.file, 'utf8') : null);
     if (!text) fail('--file か --text で文章を渡してください。');
@@ -267,4 +313,5 @@ if (!run) {
   console.log(HELP);
   process.exit(1);
 }
-run();
+
+await run();

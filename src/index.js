@@ -55,3 +55,17 @@ export { findNgWords, checkPrLabel, validateRoomComment, validateXPost } from '.
 export { generateRoomComment, generateRoomVariants, LENGTH_PRESETS } from './core/roomComment.js';
 export { generateXPost, generateXVariants, LINK_PLACEMENTS } from './core/xPost.js';
 export { THEMES, searchProducts, suggestIdeas, suggestTheme, allThemes } from './core/ideas.js';
+export {
+  API_ENDPOINT,
+  parseRakutenUrl,
+  buildSearchUrl,
+  cleanItemName,
+  nameCandidates,
+  captionToPoints,
+  guessCategory,
+  mapItemToForm,
+  firstItem,
+  parsePastedText,
+  describeApiError,
+  extractApiError,
+} from './core/rakuten.js';

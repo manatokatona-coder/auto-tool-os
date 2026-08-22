@@ -60,6 +60,39 @@
   <!-- ② ROOM紹介文 -->
   <section id="tab-room" hidden>
     <div class="card">
+      <h2>商品を読み込む</h2>
+      <p class="sub">楽天の商品ページのURLを貼ると、商品名・価格・説明を取り込んで下の欄を埋めます。</p>
+
+      <label for="imp-url">楽天の商品URL</label>
+      <input id="imp-url" type="url" inputmode="url" placeholder="https://item.rakuten.co.jp/…" autocomplete="off">
+      <button class="primary" id="btn-import">この商品を読み込む</button>
+
+      <details id="imp-paste">
+        <summary>APIキーを使わずに、コピーした文章から読み取る</summary>
+        <p>楽天アプリの商品ページで商品名と価格を選択してコピーし、そのまま貼り付けてください。キーの設定はいりません。</p>
+        <label for="imp-text" class="sr-label">コピーした文章</label>
+        <textarea id="imp-text" placeholder="ステンレスタンブラー 蓋付き 500ml&#10;通常価格 3,980円&#10;セール価格 2,480円"></textarea>
+        <button class="secondary" id="btn-import-text">貼り付けから読み取る</button>
+      </details>
+
+      <details id="imp-settings">
+        <summary>楽天APIキーの設定</summary>
+        <p>
+          <a href="https://webservice.rakuten.co.jp/app/create" target="_blank" rel="noopener">楽天ウェブサービス</a>
+          でアプリを登録すると発行されます。種別は「ウェブアプリケーション」、許可ドメインにこのサイトのドメインを入れてください。
+          キーはこの端末のブラウザにだけ保存されます。
+        </p>
+        <label for="imp-appid">アプリID（applicationId）</label>
+        <input id="imp-appid" type="text" inputmode="numeric" autocomplete="off" placeholder="1234567890123456789">
+        <label for="imp-key">アクセスキー（accessKey）</label>
+        <input id="imp-key" type="password" autocomplete="off" placeholder="登録時に発行されます">
+        <p class="note" id="imp-domain"></p>
+      </details>
+
+      <div id="imp-out"></div>
+    </div>
+
+    <div class="card">
       <h2>楽天ROOM 紹介文</h2>
       <p class="sub">500文字以内・冒頭42文字にフックを置く型で作ります。</p>
 

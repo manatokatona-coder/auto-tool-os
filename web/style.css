@@ -305,6 +305,34 @@ button:active { opacity: 0.75; }
 .issues li.warn { border-left: 3px solid var(--warn); }
 .issues li .fix { display: block; color: var(--muted); font-size: 12px; }
 
+/* 読み込んだ候補から1つ選ぶチップ */
+.chips { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 6px; }
+
+.chips button {
+  width: auto;
+  margin: 0;
+  min-height: 36px;
+  padding: 6px 12px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: var(--surface-2);
+  color: var(--text);
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.chips button[aria-pressed='true'] {
+  border-color: var(--accent);
+  background: var(--accent-soft);
+  color: var(--accent);
+}
+
+.picked { margin: 10px 0 0; padding: 0; list-style: none; font-size: 13.5px; }
+.picked li { display: flex; gap: 8px; align-items: flex-start; padding: 6px 0; border-bottom: 1px solid var(--line); }
+.picked li:last-child { border-bottom: 0; }
+.picked input { width: 22px; height: 22px; min-height: 22px; flex: 0 0 auto; margin-top: 2px; }
+
 .idea {
   border: 1px solid var(--line);
   border-radius: 12px;
